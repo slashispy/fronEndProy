@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-
+// Componentes
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { AboutComponent } from './components/about/about.component';
@@ -10,6 +10,8 @@ import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 // Rutas
 import { APP_ROUTING } from './app.routes';
+// Servicios
+import { LoginService } from './servicios/login.service';
 
 @NgModule({
   declarations: [
@@ -23,9 +25,10 @@ import { APP_ROUTING } from './app.routes';
     BrowserModule,
     FormsModule,
     HttpModule,
+    ReactiveFormsModule,
     APP_ROUTING
   ],
-  providers: [],
+  providers: [LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
