@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { LoginService } from '../../servicios/login.service';
 import { Credenciales } from '../../clases/credenciales';
+import { AppComponent } from '../../app.component';
 
 
 @Component({
@@ -17,10 +18,19 @@ export class LoginComponent implements OnInit {
     password: new FormControl('', Validators.required)
   });
 
+  cre: Credenciales;
+  alert: boolean;
+
+
   constructor(private loginService: LoginService,
-              private router: Router) { }
+              private router: Router,
+              private app: AppComponent) {
+               }
 
   ngOnInit() {
+    if (this.router.url === '/login') {
+      this.app.obtnerUrl(this.router.url);
+    }
   }
 
   login() {
@@ -28,12 +38,15 @@ export class LoginComponent implements OnInit {
       return;
     }
     const credenciales = this.loginForm.value;
+    this.cre = credenciales;
     this.loginService.login(credenciales)
-    .subscribe(successCode => {
-      console.log(successCode);
+    .subscribe(resp => {
+      this.cre.token = resp.token;
+      this.loginService.setCredenciales(this.cre);
       this.router.navigate(['/home']);
     }, errorCode => {
       console.log(errorCode);
+      this.alert = true;
     } );
   }
 

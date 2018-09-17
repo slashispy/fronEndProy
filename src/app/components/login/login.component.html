@@ -1,5 +1,9 @@
 <!--<div class="dropdown-menu">-->
+    
   <div class="container">
+      <div class="animated fadeOut" *ngIf="alert" class="alert alert-danger" role="alert">
+          Contraseña y/o Usuario incorrectos
+      </div>
   <form [formGroup]="loginForm" (ngSubmit)="login()" class="px-4 py-3">
     <div class="form-group">
       <label for="usuario">Usuario</label>

@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-faded">
-  <a class="navbar-brand" href="#">Navbar</a>
+  <a class="navbar-brand" href="#">Menu</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -17,15 +17,15 @@
         <a class="nav-link" [routerLink] = "['home']" >Home</a>
       </li>
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink] = "['heroes']">Productos</a>
+        <a class="nav-link" [routerLink] = "['productos']">Productos</a>
       </li>
       <li class="nav-item" routerLinkActive="active">
           <a class="nav-link"[routerLink] = "['about']">About</a>
         </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
+    <!--<form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Buscar Heroe" (keyup.enter)="buscarHeroe(buscarTexto.value)" aria-label="Search" #buscarTexto>
       <button (click)="buscarHeroe(buscarTexto.value)" class="btn btn-outline-primary my-2 my-sm-0" type="button">Buscar</button>
-    </form>
+    </form>-->
   </div>
 </nav>
