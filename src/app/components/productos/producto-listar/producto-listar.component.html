@@ -1,0 +1,24 @@
+<table class="table">
+  <tr>
+      <td>
+          <h3>Lista de Productos</h3>
+      </td>
+      <td></td>
+  </tr>
+  <tr *ngFor="let producto of productos">
+      <td>{{producto.codigo}}</td>
+      <td>{{producto.descripcion}}</td>
+      <td>{{producto.cantidad}}</td>
+      <td *ngIf="producto.estado === 'A'">Activo</td>
+      <td *ngIf="producto.estado === 'I'">Inactivo</td>
+      <td *ngIf="producto.controlarStock === 'S'">Se Controla Stock</td>
+      <td *ngIf="producto.controlarStock === 'N'">No se Controla Stock</td>
+      <td>{{producto.precioUnitario}}</td>
+      <td>{{producto.cantidadMinima}}</td>
+      <td>
+         <!-- <a class="btn btn-default" 
+              ui-sref="tipoExpedDtos-view({id:tipoExpedDtos.id})">Ver</a>-->
+      </td>
+  </tr>
+</table>
+<!--<a ui-sref="tipoExpedDtos-new" class="btn-primary btn-lg">Agregar Nuevo Expedientes de un Departamento</a>-->

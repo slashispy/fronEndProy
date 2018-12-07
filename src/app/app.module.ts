@@ -13,6 +13,8 @@ import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { APP_ROUTING } from './app.routes';
 // Servicios
 import { LoginService } from './servicios/login.service';
+import { ProductoListarComponent } from './components/productos/producto-listar/producto-listar.component';
+import { ProductoEditarComponent } from './components/productos/producto-editar/producto-editar.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { LoginService } from './servicios/login.service';
     LoginComponent,
     AboutComponent,
     HomeComponent,
-    NavbarComponent
+    NavbarComponent,
+    ProductoListarComponent,
+    ProductoEditarComponent
   ],
   imports: [
     BrowserModule,

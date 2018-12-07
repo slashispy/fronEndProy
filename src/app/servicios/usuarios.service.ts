@@ -12,8 +12,7 @@ export class UsuariosService {
   usuarioUrl = 'http://localhost:8091/backEndProy/usuario/';
 
   usuarios: Usuario[];
-
-
+  usuario: Usuario;
 
   constructor(private http: HttpClient) { }
 
@@ -25,8 +24,7 @@ export class UsuariosService {
       })
     };
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
-
-    return this.http.request('GET', this.usuarioUrl, httpOptions)
+    return this.http.get( this.usuarioUrl, httpOptions)
     .pipe(
       map( (resp: Usuario[]) => {
         this.usuarios = resp;
@@ -34,6 +32,24 @@ export class UsuariosService {
       }
       ),
       catchError(this.handleError)
+      );
+  }
+
+  getUser(token: string, id: string) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'my-auth-token'
+      })
+    };
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+    return this.http.get(this.usuarioUrl + id, httpOptions)
+      .pipe(
+        map((resp: Usuario) => {
+          this.usuario = resp;
+          return this.usuario;
+        }),
+        catchError(this.handleError)
       );
   }
 
@@ -47,6 +63,38 @@ export class UsuariosService {
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
     return this.http.post(this.usuarioUrl, user, httpOptions)
     .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  editUser(user: Usuario, token: string) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'my-auth-token'
+      })
+    };
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+    return this.http.put(this.usuarioUrl + user.id, user, httpOptions)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getUserByUsuario(usuario: string, token: string) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'my-auth-token'
+      })
+    };
+    httpOptions.headers = httpOptions.headers.set('Authorization', token);
+    return this.http.get(this.usuarioUrl + 'user/' + usuario, httpOptions)
+    .pipe(
+      map((resp: Usuario) => {
+        this.usuario = resp;
+        return this.usuario;
+      }),
       catchError(this.handleError)
     );
   }

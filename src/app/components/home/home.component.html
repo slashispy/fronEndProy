@@ -1,6 +1,7 @@
 <div class="jumbotron jumbotron-fluid animated fadeIn fast">
   <div class="container">
-    <h1 class="display-4 animated fadeIn">Cabisol System</h1>
-    <p class="lead animated fadeIn fast">Aplicacion de Kioskos</p>
+    <h1 *ngIf="user===null" class="display-4 animated fadeIn">{{ saludo }}</h1>
+    <h1 *ngIf="user!=null" class="display-4 animated fadeIn">{{ saludo }}, {{ user.nombre }}</h1>
+    <p class="lead animated fadeIn fast"></p>
   </div>
 </div>

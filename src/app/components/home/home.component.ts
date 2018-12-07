@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
   credenciales: Credenciales;
   usuarios: Usuario[];
   user: Usuario;
+  saludo: string;
 
   constructor(private app: AppComponent,
               private loginService: LoginService,
@@ -28,11 +29,10 @@ export class HomeComponent implements OnInit {
     this.app.obtnerUrl('/home');
     this.credenciales = this.loginService.getCredecianles();
     if (this.credenciales != null) {
-      this.usuarioService.getAllUsers(this.credenciales.token)
+      this.usuarioService.getUserByUsuario(this.credenciales.usuario, this.credenciales.token)
       .subscribe(
         resp => {
-          this.usuarios = resp;
-          console.log(this.usuarios);
+          this.user = resp;
         },
         errorCode => {
           console.log(errorCode);
@@ -40,6 +40,19 @@ export class HomeComponent implements OnInit {
       );
     } else {
       this.router.navigate(['/login']);
+    }
+    this.saludoF();
+  }
+
+  saludoF() {
+    const d = new Date();
+    const hora: number = d.getHours();
+    if (hora >= 6 && hora < 12) {
+      this.saludo = 'Buenos Días';
+    } else if (hora >= 12 && hora < 20) {
+      this.saludo = 'Buenas Tardes';
+    } else {
+      this.saludo = 'Buenas Noches';
     }
   }
 
