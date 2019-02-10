@@ -1,0 +1,56 @@
+<div class="container">
+  <h2>Nuevo Producto</h2>
+  <form [formGroup]="productoForm" (ngSubmit)="nuevoProducto()" class="px-4 py-3">
+    <div class="form-group">
+      <label for="codigo">Código</label>
+      <input formControlName="codigo" type="text" class="form-control" id="codigo" placeholder="Código">
+    </div>
+    <div class="form-group">
+      <label for="descripcion">Descripción</label>
+      <input formControlName="descripcion" type="text" class="form-control" id="descripcion" placeholder="Descripción">
+    </div>
+    <div class="form-group">
+      <label for="cantidad">Cantidad</label>
+      <input formControlName="cantidad" type="number" class="form-control" id="cantidad" placeholder="Cantidad">
+    </div>
+    <div class="form-group">
+      <label for="estado">Estado</label>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" formControlName="estado" name="estado" id="estado1" value="A" checked>
+        <label class="form-check-label" for="estado1">
+          Activo
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" formControlName="estado" name="estado" id="estado2" value="I">
+        <label class="form-check-label" for="estado2">
+          Inactivo
+        </label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="controlarStock">Controlar Stock</label>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" formControlName="controlarStock" name="controlarStock" id="control1" value="S" checked>
+        <label class="form-check-label" for="control1">
+          Si
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" formControlName="controlarStock" name="controlarStock" id="control2" value="N">
+        <label class="form-check-label" for="control2">
+          No
+        </label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="precioUnitario">Precio Unitario</label>
+      <input formControlName="precioUnitario" type="number" class="form-control" id="precioUnitario" placeholder="Precio Unitario">
+    </div>
+    <div class="form-group">
+      <label for="cantidadMinima">Cantidad Minima</label>
+      <input formControlName="cantidadMinima" type="number" class="form-control" id="cantidadMinima" placeholder="Cantidad Minima">
+    </div>
+    <button type="submit" class="btn btn-primary">Crear</button>
+  </form>
+</div>

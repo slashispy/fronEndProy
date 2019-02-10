@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     if (this.router.url === '/login') {
       this.app.obtnerUrl(this.router.url);
+      this.loginService.setCredenciales(null);
     }
   }
 

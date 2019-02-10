@@ -9,12 +9,14 @@ import { LoginComponent } from './components/login/login.component';
 import { AboutComponent } from './components/about/about.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
+import { DataTablesModule } from 'angular-datatables';
 // Rutas
 import { APP_ROUTING } from './app.routes';
 // Servicios
 import { LoginService } from './servicios/login.service';
 import { ProductoListarComponent } from './components/productos/producto-listar/producto-listar.component';
 import { ProductoEditarComponent } from './components/productos/producto-editar/producto-editar.component';
+import { ProductoCrearComponent } from './components/productos/producto-crear/producto-crear.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { ProductoEditarComponent } from './components/productos/producto-editar/
     HomeComponent,
     NavbarComponent,
     ProductoListarComponent,
-    ProductoEditarComponent
+    ProductoEditarComponent,
+    ProductoCrearComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +35,8 @@ import { ProductoEditarComponent } from './components/productos/producto-editar/
     HttpModule,
     HttpClientModule,
     ReactiveFormsModule,
-    APP_ROUTING
+    APP_ROUTING,
+    DataTablesModule
   ],
   providers: [LoginService],
   bootstrap: [AppComponent]

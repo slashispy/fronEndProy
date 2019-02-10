@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-faded">
-  <a class="navbar-brand" href="#">Menu</a>
+  <a class="navbar-brand" [routerLink] = "['home']" >Menu</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -28,4 +28,6 @@
       <button (click)="buscarHeroe(buscarTexto.value)" class="btn btn-outline-primary my-2 my-sm-0" type="button">Buscar</button>
     </form>-->
   </div>
+  
+  <a class="navbar-brand" [routerLink] = "['login']">Logout</a>
 </nav>
