@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-
-import { AppComponent } from '../../app.component';
 import { Credenciales } from '../../clases/credenciales';
 import { Usuario } from '../../clases/usuario';
 
 import { Router } from '@angular/router';
 
-import { LoginService } from '../../servicios/login.service';
 import { UsuariosService } from '../../servicios/usuarios.service';
 
 @Component({
@@ -15,24 +12,22 @@ import { UsuariosService } from '../../servicios/usuarios.service';
 })
 export class HomeComponent implements OnInit {
 
-  credenciales: Credenciales;
+  currentUser: Credenciales;
   usuarios: Usuario[];
   user: Usuario;
   saludo: string;
 
-  constructor(private app: AppComponent,
-              private loginService: LoginService,
-              private usuarioService: UsuariosService,
-              private router: Router) { }
+  constructor(private usuarioService: UsuariosService,
+              private router: Router) {
+                this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+              }
 
   ngOnInit() {
-    this.app.obtnerUrl('/home');
-    this.credenciales = this.loginService.getCredecianles();
-    if (this.credenciales != null) {
-      this.usuarioService.getUserByUsuario(this.credenciales.usuario, this.credenciales.token)
+    if (this.currentUser != null) {
+      this.usuarioService.getUserByUsuario(this.currentUser.usuario, this.currentUser.token)
       .subscribe(
         resp => {
-          this.user = resp;
+          this.user =  resp;
         },
         errorCode => {
           console.log(errorCode);

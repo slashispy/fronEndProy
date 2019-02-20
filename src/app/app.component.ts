@@ -1,5 +1,6 @@
 import { Component, AfterViewChecked, ChangeDetectorRef  } from '@angular/core';
 import { Router } from '@angular/router';
+import { Credenciales } from './clases/credenciales';
 
 @Component({
   selector: 'app-root',
@@ -8,23 +9,20 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements AfterViewChecked  {
   title = 'Cabisol';
-  href  = '';
-  navBar = true;
+  navBar: boolean;
+  currentUser: Credenciales;
 
   constructor(private router: Router,
     private ref: ChangeDetectorRef) {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (this.currentUser != null) {
+      this.navBar = true;
+    } else {
+      this.navBar = false;
+    }
   }
 
   ngAfterViewChecked(): void {
     this.ref.detectChanges();
-  }
-
-  obtnerUrl(urlPara: string) {
-    this.href = this.router.url;
-    if (urlPara === '/login') {
-      this.navBar = false;
-    } else {
-      this.navBar = true;
-    }
   }
 }

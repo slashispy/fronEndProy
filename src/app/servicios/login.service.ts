@@ -22,10 +22,18 @@ export class LoginService {
     .pipe(
       map(response => {
         const cre: Credenciales = response.json();
+        if (cre && cre.token) {
+          cre.usuario = entrada.usuario;
+          localStorage.setItem('currentUser', JSON.stringify(cre));
+        }
         return cre;
       }),
       catchError(this.handleError)
     );
+  }
+
+  logout() {
+    localStorage.removeItem('currentUser');
   }
 
   getCredecianles(): Credenciales {

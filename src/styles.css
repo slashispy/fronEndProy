@@ -35,6 +35,11 @@ body{
     width: 120px;
     
   }
+
+  .cursor-white {
+    color:white!Important;
+    cursor: pointer;
+  }
   
   @keyframes fadeIn {
     from {

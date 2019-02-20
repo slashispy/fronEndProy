@@ -25,12 +25,10 @@ export class LoginComponent implements OnInit {
   constructor(private loginService: LoginService,
               private router: Router,
               private app: AppComponent) {
+                app.navBar = false;
                }
 
   ngOnInit() {
-    if (this.router.url === '/login') {
-      this.app.obtnerUrl(this.router.url);
-    }
   }
 
   login() {
@@ -41,9 +39,8 @@ export class LoginComponent implements OnInit {
     this.cre = credenciales;
     this.loginService.login(credenciales)
     .subscribe(resp => {
-      this.cre.token = resp.token;
-      this.loginService.setCredenciales(this.cre);
       this.router.navigate(['/home']);
+      this.app.navBar = true;
     }, errorCode => {
       console.log(errorCode);
       this.alert = true;

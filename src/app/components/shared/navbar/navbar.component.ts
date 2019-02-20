@@ -17,4 +17,9 @@ export class NavbarComponent implements OnInit {
     this.router.navigate( [ '/buscar', termino ]);
   }
 
+  logout() {
+    localStorage.removeItem('currentUser');
+    this.router.navigate(['/login']);
+  }
+
 }

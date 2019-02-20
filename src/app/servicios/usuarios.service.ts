@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Usuario } from '../clases/usuario';
-import { throwError } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +31,7 @@ export class UsuariosService {
         return this.usuarios;
       }
       ),
-      catchError(this.handleError)
+      catchError(this.handleError('getAllUsers()'))
       );
   }
 
@@ -49,7 +49,7 @@ export class UsuariosService {
           this.usuario = resp;
           return this.usuario;
         }),
-        catchError(this.handleError)
+        catchError(this.handleError('getUser()'))
       );
   }
 
@@ -63,7 +63,7 @@ export class UsuariosService {
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
     return this.http.post(this.usuarioUrl, user, httpOptions)
     .pipe(
-      catchError(this.handleError)
+      catchError(this.handleError('addUser()'))
     );
   }
 
@@ -77,11 +77,11 @@ export class UsuariosService {
     httpOptions.headers = httpOptions.headers.set('Authorization', token);
     return this.http.put(this.usuarioUrl + user.id, user, httpOptions)
     .pipe(
-      catchError(this.handleError)
+      catchError(this.handleError('editUser()'))
     );
   }
 
-  getUserByUsuario(usuario: string, token: string) {
+  getUserByUsuario(usuario: string, token: string): Observable<Usuario> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
@@ -95,23 +95,21 @@ export class UsuariosService {
         this.usuario = resp;
         return this.usuario;
       }),
-      catchError(this.handleError)
+      catchError(this.handleError<Usuario>('getByUsuario()'))
     );
   }
 
-  private handleError(error: HttpErrorResponse) {
-    if (error.error instanceof ErrorEvent) {
-      // A client-side or network error occurred. Handle it accordingly.
-      console.error('An error occurred:', error.error.message);
-    } else {
-      // The backend returned an unsuccessful response code.
-      // The response body may contain clues as to what went wrong,
-      console.error(
-        `Backend returned code ${error.status}, ` +
-        `body was: ${error.error}`);
-    }
-    // return an observable with a user-facing error message
-    return throwError(
-      'Something bad happened; please try again later.');
+  private handleError<T> (operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
+
+      // TODO: better job of transforming error for user consumption
+      console.log(`${operation} failed: ${error.message}`);
+
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
   }
 }
