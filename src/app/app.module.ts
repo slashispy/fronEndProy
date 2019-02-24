@@ -9,7 +9,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AboutComponent } from './components/about/about.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
-import { ProductosCrearComponent } from './components/productos/productos-crear/productos-crear.component';
+import { DataTablesModule } from 'angular-datatables';
 // Rutas
 import { APP_ROUTING } from './app.routes';
 // Servicios
@@ -20,6 +20,7 @@ import { ProductoEditarComponent } from './components/productos/producto-editar/
 import { AuthGuard } from './guards/auth.guard';
 // Interceptors
 import { ErrorInterceptor } from './interceptors/error.interceptor';
+import { ProductoCrearComponent } from './components/productos/producto-crear/producto-crear.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
     NavbarComponent,
     ProductoListarComponent,
     ProductoEditarComponent,
-    ProductosCrearComponent
+    ProductoCrearComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +39,8 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
     HttpModule,
     HttpClientModule,
     ReactiveFormsModule,
-    APP_ROUTING
+    APP_ROUTING,
+    DataTablesModule
   ],
   providers: [
     LoginService,

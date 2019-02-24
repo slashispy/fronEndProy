@@ -36,7 +36,7 @@ export class ProductosService {
       );
   }
 
-  getUser(token: string, id: string) {
+  getProduct(token: string, id: string) {
     this.httpOptions.headers = this.httpOptions.headers.set('Authorization', token);
     return this.http.get(this.productoUrl + id, this.httpOptions)
       .pipe(

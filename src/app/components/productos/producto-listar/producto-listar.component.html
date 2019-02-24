@@ -1,0 +1,45 @@
+<table class="table">
+  <tr>
+      <td>
+          <h3>Lista de Productos</h3>
+      </td>
+      <td><button class="btn btn-primary" [routerLink] = "['/producto-crear']">Nuevo Producto</button></td>
+  </tr>
+</table>
+<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+    <thead>
+        <tr>
+            <th>Codigo</th>
+            <th>Descripción</th>
+            <th>Cantidad</th>
+            <th>Estado</th>
+            <th>Controlar Stock</th>
+            <th>Precio Unitario</th>
+            <th>Cantidad Minima</th>
+            <th>Acción</th>
+        </tr>
+    </thead>
+    <tbody *ngIf="productos?.length != 0">
+        <tr *ngFor="let producto of productos">
+            <td>{{producto.codigo}}</td>
+            <td>{{producto.descripcion}}</td>
+            <td>{{producto.cantidad}}</td>
+            <td *ngIf="producto.estado === 'A'">Activo</td>
+            <td *ngIf="producto.estado === 'I'">Inactivo</td>
+            <td *ngIf="producto.controlarStock === 'S'">Si</td>
+            <td *ngIf="producto.controlarStock === 'N'">No</td>
+            <td>{{producto.precioUnitario}}</td>
+            <td>{{producto.cantidadMinima}}</td>
+            <td>
+            <a class="btn btn-default" (click)="editProduct(producto.id)">Ver</a>
+            </td>
+        </tr>
+    </tbody>
+    <tbody *ngIf="productos?.length == 0">
+      <tr>
+        <td colspan="8" class="no-data-available">No data!</td>
+      </tr>
+    <tbody>
+</table>
+
+<!--<a ui-sref="tipoExpedDtos-new" class="btn-primary btn-lg">Agregar Nuevo Expedientes de un Departamento</a>-->
