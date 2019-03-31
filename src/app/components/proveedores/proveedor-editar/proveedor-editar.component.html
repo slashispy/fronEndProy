@@ -1,0 +1,45 @@
+<div class="container">
+  <h2>Editar Proveedor</h2>
+  <form [formGroup]="proveedorForm" (ngSubmit)="editarProveedor()" class="px-4 py-3">
+    <div class="form-group">
+      <label for="razonSocial">Razón Social</label>
+      <input formControlName="razonSocial" type="text" class="form-control" id="razonSocial" placeholder="Razón Social">
+    </div>
+    <div class="form-group">
+      <label for="ruc">Ruc</label>
+      <input formControlName="ruc" type="text" class="form-control" id="ruc" placeholder="Ruc">
+    </div>
+    <div class="form-group">
+      <label for="timbrado">Timbrado</label>
+      <input formControlName="timbrado" type="text" class="form-control" id="timbrado" placeholder="Timbrado">
+    </div>
+    <div class="form-group">
+      <label for="estado">Estado</label>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" formControlName="estado" name="estado" id="estado1" value="A" checked>
+        <label class="form-check-label" for="estado1">
+          Activo
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" formControlName="estado" name="estado" id="estado2" value="I">
+        <label class="form-check-label" for="estado2">
+          Inactivo
+        </label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="direccion">Dirección</label>
+      <input formControlName="direccion" type="text" class="form-control" id="direccion" placeholder="Dirección">
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input formControlName="email" type="email" class="form-control" id="email" placeholder="E-mail">
+    </div>
+    <div class="form-group">
+      <label for="telefono">Telefono</label>
+      <input formControlName="telefono" type="tel" class="form-control" id="telefono" placeholder="Telefono">
+    </div>
+    <button type="submit" class="btn btn-primary">Editar</button>
+  </form>
+</div>

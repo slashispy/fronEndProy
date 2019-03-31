@@ -14,7 +14,6 @@ export class ProductoCrearComponent implements OnInit {
   productoForm = new FormGroup({
     codigo: new FormControl('', Validators.required),
     descripcion: new FormControl('', Validators.required),
-    cantidad: new FormControl('', Validators.required),
     estado: new FormControl('A', Validators.required),
     controlarStock: new FormControl('S', Validators.required),
     precioUnitario: new FormControl('', Validators.required),

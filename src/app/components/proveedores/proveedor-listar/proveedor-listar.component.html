@@ -1,0 +1,44 @@
+<table class="table">
+  <tr>
+      <td>
+          <h3>Lista de Proveedores</h3>
+      </td>
+      <td><button class="btn btn-primary" [routerLink] = "['/proveedor-crear']">Nuevo Proveedor</button></td>
+  </tr>
+</table>
+<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+    <thead>
+        <tr>
+            <th>Ruc</th>
+            <th>Razon Social</th>
+            <th>Timbrado</th>
+            <th>Estado</th>
+            <th>Direccion</th>
+            <th>Email</th>
+            <th>Telefono</th>
+            <th>Acción</th>
+        </tr>
+    </thead>
+    <tbody *ngIf="proveedores?.length != 0">
+        <tr *ngFor="let proveedor of proveedores">
+            <td>{{proveedor.ruc}}</td>
+            <td>{{proveedor.razonSocial}}</td>
+            <td>{{proveedor.timbrado}}</td>
+            <td *ngIf="proveedor.estado === 'A'">Activo</td>
+            <td *ngIf="proveedor.estado === 'I'">Inactivo</td>
+            <td>{{proveedor.direccion}}</td>
+            <td>{{proveedor.email}}</td>
+            <td>{{proveedor.telefono}}</td>
+            <td>
+            <a class="btn btn-default" (click)="editProveedor(proveedor.id)">Ver</a>
+            </td>
+        </tr>
+    </tbody>
+    <tbody *ngIf="proveedores?.length == 0">
+      <tr>
+        <td colspan="8" class="no-data-available">No data!</td>
+      </tr>
+    <tbody>
+</table>
+
+<!--<a ui-sref="tipoExpedDtos-new" class="btn-primary btn-lg">Agregar Nuevo Expedientes de un Departamento</a>-->

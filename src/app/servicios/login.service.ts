@@ -3,12 +3,15 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Credenciales } from '../clases/credenciales';
+import { Usuario } from '../clases/usuario';
 
 
 @Injectable()
 export class LoginService {
   loginUrl = 'http://localhost:8091/backEndProy/auth/login';
+  registrerUrl = 'http://localhost:8091/backEndProy/auth/registrer';
   credenciales: Credenciales;
+  usuario: Usuario;
 
   constructor(private http: Http) { }
 
@@ -36,16 +39,23 @@ export class LoginService {
     localStorage.removeItem('currentUser');
   }
 
-  getCredecianles(): Credenciales {
-    return this.credenciales;
-  }
+  registrarse(usuarioR: Usuario) {
+    const cpHeaders = new Headers({'Content-type' : 'application/json'});
+    const options = new RequestOptions({headers : cpHeaders});
+    console.log('Registrarse: ' + JSON.stringify(usuarioR));
+    return this.http.post(this.registrerUrl, usuarioR, options)
+    .pipe(
+      map(response => {
+        const cre: Credenciales = response.json();
+        if (cre && cre.token) {
+          cre.usuario = usuarioR.usuario;
+          localStorage.setItem('currentUser', JSON.stringify(cre));
+        }
+        return cre;
+      }),
+      catchError(this.handleError)
+    );
 
-  getUsuario(): string {
-    return this.credenciales.usuario;
-  }
-
-  setCredenciales(cre: Credenciales) {
-    this.credenciales = cre;
   }
 
 

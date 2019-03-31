@@ -21,6 +21,10 @@ import { AuthGuard } from './guards/auth.guard';
 // Interceptors
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { ProductoCrearComponent } from './components/productos/producto-crear/producto-crear.component';
+import { RegistrarComponent } from './components/registrar/registrar.component';
+import { ProveedorListarComponent } from './components/proveedores/proveedor-listar/proveedor-listar.component';
+import { ProveedorCrearComponent } from './components/proveedores/proveedor-crear/proveedor-crear.component';
+import { ProveedorEditarComponent } from './components/proveedores/proveedor-editar/proveedor-editar.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +35,11 @@ import { ProductoCrearComponent } from './components/productos/producto-crear/pr
     NavbarComponent,
     ProductoListarComponent,
     ProductoEditarComponent,
-    ProductoCrearComponent
+    ProductoCrearComponent,
+    RegistrarComponent,
+    ProveedorListarComponent,
+    ProveedorCrearComponent,
+    ProveedorEditarComponent
   ],
   imports: [
     BrowserModule,
