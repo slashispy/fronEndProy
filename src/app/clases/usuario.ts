@@ -1,3 +1,5 @@
+import { Perfil } from './perfil';
+
 export class Usuario {
     id: number;
     apellido: string;
@@ -6,5 +8,5 @@ export class Usuario {
     nombre: string;
     usuario: string;
     estado: string;
-    perfiles: any[];
+    perfiles: Perfil[];
 }
