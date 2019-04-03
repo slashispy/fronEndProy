@@ -10,6 +10,7 @@ import { AboutComponent } from './components/about/about.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { DataTablesModule } from 'angular-datatables';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 // Rutas
 import { APP_ROUTING } from './app.routes';
 // Servicios
@@ -56,7 +57,8 @@ import { PermisoListarComponent } from './components/permisos/permiso-listar/per
     HttpClientModule,
     ReactiveFormsModule,
     APP_ROUTING,
-    DataTablesModule
+    DataTablesModule,
+    DragDropModule
   ],
   providers: [
     LoginService,
