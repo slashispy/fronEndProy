@@ -25,6 +25,10 @@ import { RegistrarComponent } from './components/registrar/registrar.component';
 import { ProveedorListarComponent } from './components/proveedores/proveedor-listar/proveedor-listar.component';
 import { ProveedorCrearComponent } from './components/proveedores/proveedor-crear/proveedor-crear.component';
 import { ProveedorEditarComponent } from './components/proveedores/proveedor-editar/proveedor-editar.component';
+import { ClienteListarComponent } from './components/clientes/cliente-listar/cliente-listar.component';
+import { ClienteCrearComponent } from './components/clientes/cliente-crear/cliente-crear.component';
+import { ClienteEditarComponent } from './components/clientes/cliente-editar/cliente-editar.component';
+import { PermisoListarComponent } from './components/permisos/permiso-listar/permiso-listar.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +43,11 @@ import { ProveedorEditarComponent } from './components/proveedores/proveedor-edi
     RegistrarComponent,
     ProveedorListarComponent,
     ProveedorCrearComponent,
-    ProveedorEditarComponent
+    ProveedorEditarComponent,
+    ClienteListarComponent,
+    ClienteCrearComponent,
+    ClienteEditarComponent,
+    PermisoListarComponent
   ],
   imports: [
     BrowserModule,

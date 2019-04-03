@@ -10,6 +10,9 @@ import { RegistrarComponent } from './components/registrar/registrar.component';
 import { ProveedorListarComponent } from './components/proveedores/proveedor-listar/proveedor-listar.component';
 import { ProveedorCrearComponent } from './components/proveedores/proveedor-crear/proveedor-crear.component';
 import { ProveedorEditarComponent } from './components/proveedores/proveedor-editar/proveedor-editar.component';
+import { ClienteListarComponent } from './components/clientes/cliente-listar/cliente-listar.component';
+import { ClienteCrearComponent } from './components/clientes/cliente-crear/cliente-crear.component';
+import { ClienteEditarComponent } from './components/clientes/cliente-editar/cliente-editar.component';
 
 const APP_ROUTES: Routes = [
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
@@ -20,6 +23,9 @@ const APP_ROUTES: Routes = [
     { path: 'proveedores', component: ProveedorListarComponent, canActivate: [AuthGuard]},
     { path: 'proveedor-crear', component: ProveedorCrearComponent, canActivate: [AuthGuard]},
     { path: 'proveedor-editar', component: ProveedorEditarComponent, canActivate: [AuthGuard]},
+    { path: 'clientes', component: ClienteListarComponent, canActivate: [AuthGuard]},
+    { path: 'cliente-crear', component: ClienteCrearComponent, canActivate: [AuthGuard]},
+    { path: 'cliente-editar', component: ClienteEditarComponent, canActivate: [AuthGuard]},
     { path: 'login', component: LoginComponent},
     { path: 'registrer', component: RegistrarComponent},
     { path: '**', pathMatch: 'full', redirectTo: 'home'}

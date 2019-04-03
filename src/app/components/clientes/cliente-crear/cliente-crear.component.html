@@ -1,0 +1,14 @@
+<div class="container">
+  <h2>Nuevo Cliente</h2>
+  <form [formGroup]="clienteForm" (ngSubmit)="nuevoCliente()" class="px-4 py-3">
+    <div class="form-group">
+      <label for="ruc">Ruc</label>
+      <input formControlName="ruc" type="text" class="form-control" id="ruc" placeholder="RUC">
+    </div>
+    <div class="form-group">
+      <label for="razonSocial">Razón Social</label>
+      <input formControlName="razonSocial" type="text" class="form-control" id="razonSocial" placeholder="Razón Social">
+    </div>
+    <button type="submit" class="btn btn-primary">Crear</button>
+  </form>
+</div>

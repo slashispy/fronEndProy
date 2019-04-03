@@ -1,0 +1,33 @@
+<table class="table">
+  <tr>
+      <td>
+          <h3>Lista de Clientes</h3>
+      </td>
+      <td><button class="btn btn-primary" [routerLink] = "['/cliente-crear']">Nuevo Cliente</button></td>
+  </tr>
+</table>
+<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+    <thead>
+        <tr>
+            <th>RUC</th>
+            <th>Razón Social</th>
+            <th>Acción</th>
+        </tr>
+    </thead>
+    <tbody *ngIf="clientes?.length != 0">
+        <tr *ngFor="let cliente of clientes">
+            <td>{{cliente.ruc}}</td>
+            <td>{{cliente.razonSocial}}</td>
+            <td>
+            <a class="btn btn-default" (click)="editClient(cliente.id)">Ver</a>
+            </td>
+        </tr>
+    </tbody>
+    <tbody *ngIf="clientes?.length == 0">
+      <tr>
+        <td colspan="8" class="no-data-available">No data!</td>
+      </tr>
+    <tbody>
+</table>
+
+<!--<a ui-sref="tipoExpedDtos-new" class="btn-primary btn-lg">Agregar Nuevo Expedientes de un Departamento</a>-->
