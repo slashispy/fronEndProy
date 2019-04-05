@@ -1,36 +1,36 @@
 import { Component, OnInit, OnDestroy, EventEmitter, Output } from '@angular/core';
 import { Credenciales } from '../../../clases/credenciales';
-import { Permiso } from '../../../clases/permiso';
+import { Parametro } from '../../../clases/parametro';
 
 import { Router } from '@angular/router';
-import { PermisosService } from '../../../servicios/permisos.service';
+import { ParametrosService } from '../../../servicios/parametros.service';
 
 import { Subject } from 'rxjs';
 import { Datatables } from '../../../clases/datatables';
 
 @Component({
-  selector: 'app-permiso-listar',
-  templateUrl: './permiso-listar.component.html'
+  selector: 'app-parametro-listar',
+  templateUrl: './parametro-listar.component.html'
 })
-export class PermisoListarComponent extends Datatables implements OnInit, OnDestroy {
-  @Output() idProducto = new EventEmitter<string>();
-  permisos: Permiso[];
+export class ParametroListarComponent extends Datatables implements OnInit, OnDestroy {
+  @Output() idParametro = new EventEmitter<string>();
+  parametros: Parametro[];
   dtTrigger: Subject<any> = new Subject();
   currentUser: Credenciales;
 
-  constructor(private permisosService: PermisosService,
+  constructor(private parametrosService: ParametrosService,
     private router: Router) {
       super();
       this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-     }
+    }
 
   ngOnInit() {
     super.ngOnInit();
     if (this.currentUser != null) {
-      this.permisosService.getAllPermits(this.currentUser.token)
+      this.parametrosService.getAllParameters(this.currentUser.token)
       .subscribe(
         resp => {
-          this.permisos = resp;
+          this.parametros = resp;
           this.dtTrigger.next();
         },
         errorCode => {
@@ -47,10 +47,10 @@ export class PermisoListarComponent extends Datatables implements OnInit, OnDest
     this.dtTrigger.unsubscribe();
   }
 
-  editPermission(id: string): void {
-    localStorage.removeItem('permisoId');
-    localStorage.setItem('permisoId', id);
-    this.router.navigate(['permiso-editar']);
+  editParameter(id: string): void {
+    localStorage.removeItem('parametroId');
+    localStorage.setItem('parametroId', id);
+    this.router.navigate(['parametro-editar']);
   }
 
 }

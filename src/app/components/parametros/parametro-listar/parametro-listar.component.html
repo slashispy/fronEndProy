@@ -1,29 +1,29 @@
 <table class="table">
   <tr>
       <td>
-          <h3>Lista de Permisos</h3>
+          <h3>Lista de Parametros</h3>
       </td>
-      <td><button class="btn btn-primary" [routerLink] = "['/permiso-crear']">Nuevo Permiso</button></td>
+      <td><button class="btn btn-primary" [routerLink] = "['/parametro-crear']">Nuevo Parametro</button></td>
   </tr>
 </table>
 <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
     <thead>
         <tr>
-            <th>Codigo</th>
-            <th>Descripción</th>
+            <th>Clave</th>
+            <th>Valor</th>
             <th>Acción</th>
         </tr>
     </thead>
-    <tbody *ngIf="permisos?.length != 0">
-        <tr *ngFor="let permiso of permisos">
-            <td>{{permiso.codigo}}</td>
-            <td>{{permiso.descripcion}}</td>
+    <tbody *ngIf="parametros?.length != 0">
+        <tr *ngFor="let parametro of parametros">
+            <td>{{parametro.clave}}</td>
+            <td>{{parametro.valor}}</td>
             <td>
-            <a class="btn btn-default" (click)="editPermission(permiso.id)">Ver</a>
+            <a class="btn btn-default" (click)="editParameter(parametro.id)">Ver</a>
             </td>
         </tr>
     </tbody>
-    <tbody *ngIf="permisos?.length == 0">
+    <tbody *ngIf="parametros?.length == 0">
       <tr>
         <td colspan="8" class="no-data-available">No data!</td>
       </tr>

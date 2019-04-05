@@ -30,6 +30,11 @@ import { ClienteListarComponent } from './components/clientes/cliente-listar/cli
 import { ClienteCrearComponent } from './components/clientes/cliente-crear/cliente-crear.component';
 import { ClienteEditarComponent } from './components/clientes/cliente-editar/cliente-editar.component';
 import { PermisoListarComponent } from './components/permisos/permiso-listar/permiso-listar.component';
+import { PermisoCrearComponent } from './components/permisos/permiso-crear/permiso-crear.component';
+import { PermisoEditarComponent } from './components/permisos/permiso-editar/permiso-editar.component';
+import { ParametroListarComponent } from './components/parametros/parametro-listar/parametro-listar.component';
+import { ParametroCrearComponent } from './components/parametros/parametro-crear/parametro-crear.component';
+import { ParametroEditarComponent } from './components/parametros/parametro-editar/parametro-editar.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +53,12 @@ import { PermisoListarComponent } from './components/permisos/permiso-listar/per
     ClienteListarComponent,
     ClienteCrearComponent,
     ClienteEditarComponent,
-    PermisoListarComponent
+    PermisoListarComponent,
+    PermisoCrearComponent,
+    PermisoEditarComponent,
+    ParametroListarComponent,
+    ParametroCrearComponent,
+    ParametroEditarComponent
   ],
   imports: [
     BrowserModule,

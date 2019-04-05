@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
-import { Permiso } from '../clases/permiso';
+import { Parametro } from '../clases/parametro';
 import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PermisosService {
+export class ParametrosService {
 
-  permisoUrl = 'http://localhost:8091/backEndProy/permiso/';
+  parametroUrl = 'http://localhost:8091/backEndProy/parametro/';
 
-  permisos: Permiso[];
-  permiso: Permiso;
+  parametros: Parametro[];
+  parametro: Parametro;
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -23,46 +23,48 @@ export class PermisosService {
 
   constructor(private http: HttpClient) { }
 
-  getAllPermits(token: string) {
+
+  getAllParameters(token: string) {
     this.httpOptions.headers = this.httpOptions.headers.set('Authorization', token);
-    return this.http.get( this.permisoUrl, this.httpOptions)
+    return this.http.get( this.parametroUrl, this.httpOptions)
     .pipe(
-      map( (resp: Permiso[]) => {
-        this.permisos = resp;
-        return this.permisos;
+      map( (resp: Parametro[]) => {
+        this.parametros = resp;
+        return this.parametros;
       }
       ),
       catchError(this.handleError)
       );
   }
 
-  getPermission(token: string, id: string) {
+  getParameter(token: string, id: string) {
     this.httpOptions.headers = this.httpOptions.headers.set('Authorization', token);
-    return this.http.get(this.permisoUrl + id, this.httpOptions)
+    return this.http.get(this.parametroUrl + id, this.httpOptions)
       .pipe(
-        map((resp: Permiso) => {
-          this.permiso = resp;
-          return this.permiso;
+        map((resp: Parametro) => {
+          this.parametro = resp;
+          return this.parametro;
         }),
         catchError(this.handleError)
       );
   }
 
-  addPermission(permission: Permiso, token: string) {
+  addParameter(parameter: Parametro, token: string) {
     this.httpOptions.headers = this.httpOptions.headers.set('Authorization', token);
-    return this.http.post(this.permisoUrl, permission, this.httpOptions)
+    return this.http.post(this.parametroUrl, parameter, this.httpOptions)
     .pipe(
       catchError(this.handleError)
     );
   }
 
-  editPermission(permission: Permiso, token: string) {
+  editParameter(parameter: Parametro, token: string) {
     this.httpOptions.headers = this.httpOptions.headers.set('Authorization', token);
-    return this.http.put(this.permisoUrl + permission.id, permission, this.httpOptions)
+    return this.http.put(this.parametroUrl + parameter.id, parameter, this.httpOptions)
     .pipe(
       catchError(this.handleError)
     );
   }
+
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {

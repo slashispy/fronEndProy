@@ -33,7 +33,7 @@ export class RegistrarComponent implements OnInit {
       email: ['', Validators.required],
       usuario: ['', Validators.required],
       clave: ['', [Validators.required, Validators.minLength(6)]],
-      perfilesAsignados: []
+      perfiles: []
     });
 
     this.loginService.getAllProfiles()
@@ -58,6 +58,7 @@ export class RegistrarComponent implements OnInit {
         return;
     }
     const usuario: Usuario = this.registerForm.value;
+    console.log(usuario);
     usuario.estado = 'A';
     this.loading = true;
     this.loginService.registrarse(usuario)
@@ -76,11 +77,12 @@ drop(event: CdkDragDrop<string[]>) {
   if (event.previousContainer === event.container) {
     moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
   } else {
+    console.log(this.permisosAsignados);
     transferArrayItem(event.previousContainer.data,
                       event.container.data,
                       event.previousIndex,
                       event.currentIndex);
-    this.registerForm.controls['perfilesAsignados'].setValue(this.permisosAsignados);
+    this.registerForm.controls['perfiles'].setValue(this.permisosAsignados);
   }
 }
 

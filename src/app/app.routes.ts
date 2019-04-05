@@ -13,6 +13,12 @@ import { ProveedorEditarComponent } from './components/proveedores/proveedor-edi
 import { ClienteListarComponent } from './components/clientes/cliente-listar/cliente-listar.component';
 import { ClienteCrearComponent } from './components/clientes/cliente-crear/cliente-crear.component';
 import { ClienteEditarComponent } from './components/clientes/cliente-editar/cliente-editar.component';
+import { PermisoListarComponent } from './components/permisos/permiso-listar/permiso-listar.component';
+import { PermisoCrearComponent } from './components/permisos/permiso-crear/permiso-crear.component';
+import { PermisoEditarComponent } from './components/permisos/permiso-editar/permiso-editar.component';
+import { ParametroListarComponent } from './components/parametros/parametro-listar/parametro-listar.component';
+import { ParametroEditarComponent } from './components/parametros/parametro-editar/parametro-editar.component';
+import { ParametroCrearComponent } from './components/parametros/parametro-crear/parametro-crear.component';
 
 const APP_ROUTES: Routes = [
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
@@ -26,6 +32,12 @@ const APP_ROUTES: Routes = [
     { path: 'clientes', component: ClienteListarComponent, canActivate: [AuthGuard]},
     { path: 'cliente-crear', component: ClienteCrearComponent, canActivate: [AuthGuard]},
     { path: 'cliente-editar', component: ClienteEditarComponent, canActivate: [AuthGuard]},
+    { path: 'permisos', component: PermisoListarComponent, canActivate: [AuthGuard]},
+    { path: 'permiso-crear', component: PermisoCrearComponent, canActivate: [AuthGuard]},
+    { path: 'permiso-editar', component: PermisoEditarComponent, canActivate: [AuthGuard]},
+    { path: 'parametros', component: ParametroListarComponent, canActivate: [AuthGuard]},
+    { path: 'parametro-crear', component: ParametroCrearComponent, canActivate: [AuthGuard]},
+    { path: 'parametro-editar', component: ParametroEditarComponent, canActivate: [AuthGuard]},
     { path: 'login', component: LoginComponent},
     { path: 'registrer', component: RegistrarComponent},
     { path: '**', pathMatch: 'full', redirectTo: 'home'}

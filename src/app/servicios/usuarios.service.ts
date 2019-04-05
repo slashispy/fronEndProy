@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Usuario } from '../clases/usuario';
 import { Observable, of } from 'rxjs';
@@ -14,17 +14,18 @@ export class UsuariosService {
   usuarios: Usuario[];
   usuario: Usuario;
 
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json',
+      'Authorization': 'my-auth-token'
+    })
+  };
+
   constructor(private http: HttpClient) { }
 
   getAllUsers(token: string) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-        'Authorization': 'my-auth-token'
-      })
-    };
-    httpOptions.headers = httpOptions.headers.set('Authorization', token);
-    return this.http.get( this.usuarioUrl, httpOptions)
+    this.httpOptions.headers = this.httpOptions.headers.set('Authorization', token);
+    return this.http.get( this.usuarioUrl, this.httpOptions)
     .pipe(
       map( (resp: Usuario[]) => {
         this.usuarios = resp;
@@ -36,14 +37,8 @@ export class UsuariosService {
   }
 
   getUser(token: string, id: string) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-        'Authorization': 'my-auth-token'
-      })
-    };
-    httpOptions.headers = httpOptions.headers.set('Authorization', token);
-    return this.http.get(this.usuarioUrl + id, httpOptions)
+    this.httpOptions.headers = this.httpOptions.headers.set('Authorization', token);
+    return this.http.get(this.usuarioUrl + id, this.httpOptions)
       .pipe(
         map((resp: Usuario) => {
           this.usuario = resp;
@@ -54,42 +49,24 @@ export class UsuariosService {
   }
 
   addUser(user: Usuario, token: string) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-        'Authorization': 'my-auth-token'
-      })
-    };
-    httpOptions.headers = httpOptions.headers.set('Authorization', token);
-    return this.http.post(this.usuarioUrl, user, httpOptions)
+    this.httpOptions.headers = this.httpOptions.headers.set('Authorization', token);
+    return this.http.post(this.usuarioUrl, user, this.httpOptions)
     .pipe(
       catchError(this.handleError('addUser()'))
     );
   }
 
   editUser(user: Usuario, token: string) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-        'Authorization': 'my-auth-token'
-      })
-    };
-    httpOptions.headers = httpOptions.headers.set('Authorization', token);
-    return this.http.put(this.usuarioUrl + user.id, user, httpOptions)
+    this.httpOptions.headers = this.httpOptions.headers.set('Authorization', token);
+    return this.http.put(this.usuarioUrl + user.id, user, this.httpOptions)
     .pipe(
       catchError(this.handleError('editUser()'))
     );
   }
 
   getUserByUsuario(usuario: string, token: string): Observable<Usuario> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-        'Authorization': 'my-auth-token'
-      })
-    };
-    httpOptions.headers = httpOptions.headers.set('Authorization', token);
-    return this.http.get(this.usuarioUrl + 'user/' + usuario, httpOptions)
+    this.httpOptions.headers = this.httpOptions.headers.set('Authorization', token);
+    return this.http.get(this.usuarioUrl + 'user/' + usuario, this.httpOptions)
     .pipe(
       map((resp: Usuario) => {
         this.usuario = resp;

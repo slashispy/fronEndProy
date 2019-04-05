@@ -1,0 +1,14 @@
+<div class="container">
+  <h2>Nuevo Permiso</h2>
+  <form [formGroup]="permisoForm" (ngSubmit)="nuevoPermiso()" class="px-4 py-3">
+    <div class="form-group">
+      <label for="codigo">Código</label>
+      <input formControlName="codigo" type="text" class="form-control" id="codigo" placeholder="Código">
+    </div>
+    <div class="form-group">
+      <label for="descripcion">Descripción</label>
+      <input formControlName="descripcion" type="text" class="form-control" id="descripcion" placeholder="Descripción">
+    </div>
+    <button type="submit" class="btn btn-primary">Crear</button>
+  </form>
+</div>
