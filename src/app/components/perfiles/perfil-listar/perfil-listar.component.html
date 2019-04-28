@@ -1,0 +1,36 @@
+<table class="table">
+  <tr>
+      <td>
+          <h3>Lista de Roles</h3>
+      </td>
+      <td><button class="btn btn-primary" [routerLink] = "['/perfil-crear']">Nuevo Rol</button></td>
+  </tr>
+</table>
+<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+    <thead>
+        <tr>
+            <th>Codigo</th>
+            <th>Descripción</th>
+            <th>Estado</th>
+            <th>Acción</th>
+        </tr>
+    </thead>
+    <tbody *ngIf="perfiles?.length != 0">
+        <tr *ngFor="let perfil of perfiles">
+            <td>{{perfil.codigo}}</td>
+            <td>{{perfil.descripcion}}</td>
+            <td *ngIf="perfil.estado === 'A'">Activo</td>
+            <td *ngIf="perfil.estado === 'I'">Inactivo</td>
+            <td>
+            <a class="btn btn-default" (click)="editProfile(perfil.id)">Ver</a>
+            </td>
+        </tr>
+    </tbody>
+    <tbody *ngIf="perfiles?.length == 0">
+      <tr>
+        <td colspan="8" class="no-data-available">No data!</td>
+      </tr>
+    <tbody>
+</table>
+
+<!--<a ui-sref="tipoExpedDtos-new" class="btn-primary btn-lg">Agregar Nuevo Expedientes de un Departamento</a>-->

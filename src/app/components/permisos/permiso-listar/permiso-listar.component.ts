@@ -13,7 +13,7 @@ import { Datatables } from '../../../clases/datatables';
   templateUrl: './permiso-listar.component.html'
 })
 export class PermisoListarComponent extends Datatables implements OnInit, OnDestroy {
-  @Output() idProducto = new EventEmitter<string>();
+  @Output() idPerfil = new EventEmitter<string>();
   permisos: Permiso[];
   dtTrigger: Subject<any> = new Subject();
   currentUser: Credenciales;

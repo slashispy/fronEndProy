@@ -19,6 +19,8 @@ import { PermisoEditarComponent } from './components/permisos/permiso-editar/per
 import { ParametroListarComponent } from './components/parametros/parametro-listar/parametro-listar.component';
 import { ParametroEditarComponent } from './components/parametros/parametro-editar/parametro-editar.component';
 import { ParametroCrearComponent } from './components/parametros/parametro-crear/parametro-crear.component';
+import { PerfilListarComponent } from './components/perfiles/perfil-listar/perfil-listar.component';
+import { PerfilCrearComponent } from './components/perfiles/perfil-crear/perfil-crear.component';
 
 const APP_ROUTES: Routes = [
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
@@ -38,6 +40,8 @@ const APP_ROUTES: Routes = [
     { path: 'parametros', component: ParametroListarComponent, canActivate: [AuthGuard]},
     { path: 'parametro-crear', component: ParametroCrearComponent, canActivate: [AuthGuard]},
     { path: 'parametro-editar', component: ParametroEditarComponent, canActivate: [AuthGuard]},
+    { path: 'perfiles', component: PerfilListarComponent, canActivate: [AuthGuard]},
+    { path: 'perfil-crear', component: PerfilCrearComponent, canActivate: [AuthGuard]},
     { path: 'login', component: LoginComponent},
     { path: 'registrer', component: RegistrarComponent},
     { path: '**', pathMatch: 'full', redirectTo: 'home'}

@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit {
     const hora: number = d.getHours();
     if (hora >= 6 && hora < 12) {
       this.saludo = 'Buenos Días';
-    } else if (hora >= 12 && hora < 20) {
+    } else if (hora >= 12 && hora < 19) {
       this.saludo = 'Buenas Tardes';
     } else {
       this.saludo = 'Buenas Noches';

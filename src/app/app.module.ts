@@ -35,6 +35,8 @@ import { PermisoEditarComponent } from './components/permisos/permiso-editar/per
 import { ParametroListarComponent } from './components/parametros/parametro-listar/parametro-listar.component';
 import { ParametroCrearComponent } from './components/parametros/parametro-crear/parametro-crear.component';
 import { ParametroEditarComponent } from './components/parametros/parametro-editar/parametro-editar.component';
+import { PerfilListarComponent } from './components/perfiles/perfil-listar/perfil-listar.component';
+import { PerfilCrearComponent } from './components/perfiles/perfil-crear/perfil-crear.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +60,9 @@ import { ParametroEditarComponent } from './components/parametros/parametro-edit
     PermisoEditarComponent,
     ParametroListarComponent,
     ParametroCrearComponent,
-    ParametroEditarComponent
+    ParametroEditarComponent,
+    PerfilListarComponent,
+    PerfilCrearComponent
   ],
   imports: [
     BrowserModule,
