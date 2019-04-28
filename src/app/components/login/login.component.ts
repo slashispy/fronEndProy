@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { LoginService } from '../../servicios/login.service';
 import { Credenciales } from '../../clases/credenciales';
 import { AppComponent } from '../../app.component';
+import { AlertService } from '../../servicios/alert.service';
 
 
 @Component({
@@ -24,6 +25,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private loginService: LoginService,
               private router: Router,
+              private alertService: AlertService,
               private app: AppComponent) {
                 app.navBar = false;
                }
@@ -43,7 +45,8 @@ export class LoginComponent implements OnInit {
       this.app.navBar = true;
     }, errorCode => {
       console.log(errorCode);
-      this.alert = true;
+      this.alertService.error(errorCode);
+      //this.alert = true;
     } );
   }
 

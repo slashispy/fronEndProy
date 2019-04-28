@@ -15,6 +15,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { APP_ROUTING } from './app.routes';
 // Servicios
 import { LoginService } from './servicios/login.service';
+import { AlertService } from './servicios/alert.service';
 import { ProductoListarComponent } from './components/productos/producto-listar/producto-listar.component';
 import { ProductoEditarComponent } from './components/productos/producto-editar/producto-editar.component';
 // Guards
@@ -37,6 +38,7 @@ import { ParametroCrearComponent } from './components/parametros/parametro-crear
 import { ParametroEditarComponent } from './components/parametros/parametro-editar/parametro-editar.component';
 import { PerfilListarComponent } from './components/perfiles/perfil-listar/perfil-listar.component';
 import { PerfilCrearComponent } from './components/perfiles/perfil-crear/perfil-crear.component';
+import { AlertComponent } from './components/shared/alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +64,8 @@ import { PerfilCrearComponent } from './components/perfiles/perfil-crear/perfil-
     ParametroCrearComponent,
     ParametroEditarComponent,
     PerfilListarComponent,
-    PerfilCrearComponent
+    PerfilCrearComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
@@ -76,6 +79,7 @@ import { PerfilCrearComponent } from './components/perfiles/perfil-crear/perfil-
   ],
   providers: [
     LoginService,
+    AlertService,
     AuthGuard,
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
