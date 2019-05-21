@@ -1,0 +1,43 @@
+<table class="table">
+  <tr>
+      <td>
+          <h3>Lista de Compras</h3>
+      </td>
+      <td><button class="btn btn-primary" [routerLink] = "['/compra']">Nueva Compra</button></td>
+  </tr>
+</table>
+<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+    <thead>
+        <tr>
+            <th>Codigo</th>
+            <th>Descripción</th>
+            <th>Estado</th>
+            <th>Controlar Stock</th>
+            <th>Precio Unitario</th>
+            <th>Cantidad Minima</th>
+            <th>Acción</th>
+        </tr>
+    </thead>
+    <tbody *ngIf="compras?.length != 0">
+        <tr *ngFor="let compra of compras">
+            <td>{{compra.codigo}}</td>
+            <td>{{compra.descripcion}}</td>
+            <td *ngIf="compra.estado === 'A'">Activo</td>
+            <td *ngIf="compra.estado === 'I'">Inactivo</td>
+            <td *ngIf="compra.controlarStock === 'S'">Si</td>
+            <td *ngIf="compra.controlarStock === 'N'">No</td>
+            <td>{{compra.precioUnitario}}</td>
+            <td>{{compra.cantidadMinima}}</td>
+            <td>
+            <a class="btn btn-default" (click)="editProduct(compra.id)">Ver</a>
+            </td>
+        </tr>
+    </tbody>
+    <tbody *ngIf="compras?.length == 0">
+      <tr>
+        <td colspan="8" class="no-data-available">No data!</td>
+      </tr>
+    <tbody>
+</table>
+
+<!--<a ui-sref="tipoExpedDtos-new" class="btn-primary btn-lg">Agregar Nuevo Expedientes de un Departamento</a>-->

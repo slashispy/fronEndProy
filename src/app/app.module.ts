@@ -37,6 +37,11 @@ import { ParametroCrearComponent } from './components/parametros/parametro-crear
 import { ParametroEditarComponent } from './components/parametros/parametro-editar/parametro-editar.component';
 import { PerfilListarComponent } from './components/perfiles/perfil-listar/perfil-listar.component';
 import { PerfilCrearComponent } from './components/perfiles/perfil-crear/perfil-crear.component';
+import { ComprasComponent } from './components/compras/compras.component';
+import { CompraComponent } from './components/compras/compra/compra.component';
+import { CompraItemsComponent } from './components/compras/compra-items/compra-items.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -55,6 +60,9 @@ import { PerfilCrearComponent } from './components/perfiles/perfil-crear/perfil-
     ClienteListarComponent,
     ClienteCrearComponent,
     ClienteEditarComponent,
+    ComprasComponent,
+    CompraComponent,
+    CompraItemsComponent,
     PermisoListarComponent,
     PermisoCrearComponent,
     PermisoEditarComponent,
@@ -64,6 +72,7 @@ import { PerfilCrearComponent } from './components/perfiles/perfil-crear/perfil-
     PerfilListarComponent,
     PerfilCrearComponent
   ],
+  entryComponents: [CompraItemsComponent],
   imports: [
     BrowserModule,
     FormsModule,
@@ -72,7 +81,9 @@ import { PerfilCrearComponent } from './components/perfiles/perfil-crear/perfil-
     ReactiveFormsModule,
     APP_ROUTING,
     DataTablesModule,
-    DragDropModule
+    DragDropModule,
+    MatDialogModule,
+    BrowserAnimationsModule
   ],
   providers: [
     LoginService,

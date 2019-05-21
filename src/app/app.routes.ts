@@ -21,6 +21,8 @@ import { ParametroEditarComponent } from './components/parametros/parametro-edit
 import { ParametroCrearComponent } from './components/parametros/parametro-crear/parametro-crear.component';
 import { PerfilListarComponent } from './components/perfiles/perfil-listar/perfil-listar.component';
 import { PerfilCrearComponent } from './components/perfiles/perfil-crear/perfil-crear.component';
+import { ComprasComponent } from './components/compras/compras.component';
+import { CompraComponent } from './components/compras/compra/compra.component';
 
 const APP_ROUTES: Routes = [
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
@@ -34,6 +36,10 @@ const APP_ROUTES: Routes = [
     { path: 'clientes', component: ClienteListarComponent, canActivate: [AuthGuard]},
     { path: 'cliente-crear', component: ClienteCrearComponent, canActivate: [AuthGuard]},
     { path: 'cliente-editar', component: ClienteEditarComponent, canActivate: [AuthGuard]},
+    { path: 'compras', component: ComprasComponent, canActivate: [AuthGuard]},
+    { path: 'compra', children: [
+        { path: '', component: CompraComponent},
+        { path: 'edit/:id', component: CompraComponent}]},
     { path: 'permisos', component: PermisoListarComponent, canActivate: [AuthGuard]},
     { path: 'permiso-crear', component: PermisoCrearComponent, canActivate: [AuthGuard]},
     { path: 'permiso-editar', component: PermisoEditarComponent, canActivate: [AuthGuard]},
