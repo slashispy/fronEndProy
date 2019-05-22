@@ -52,13 +52,11 @@ export class RegistrarComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    console.log(this.registerForm);
     // stop here if form is invalid
     if (this.registerForm.invalid) {
         return;
     }
     const usuario: Usuario = this.registerForm.value;
-    console.log(usuario);
     usuario.estado = 'A';
     this.loading = true;
     this.loginService.registrarse(usuario)
