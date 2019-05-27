@@ -16,7 +16,6 @@ export class ProductoEditarComponent implements OnInit {
     descripcion: new FormControl('', Validators.required),
     estado: new FormControl('', Validators.required),
     controlarStock: new FormControl('', Validators.required),
-    precioUnitario: new FormControl('', Validators.required),
     cantidadMinima: new FormControl('', Validators.required)
   });
   currentUser: Credenciales;
@@ -44,7 +43,6 @@ export class ProductoEditarComponent implements OnInit {
           this.productoForm.controls['descripcion'].setValue(resp.descripcion);
           this.productoForm.controls['estado'].setValue(resp.estado);
           this.productoForm.controls['controlarStock'].setValue(resp.controlarStock);
-          this.productoForm.controls['precioUnitario'].setValue(resp.precioUnitario);
           this.productoForm.controls['codigo'].setValue(resp.codigo);
           this.productoForm.controls['cantidadMinima'].setValue(resp.cantidadMinima);
         },

@@ -50,11 +50,11 @@ export class PerfilEditarComponent implements OnInit {
           this.perfilForm.controls['permisos'].setValue(resp.permisos);
           this.permisosAsignados = resp.permisos;
           this.perfilesService.getAllPermits(this.currentUser.token)
-      .subscribe(
-        resp2 => {
-          this.permisosDisponibles = resp2;
-          this.filtrarPermisosNoAsignados();
-        },
+          .subscribe(
+            resp2 => {
+            this.permisosDisponibles = resp2;
+            this.filtrarPermisosNoAsignados();
+          },
         errorCode => {
           console.log(errorCode);
         }
@@ -71,18 +71,18 @@ export class PerfilEditarComponent implements OnInit {
   }
 
   filtrarPermisosNoAsignados() {
-    this.permisosDisponibles.forEach(
-      (e1) => this.permisosAsignados.forEach(
-        (e2) => {
-          console.log(e1);
-          console.log(e2);
-          if (e1.id !== e2.id) {
-            console.log('Entro');
-            this.permisosNoAsignados.push(e1);
-          }
+    let band = false;
+    for (let i = 0; i < this.permisosDisponibles.length; i++) {
+      band = false;
+      for (let j = 0; j < this.permisosAsignados.length; j++) {
+        if (this.permisosDisponibles[i].id ===  this.permisosAsignados[j].id) {
+          band = true;
         }
-      )
-    );
+      }
+      if (!band) {
+        this.permisosNoAsignados.push(this.permisosDisponibles[i]);
+      }
+    }
   }
 
   drop(event: CdkDragDrop<string[]>) {
@@ -94,6 +94,26 @@ export class PerfilEditarComponent implements OnInit {
                         event.previousIndex,
                         event.currentIndex);
       this.perfilForm.controls['permisos'].setValue(this.permisosAsignados);
+    }
+  }
+
+  editarPerfil() {
+    if (this.perfilForm.invalid) {
+      return;
+    }
+    const pro = this.perfilForm.value;
+    console.log(pro);
+    this.perfil = pro;
+    if (this.currentUser != null) {
+      this.perfilesService.editProfile(pro, this.currentUser.token)
+      .subscribe(
+        resp => {
+          this.router.navigate(['/perfiles']);
+        },
+        errorCode => {
+        console.log(errorCode);
+        // this.alert = true;
+      } );
     }
   }
 

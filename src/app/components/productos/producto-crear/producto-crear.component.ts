@@ -17,7 +17,7 @@ export class ProductoCrearComponent implements OnInit {
     estado: new FormControl('A', Validators.required),
     controlarStock: new FormControl('S', Validators.required),
     precioUnitario: new FormControl(''),
-    cantidadMinima: new FormControl('')
+    cantidadMinima: new FormControl('', Validators.required)
   });
   currentUser: Credenciales;
   producto: Producto;

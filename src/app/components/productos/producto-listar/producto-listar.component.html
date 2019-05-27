@@ -13,7 +13,6 @@
             <th>Descripción</th>
             <th>Estado</th>
             <th>Controlar Stock</th>
-            <th>Precio Unitario</th>
             <th>Cantidad Minima</th>
             <th>Acción</th>
         </tr>
@@ -26,7 +25,6 @@
             <td *ngIf="producto.estado === 'I'">Inactivo</td>
             <td *ngIf="producto.controlarStock === 'S'">Si</td>
             <td *ngIf="producto.controlarStock === 'N'">No</td>
-            <td>{{producto.precioUnitario}}</td>
             <td>{{producto.cantidadMinima}}</td>
             <td>
             <a class="btn btn-default" (click)="editProduct(producto.id)">Ver</a>
