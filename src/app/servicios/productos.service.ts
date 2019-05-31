@@ -36,6 +36,19 @@ export class ProductosService {
       );
   }
 
+  getAllProductsActives(token: string) {
+    this.httpOptions.headers = this.httpOptions.headers.set('Authorization', token);
+    return this.http.get( this.productoUrl + '?estado=A', this.httpOptions)
+    .pipe(
+      map( (resp: Producto[]) => {
+        this.productos = resp;
+        return this.productos;
+      }
+      ),
+      catchError(this.handleError)
+      );
+  }
+
   getProduct(token: string, id: string) {
     this.httpOptions.headers = this.httpOptions.headers.set('Authorization', token);
     return this.http.get(this.productoUrl + id, this.httpOptions)

@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { ProductosService } from '../../../servicios/productos.service';
 
 import { Subject } from 'rxjs';
-import { Datatables } from 'src/app/clases/datatables';
+import { Datatables } from 'src/app/clases/utils/datatables';
 
 @Component({
   selector: 'app-producto-listar',

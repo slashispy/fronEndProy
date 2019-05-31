@@ -9,25 +9,23 @@
 <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
     <thead>
         <tr>
-            <th>Codigo</th>
-            <th>Descripción</th>
-            <th>Estado</th>
-            <th>Controlar Stock</th>
-            <th>Precio Unitario</th>
-            <th>Cantidad Minima</th>
+            <th>Id</th>
+            <th>Fecha</th>
+            <th>Proveedor</th>
+            <th>Importe</th>
+            <th>Descuento</th>
+            <th>Tipo de Compra</th>
             <th>Acción</th>
         </tr>
     </thead>
     <tbody *ngIf="compras?.length != 0">
         <tr *ngFor="let compra of compras">
-            <td>{{compra.codigo}}</td>
-            <td>{{compra.descripcion}}</td>
-            <td *ngIf="compra.estado === 'A'">Activo</td>
-            <td *ngIf="compra.estado === 'I'">Inactivo</td>
-            <td *ngIf="compra.controlarStock === 'S'">Si</td>
-            <td *ngIf="compra.controlarStock === 'N'">No</td>
-            <td>{{compra.precioUnitario}}</td>
-            <td>{{compra.cantidadMinima}}</td>
+            <td>{{compra.id}}</td>
+            <td>{{compra.fecha}}</td>
+            <td>{{compra.proveedor.razonSocial}}</td>
+            <td>{{compra.importe}}</td>
+            <td>{{compra.descuento}}</td>
+            <td>{{compra.tipoCompra.descripcion}}</td>
             <td>
             <a class="btn btn-default" (click)="editProduct(compra.id)">Ver</a>
             </td>

@@ -3,6 +3,12 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Item } from '../../../clases/compra';
 import { ComprasService } from '../../../servicios/compras.service';
 import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { Producto } from '../../../clases/producto';
+import { ProductosService } from 'src/app/servicios/productos.service';
+import { Credenciales } from 'src/app/clases/credenciales';
+import { Router } from '@angular/router';
+import {map, startWith} from 'rxjs/operators';
 
 @Component({
   selector: 'app-compra-items',
@@ -18,21 +24,49 @@ export class CompraItemsComponent implements OnInit {
     importe: new FormControl('', Validators.required)
   });
   isValid = true;
+  currentUser: Credenciales;
   ComprasService: any;
+  options: Producto[];
+  filteredOptions: Observable<Producto[]>;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data,
     public dialogRef: MatDialogRef<CompraItemsComponent>,
-    private comprasService: ComprasService) { }
+    private comprasService: ComprasService,
+    private productosService: ProductosService,
+    private router: Router) {
+      this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    }
 
   ngOnInit() {
-    if (this.data.orderItemIndex != null) {
-      this.productoItemForm.controls['producto'].setValue(this.comprasService.compraItems[this.data.orderItemIndex]['producto']);
-      this.productoItemForm.controls['cantidad'].setValue(this.comprasService.compraItems[this.data.orderItemIndex]['cantidad']);
-      this.productoItemForm.controls['precioUnitario'].setValue(
-        this.comprasService.compraItems[this.data.orderItemIndex]['precioUnitario']);
-      this.productoItemForm.controls['descuento'].setValue(this.comprasService.compraItems[this.data.orderItemIndex]['descuento']);
-      this.productoItemForm.controls['importe'].setValue(this.comprasService.compraItems[this.data.orderItemIndex]['importe']);
+    if (this.currentUser != null) {
+      this.productosService.getAllProductsActives(this.currentUser.token)
+      .subscribe(
+        resp => {
+          this.options = resp;
+          this.filteredOptions = this.productoItemForm.controls.producto.valueChanges
+            .pipe(
+              startWith<string | Producto>(''),
+              map(value => typeof value === 'string' ? value : value.descripcion),
+              map(descripcion => descripcion ? this._filter(descripcion) : this.options.slice())
+            );
+          if (this.data.orderItemIndex != null) {
+            this.productoItemForm.controls['producto'].setValue(this.comprasService.compraItems[this.data.orderItemIndex]['producto']);
+            this.productoItemForm.controls['cantidad'].setValue(this.comprasService.compraItems[this.data.orderItemIndex]['cantidad']);
+            this.productoItemForm.controls['precioUnitario'].setValue(
+              this.comprasService.compraItems[this.data.orderItemIndex]['precioUnitario']);
+            this.productoItemForm.controls['descuento'].setValue(this.comprasService.compraItems[this.data.orderItemIndex]['descuento']);
+            this.productoItemForm.controls['importe'].setValue(this.comprasService.compraItems[this.data.orderItemIndex]['importe']);
+          } else {
+            this.productoItemForm.controls['descuento'].setValue(0);
+          }
+        },
+        errorCode => {
+          console.log(errorCode);
+        }
+      );
+    } else {
+      this.router.navigate(['/login']);
     }
   }
 
@@ -55,7 +89,7 @@ export class CompraItemsComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    if (this.productoItemForm.invalid) {
+    if (this.productoItemForm.invalid || !this.validateForm()) {
       return;
     }
     if (this.data.orderItemIndex != null) {
@@ -66,14 +100,21 @@ export class CompraItemsComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  validateForm(formData: Item) {
+  validateForm() {
     this.isValid = true;
-    /*if (formData.ItemID === 0) {
+    if (!this.options.includes(this.productoItemForm.controls['producto'].value)) {
       this.isValid = false;
-    } else if (formData.Quantity === 0) {
-      this.isValid = false;
-    }*/
+    }
     return this.isValid;
   }
 
+  displayFn(user?: Producto): string | undefined {
+    return user ? user.descripcion : undefined;
+  }
+
+  private _filter(name: string): Producto[] {
+    const filterValue = name.toLowerCase();
+    return this.options.filter(option => option.descripcion.toLowerCase().indexOf(filterValue) !== -1 ||
+    option.codigo.toLowerCase().indexOf(filterValue) !== -1);
+  }
 }

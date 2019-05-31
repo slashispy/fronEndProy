@@ -2,8 +2,13 @@
 <hr>
 <form [formGroup]="productoItemForm" autocomplete="off" (submit)="onSubmit(form)">
   <div class="form-group">
-    <label for="producto">Producto</label>
-    <input formControlName="producto" type="text" class="form-control" id="producto" placeholder="Producto">
+      <label for="producto">Producto</label>
+      <input formControlName="producto" type="text" class="form-control" id="producto" placeholder="Producto" matInput [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{option.codigo}} {{option.descripcion}}
+        </mat-option>
+      </mat-autocomplete>
   </div>
   <div class="form-row">
     <div class="form-group col-md-6">
@@ -12,12 +17,12 @@
         <div class="input-group-prepend">
           <div class="input-group-text">&#x20B2;</div>
         </div>
-        <input formControlName="precioUnitario" type="text" class="form-control" id="price" placeholder="Precio Unitario">
+        <input formControlName="precioUnitario" type="number" class="form-control" id="price" placeholder="Precio Unitario">
       </div>
     </div>
     <div class="form-group col-md-6">
       <label>Cantidad</label>
-      <input formControlName="cantidad" type="text" class="form-control" id="cantidad" placeholder="Cantidad" (keyup)="updateTotal()">
+      <input formControlName="cantidad" type="number" class="form-control" id="cantidad" placeholder="Cantidad" (keyup)="updateTotal()">
     </div>
   </div>
   <div class="form-group">
@@ -26,7 +31,7 @@
       <div class="input-group-prepend">
         <div class="input-group-text">&#x20B2;</div>
       </div>
-      <input formControlName="descuento" type="text" class="form-control" id="descuento" placeholder="Descuento" value="0" (keyup)="updateTotal()">
+      <input formControlName="descuento" type="number" class="form-control" id="descuento" placeholder="Descuento" value="0" (keyup)="updateTotal()">
     </div>
   </div>
   <div class="form-group">
@@ -35,7 +40,7 @@
       <div class="input-group-prepend">
         <div class="input-group-text">&#x20B2;</div>
       </div>
-      <input formControlName="importe" type="text" class="form-control" id="importe" placeholder="Importe" readonly>
+      <input formControlName="importe" type="number" class="form-control" id="importe" placeholder="Importe" readonly>
     </div>
   </div>
   <div class="form-group">

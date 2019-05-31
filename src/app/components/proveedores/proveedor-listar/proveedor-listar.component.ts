@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, EventEmitter, Output } from '@angular/core';
 import { Credenciales } from '../../../clases/credenciales';
-import { Datatables } from 'src/app/clases/datatables';
+import { Datatables } from 'src/app/clases/utils/datatables';
 import { Proveedor } from 'src/app/clases/proveedor';
 
 import { Router } from '@angular/router';

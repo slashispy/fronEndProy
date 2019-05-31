@@ -1,55 +1,47 @@
 <div class="container">
   <h2>Nueva Compra</h2>
-  <form [formGroup]="productoForm" (ngSubmit)="nuevoProducto()" class="px-4 py-3">
-    <div class="form-group">
-      <label for="codigo">Código</label>
-      <input formControlName="codigo" type="text" class="form-control" id="codigo" placeholder="Código">
-    </div>
-    <div class="form-group">
-      <label for="descripcion">Descripción</label>
-      <input formControlName="descripcion" type="text" class="form-control" id="descripcion" placeholder="Descripción">
-    </div>
-    <div class="form-group">
-      <label for="estado">Estado</label>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" formControlName="estado" name="estado" id="estado1" value="A" checked>
-        <label class="form-check-label" for="estado1">
-          Activo
-        </label>
+  <form [formGroup]="compraForm" (ngSubmit)="nuevaCompra()" class="px-4 py-3">
+    <div class="form-row">
+      <div class="form-group col-md-3">
+        <label for="fecha">Fecha</label>
+        <div class="input-group">
+          <input formControlName="fecha" type="text" class="form-control" id="fecha" placeholder="Fecha" [max]="maxDate" [matDatepicker]="dp3" disabled>
+          <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+          <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+        </div>
       </div>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" formControlName="estado" name="estado" id="estado2" value="I">
-        <label class="form-check-label" for="estado2">
-          Inactivo
-        </label>
+      <div class="form-group col-md-3">
+      </div>
+      <div class="form-group col-md-6">
+          <label for="nroFactura">Nro. Factura</label>
+          <input formControlName="nroFactura" type="text" class="form-control" id="nroFactura" placeholder="Nro. Factura">
       </div>
     </div>
     <div class="form-group">
-      <label for="controlarStock">Controlar Stock</label>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" formControlName="controlarStock" name="controlarStock" id="control1" value="S" checked>
-        <label class="form-check-label" for="control1">
-          Si
-        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" formControlName="controlarStock" name="controlarStock" id="control2" value="N">
-        <label class="form-check-label" for="control2">
-          No
-        </label>
-      </div>
+        <label for="proveedor">Proveedor</label>
+        <input formControlName="proveedor" type="text" class="form-control" id="proveedor" placeholder="Proveedor" matInput [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option.ruc}} {{option.razonSocial}}
+          </mat-option>
+        </mat-autocomplete>
     </div>
     <div class="form-group">
-      <label for="precioUnitario">Precio Unitario</label>
-      <input formControlName="precioUnitario" type="number" class="form-control" id="precioUnitario" placeholder="Precio Unitario">
+      <label for="importe">Importe</label>
+      <input formControlName="importe" type="number" class="form-control" id="importe" placeholder="Importe" readonly>
     </div>
     <div class="form-group">
-      <label for="cantidadMinima">Cantidad Minima</label>
-      <input formControlName="cantidadMinima" type="number" class="form-control" id="cantidadMinima" placeholder="Cantidad Minima">
+      <label for="descuento">Descuento</label>
+      <input formControlName="descuento" type="number" class="form-control" id="descuento" placeholder="Descuento" readonly>
     </div>
     <div class="form-group">
-      <label for="gtotal">Grand Total</label>
-      <input formControlName="gtotal" type="number" class="form-control" id="gtotal" placeholder="Grand Total">
+        <label for="tipoCompra">Tipo de Compra</label>
+        <input formControlName="tipoCompra" type="text" class="form-control" id="tipoCompra" placeholder="Tipo de Compra" matInput [matAutocomplete]="auto2">
+        <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displayFnType">
+          <mat-option *ngFor="let option of filteredTypeOptions | async" [value]="option">
+            {{option.descripcion}}
+          </mat-option>
+        </mat-autocomplete>
     </div>
     <!-- order items table-->
     <table class="table table-borderless">
@@ -71,7 +63,7 @@
         </tr>
   
         <tr *ngFor="let item of comprasService.compraItems;let i=index;">
-          <td>{{item.producto}}</td>
+          <td>{{item.producto.descripcion}}</td>
           <td>{{item.cantidad}}</td>
           <td>{{item.precioUnitario}}</td>
           <td>{{item.descuento}}</td>

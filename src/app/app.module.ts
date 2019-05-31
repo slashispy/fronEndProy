@@ -40,7 +40,8 @@ import { PerfilCrearComponent } from './components/perfiles/perfil-crear/perfil-
 import { ComprasComponent } from './components/compras/compras.component';
 import { CompraComponent } from './components/compras/compra/compra.component';
 import { CompraItemsComponent } from './components/compras/compra-items/compra-items.component';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatAutocompleteModule, MatInputModule, MatDatepickerModule, MatNativeDateModule } from '@angular/material/';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -83,7 +84,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     DataTablesModule,
     DragDropModule,
     MatDialogModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [
     LoginService,

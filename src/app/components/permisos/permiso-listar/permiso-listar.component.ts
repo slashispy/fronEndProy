@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { PermisosService } from '../../../servicios/permisos.service';
 
 import { Subject } from 'rxjs';
-import { Datatables } from '../../../clases/datatables';
+import { Datatables } from '../../../clases/utils/datatables';
 
 @Component({
   selector: 'app-permiso-listar',

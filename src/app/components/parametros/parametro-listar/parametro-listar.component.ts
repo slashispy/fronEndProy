@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { ParametrosService } from '../../../servicios/parametros.service';
 
 import { Subject } from 'rxjs';
-import { Datatables } from '../../../clases/datatables';
+import { Datatables } from '../../../clases/utils/datatables';
 
 @Component({
   selector: 'app-parametro-listar',

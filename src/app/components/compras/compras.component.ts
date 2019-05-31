@@ -1,12 +1,13 @@
 import { Component, OnDestroy, OnInit, EventEmitter, Output } from '@angular/core';
 import { Credenciales } from '../../clases/credenciales';
-import { Compra } from '../../clases/compra';
+import { Prod, Compra } from '../../clases/compra';
 
 import { Router } from '@angular/router';
 import { ProductosService } from '../../servicios/productos.service';
 
 import { Subject } from 'rxjs';
-import { Datatables } from 'src/app/clases/datatables';
+import { Datatables } from 'src/app/clases/utils/datatables';
+import { ComprasService } from 'src/app/servicios/compras.service';
 
 @Component({
   selector: 'app-compras',
@@ -18,7 +19,7 @@ export class ComprasComponent extends Datatables implements OnDestroy, OnInit {
   dtTrigger: Subject<any> = new Subject();
   currentUser: Credenciales;
 
-  constructor(private productosService: ProductosService,
+  constructor(private comprasService: ComprasService,
     private router: Router) {
       super();
       this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -27,10 +28,11 @@ export class ComprasComponent extends Datatables implements OnDestroy, OnInit {
   ngOnInit() {
     super.ngOnInit();
     if (this.currentUser != null) {
-      this.productosService.getAllProducts(this.currentUser.token)
+      this.comprasService.getAllCompras(this.currentUser.token)
       .subscribe(
         resp => {
           this.compras = resp;
+          console.log(resp);
           this.dtTrigger.next();
         },
         errorCode => {
