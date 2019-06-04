@@ -11,24 +11,26 @@
         <tr>
             <th>Id</th>
             <th>Fecha</th>
+            <th>Nº Factura</th>
             <th>Proveedor</th>
             <th>Importe</th>
             <th>Descuento</th>
             <th>Tipo de Compra</th>
-            <th>Acción</th>
+            <!-- <th>Acción</th> -->
         </tr>
     </thead>
     <tbody *ngIf="compras?.length != 0">
         <tr *ngFor="let compra of compras">
             <td>{{compra.id}}</td>
             <td>{{compra.fecha}}</td>
+            <td>{{compra.nroFactura}}</td>
             <td>{{compra.proveedor.razonSocial}}</td>
             <td>{{compra.importe}}</td>
             <td>{{compra.descuento}}</td>
             <td>{{compra.tipoCompra.descripcion}}</td>
-            <td>
+            <!-- <td>
             <a class="btn btn-default" (click)="editProduct(compra.id)">Ver</a>
-            </td>
+            </td> -->
         </tr>
     </tbody>
     <tbody *ngIf="compras?.length == 0">

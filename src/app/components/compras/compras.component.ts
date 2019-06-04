@@ -49,11 +49,11 @@ export class ComprasComponent extends Datatables implements OnDestroy, OnInit {
     this.dtTrigger.unsubscribe();
   }
 
-  editProduct(id: string): void {
+ /*  editProduct(id: string): void {
     localStorage.removeItem('productoId');
     localStorage.setItem('productoId', id);
     this.router.navigate(['producto-editar']);
-  }
+  } */
 
   refreshList() {
     // this.service.getOrderList().then(res => this.orderList = res);
