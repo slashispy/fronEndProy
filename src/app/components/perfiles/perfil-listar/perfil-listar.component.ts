@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, EventEmitter, Output } from '@angular/core';
 import { Credenciales } from '../../../clases/credenciales';
 import { Perfil } from '../../../clases/perfil';
-import { Datatables } from '../../../clases/datatables';
+import { Datatables } from '../../../clases/utils/datatables';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { PerfilesService } from '../../../servicios/perfiles.service';

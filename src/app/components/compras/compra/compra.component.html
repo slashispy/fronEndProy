@@ -1,0 +1,81 @@
+<div class="container">
+  <h2>Nueva Compra</h2>
+  <form [formGroup]="compraForm" (ngSubmit)="nuevaCompra()" class="px-4 py-3">
+    <div class="form-row">
+      <div class="form-group col-md-3">
+        <label for="fecha">Fecha</label>
+        <div class="input-group">
+          <input formControlName="fecha" type="text" class="form-control" id="fecha" placeholder="Fecha" [max]="maxDate" [matDatepicker]="dp3" disabled>
+          <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+          <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+        </div>
+      </div>
+      <div class="form-group col-md-3">
+      </div>
+      <div class="form-group col-md-6">
+          <label for="nroFactura">Nro. Factura</label>
+          <input formControlName="nroFactura" type="text" class="form-control" id="nroFactura" placeholder="Nro. Factura">
+      </div>
+    </div>
+    <div class="form-group">
+        <label for="proveedor">Proveedor</label>
+        <input formControlName="proveedor" type="text" class="form-control" id="proveedor" placeholder="Proveedor" matInput [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option.ruc}} {{option.razonSocial}}
+          </mat-option>
+        </mat-autocomplete>
+    </div>
+    <div class="form-group">
+      <label for="importe">Importe</label>
+      <input formControlName="importe" type="number" class="form-control" id="importe" placeholder="Importe" readonly>
+    </div>
+    <div class="form-group">
+      <label for="descuento">Descuento</label>
+      <input formControlName="descuento" type="number" class="form-control" id="descuento" placeholder="Descuento" readonly>
+    </div>
+    <div class="form-group">
+        <label for="tipoCompra">Tipo de Compra</label>
+        <input formControlName="tipoCompra" type="text" class="form-control" id="tipoCompra" placeholder="Tipo de Compra" matInput [matAutocomplete]="auto2">
+        <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displayFnType">
+          <mat-option *ngFor="let option of filteredTypeOptions | async" [value]="option">
+            {{option.descripcion}}
+          </mat-option>
+        </mat-autocomplete>
+    </div>
+    <!-- order items table-->
+    <table class="table table-borderless">
+      <thead class="thead-light">
+        <th>Producto</th>
+        <th>Cantidad</th>
+        <th>Precio Unitario</th>
+        <th>Descuento</th>
+        <th>Importe</th>
+        <th>
+          <a class="btn btn-sm btn-success text-white" (click)="AddOrEditOrderItem(null)"><i class="fa fa-plus"></i> Agregar Item</a>
+        </th>
+      </thead>
+      <tbody>
+        <tr *ngIf="comprasService.compraItems.length==0" [class.text-danger]="!isValid && comprasService.compraItems.length==0">
+          <td class="font-italic text-center" colspan="5">
+            No hay productos en la lista.
+          </td>
+        </tr>
+  
+        <tr *ngFor="let item of comprasService.compraItems;let i=index;">
+          <td>{{item.producto.descripcion}}</td>
+          <td>{{item.cantidad}}</td>
+          <td>{{item.precioUnitario}}</td>
+          <td>{{item.descuento}}</td>
+          <td>{{item.importe}}</td>
+          <td>
+            <a class="btn btn-sm btn-info text-white" (click)="AddOrEditOrderItem(i)"><i class="fa fa-pencil"></i></a>
+            <a class="btn btn-sm btn-danger text-white ml-1" (click)="onDeleteOrderItem(i)"><i class="fa fa-trash"></i></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button type="submit" class="btn btn-primary">Registrar</button>
+    <a [routerLink]="['/compras']" class="btn btn-link">Cancelar</a>
+  </form>
+</div>

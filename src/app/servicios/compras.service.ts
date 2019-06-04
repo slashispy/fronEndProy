@@ -1,18 +1,21 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
-import { Producto } from '../clases/producto';
 import { throwError } from 'rxjs';
+import { Compra, Item, TipoCompra } from '../clases/compra';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProductosService {
-
+export class ComprasService {
+  formData: Compra;
+  compras: Compra[];
+  compraItems: Item[] = new Array();
+  tiposCompra: TipoCompra[] = new Array();
   constructor(private http: HttpClient) { }
 
-  productoUrl = 'http://localhost:8091/backEndProy/producto/';
-
+  compraUrl = 'http://localhost:8091/backEndProy/compra/';
+  tipoCompraUrl = 'http://localhost:8091/backEndProy/tipoTransaccion/?uso=C';
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json',
@@ -20,58 +23,35 @@ export class ProductosService {
     })
   };
 
-  productos: Producto[];
-  producto: Producto;
-
-  getAllProducts(token: string) {
+  getAllCompras(token: string) {
     this.httpOptions.headers = this.httpOptions.headers.set('Authorization', token);
-    return this.http.get( this.productoUrl, this.httpOptions)
+    return this.http.get( this.compraUrl, this.httpOptions)
     .pipe(
-      map( (resp: Producto[]) => {
-        this.productos = resp;
-        return this.productos;
+      map( (resp: Compra[]) => {
+        this.compras = resp;
+        return this.compras;
       }
       ),
       catchError(this.handleError)
       );
   }
 
-  getAllProductsActives(token: string) {
+  getAllTiposCompra(token: string) {
     this.httpOptions.headers = this.httpOptions.headers.set('Authorization', token);
-    return this.http.get( this.productoUrl + '?estado=A', this.httpOptions)
+    return this.http.get( this.tipoCompraUrl, this.httpOptions)
     .pipe(
-      map( (resp: Producto[]) => {
-        this.productos = resp;
-        return this.productos;
+      map( (resp: TipoCompra[]) => {
+        this.tiposCompra = resp;
+        return this.tiposCompra;
       }
       ),
       catchError(this.handleError)
       );
   }
 
-  getProduct(token: string, id: string) {
+  addCompra(compra: Compra, token: string) {
     this.httpOptions.headers = this.httpOptions.headers.set('Authorization', token);
-    return this.http.get(this.productoUrl + id, this.httpOptions)
-      .pipe(
-        map((resp: Producto) => {
-          this.producto = resp;
-          return this.producto;
-        }),
-        catchError(this.handleError)
-      );
-  }
-
-  addProduct(product: Producto, token: string) {
-    this.httpOptions.headers = this.httpOptions.headers.set('Authorization', token);
-    return this.http.post(this.productoUrl, product, this.httpOptions)
-    .pipe(
-      catchError(this.handleError)
-    );
-  }
-
-  editProduct(product: Producto, token: string) {
-    this.httpOptions.headers = this.httpOptions.headers.set('Authorization', token);
-    return this.http.put(this.productoUrl + product.id, product, this.httpOptions)
+    return this.http.post(this.compraUrl, compra, this.httpOptions)
     .pipe(
       catchError(this.handleError)
     );

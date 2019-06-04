@@ -1,0 +1,43 @@
+<table class="table">
+  <tr>
+      <td>
+          <h3>Lista de Compras</h3>
+      </td>
+      <td><button class="btn btn-primary" [routerLink] = "['/compra']">Nueva Compra</button></td>
+  </tr>
+</table>
+<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Fecha</th>
+            <th>Nº Factura</th>
+            <th>Proveedor</th>
+            <th>Importe</th>
+            <th>Descuento</th>
+            <th>Tipo de Compra</th>
+            <!-- <th>Acción</th> -->
+        </tr>
+    </thead>
+    <tbody *ngIf="compras?.length != 0">
+        <tr *ngFor="let compra of compras">
+            <td>{{compra.id}}</td>
+            <td>{{compra.fecha}}</td>
+            <td>{{compra.nroFactura}}</td>
+            <td>{{compra.proveedor.razonSocial}}</td>
+            <td>{{compra.importe}}</td>
+            <td>{{compra.descuento}}</td>
+            <td>{{compra.tipoCompra.descripcion}}</td>
+            <!-- <td>
+            <a class="btn btn-default" (click)="editProduct(compra.id)">Ver</a>
+            </td> -->
+        </tr>
+    </tbody>
+    <tbody *ngIf="compras?.length == 0">
+      <tr>
+        <td colspan="8" class="no-data-available">No data!</td>
+      </tr>
+    <tbody>
+</table>
+
+<!--<a ui-sref="tipoExpedDtos-new" class="btn-primary btn-lg">Agregar Nuevo Expedientes de un Departamento</a>-->

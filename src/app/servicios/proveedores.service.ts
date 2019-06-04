@@ -36,6 +36,20 @@ export class ProveedoresService {
       );
   }
 
+  getAllProveedoresActives(token: string) {
+    this.httpOptions.headers = this.httpOptions.headers.set('Authorization', token);
+    return this.http.get( this.proveedorUrl + '?estado=A', this.httpOptions)
+    .pipe(
+      map( (resp: Proveedor[]) => {
+        this.proveedores = resp;
+        return this.proveedores;
+      }
+      ),
+      catchError(this.handleError)
+      );
+  }
+
+
   getProveedor(token: string, id: string) {
     this.httpOptions.headers = this.httpOptions.headers.set('Authorization', token);
     return this.http.get(this.proveedorUrl + id, this.httpOptions)

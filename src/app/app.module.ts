@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 // Componentes
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -28,6 +29,13 @@ import { ParametroEditarComponent } from './components/parametros/parametro-edit
 import { PerfilListarComponent } from './components/perfiles/perfil-listar/perfil-listar.component';
 import { PerfilCrearComponent } from './components/perfiles/perfil-crear/perfil-crear.component';
 import { PerfilEditarComponent } from './components/perfiles/perfil-editar/perfil-editar.component';
+import { ComprasComponent } from './components/compras/compras.component';
+import { CompraComponent } from './components/compras/compra/compra.component';
+import { CompraItemsComponent } from './components/compras/compra-items/compra-items.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatAutocompleteModule, MatInputModule, MatDatepickerModule, MatNativeDateModule } from '@angular/material/';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 // Rutas
 import { APP_ROUTING } from './app.routes';
 // Servicios
@@ -39,6 +47,7 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
 // Modulos
 import { DataTablesModule } from 'angular-datatables';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+
 
 
 @NgModule({
@@ -58,6 +67,9 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     ClienteListarComponent,
     ClienteCrearComponent,
     ClienteEditarComponent,
+    ComprasComponent,
+    CompraComponent,
+    CompraItemsComponent,
     PermisoListarComponent,
     PermisoCrearComponent,
     PermisoEditarComponent,
@@ -68,6 +80,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     PerfilCrearComponent,
     PerfilEditarComponent
   ],
+  entryComponents: [CompraItemsComponent],
   imports: [
     BrowserModule,
     FormsModule,
@@ -76,7 +89,14 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     ReactiveFormsModule,
     APP_ROUTING,
     DataTablesModule,
-    DragDropModule
+    DragDropModule,
+    MatDialogModule,
+    BrowserAnimationsModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    AngularFontAwesomeModule
   ],
   providers: [
     LoginService,
