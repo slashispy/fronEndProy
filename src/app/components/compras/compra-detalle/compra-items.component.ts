@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Item } from '../../../clases/compra';
+import { Item, Prod } from '../../../clases/compra';
 import { ComprasService } from '../../../servicios/compras.service';
 import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -103,7 +103,15 @@ export class CompraItemsComponent implements OnInit {
   validateForm() {
     this.isValid = true;
     if (!this.options.includes(this.productoItemForm.controls['producto'].value)) {
-      this.isValid = false;
+      const prod: Producto = this.productoItemForm.controls['producto'].value;
+      for (let  x = 0; x < this.options.length; x++) {
+        if (this.options[x].id === prod.id) {
+          this.isValid = true;
+          break;
+        } else {
+          this.isValid = false;
+        }
+      }
     }
     return this.isValid;
   }

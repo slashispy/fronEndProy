@@ -15,7 +15,6 @@ export class ProveedorEditarComponent implements OnInit {
     id: new FormControl('', Validators.required),
     razonSocial: new FormControl('', Validators.required),
     ruc: new FormControl('', Validators.required),
-    timbrado: new FormControl('', Validators.required),
     estado: new FormControl('A', Validators.required),
     direccion: new FormControl('', Validators.required),
     email: new FormControl('', Validators.required),
@@ -44,7 +43,6 @@ export class ProveedorEditarComponent implements OnInit {
           this.proveedorForm.controls['razonSocial'].setValue(resp.razonSocial);
           this.proveedorForm.controls['ruc'].setValue(resp.ruc);
           this.proveedorForm.controls['ruc'].disable();
-          this.proveedorForm.controls['timbrado'].setValue(resp.timbrado);
           this.proveedorForm.controls['estado'].setValue(resp.estado);
           this.proveedorForm.controls['direccion'].setValue(resp.direccion);
           this.proveedorForm.controls['email'].setValue(resp.email);

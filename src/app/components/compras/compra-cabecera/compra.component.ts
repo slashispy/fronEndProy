@@ -7,7 +7,7 @@ import { ProductosService } from '../../../servicios/productos.service';
 import { ComprasService } from '../../../servicios/compras.service';
 
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { CompraItemsComponent } from '../compra-items/compra-items.component';
+import { CompraItemsComponent } from '../compra-detalle/compra-items.component';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
 import { AppDateAdapter, APP_DATE_FORMATS } from 'src/app/clases/utils/date-adapter';
 import { Proveedor } from 'src/app/clases/proveedor';

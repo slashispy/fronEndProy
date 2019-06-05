@@ -14,7 +14,6 @@ export class ProveedorCrearComponent implements OnInit {
   proveedorForm = new FormGroup({
     razonSocial: new FormControl('', Validators.required),
     ruc: new FormControl('', Validators.required),
-    timbrado: new FormControl('', Validators.required),
     estado: new FormControl('A', Validators.required),
     direccion: new FormControl('', Validators.required),
     email: new FormControl('', Validators.required),

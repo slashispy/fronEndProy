@@ -22,8 +22,8 @@ import { ParametroCrearComponent } from './components/parametros/parametro-crear
 import { PerfilListarComponent } from './components/perfiles/perfil-listar/perfil-listar.component';
 import { PerfilCrearComponent } from './components/perfiles/perfil-crear/perfil-crear.component';
 import { PerfilEditarComponent } from './components/perfiles/perfil-editar/perfil-editar.component';
-import { ComprasComponent } from './components/compras/compras.component';
-import { CompraComponent } from './components/compras/compra/compra.component';
+import { ComprasComponent } from './components/compras/compra-lista/compras.component';
+import { CompraComponent } from './components/compras/compra-cabecera/compra.component';
 
 const APP_ROUTES: Routes = [
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},

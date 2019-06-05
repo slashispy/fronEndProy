@@ -42,7 +42,6 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/home']);
       this.app.navBar = true;
     }, errorCode => {
-      console.log(errorCode);
       this.alert = true;
     } );
   }

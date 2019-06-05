@@ -28,7 +28,6 @@ export class LoginService {
 
   login( entrada: Credenciales) {
     this.credenciales = entrada;
-    console.log('Login ' + entrada.usuario + ' ' + entrada.password );
     return this.http.post(this.loginUrl, entrada, this.httpOptions)
     .pipe(
       map((resp: Credenciales) => {

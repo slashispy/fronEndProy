@@ -1,9 +1,8 @@
 import { Component, OnDestroy, OnInit, EventEmitter, Output } from '@angular/core';
-import { Credenciales } from '../../clases/credenciales';
-import { Prod, Compra } from '../../clases/compra';
+import { Credenciales } from '../../../clases/credenciales';
+import { Prod, Compra } from '../../../clases/compra';
 
 import { Router } from '@angular/router';
-import { ProductosService } from '../../servicios/productos.service';
 
 import { Subject } from 'rxjs';
 import { Datatables } from 'src/app/clases/utils/datatables';
@@ -32,7 +31,6 @@ export class ComprasComponent extends Datatables implements OnDestroy, OnInit {
       .subscribe(
         resp => {
           this.compras = resp;
-          console.log(resp);
           this.dtTrigger.next();
         },
         errorCode => {
