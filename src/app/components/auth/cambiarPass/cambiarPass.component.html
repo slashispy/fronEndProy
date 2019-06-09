@@ -1,0 +1,41 @@
+<h2>Cambiar Password</h2>
+<h2 *ngIf="actualizado">Actualizado</h2>
+<form [formGroup]="cambioPassForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label for="usuario">Usuario</label>
+        <input type="text" formControlName="usuario" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.usuario.errors }" />
+        <div *ngIf="submitted && f.usuario.errors" class="invalid-feedback">
+            <div *ngIf="f.usuario.errors.required">Usuario es requerido</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+            <div *ngIf="f.password.errors.required">Password es requerido</div>
+            <div *ngIf="f.password.errors.minlength">Password al menos debe tener 6 caracteres</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="nuevoPassword">Nuevo Password</label>
+        <input type="password" formControlName="nuevoPassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.nuevoPassword.errors }" />
+        <div *ngIf="submitted && f.nuevoPassword.errors" class="invalid-feedback">
+            <div *ngIf="f.nuevoPassword.errors.required">Nuevo Password es requerido</div>
+            <div *ngIf="f.nuevoPassword.errors.minlength">Nuevo Password al menos debe tener 6 caracteres</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="confirmarPassword">Confirmar Nuevo Password</label>
+        <input type="password" formControlName="confirmarPassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirmarPassword.errors }"/>
+        <div *ngIf="submitted && f.confirmarPassword.errors" class="invalid-feedback">
+            <div *ngIf="f.confirmarPassword.errors.required">Confirmar Nuevo Password es requerido</div>
+            <div *ngIf="f.confirmarPassword.errors.minlength">Confirmar Nuevo Password al menos debe tener 6 caracteres</div>
+            <div *ngIf="f.confirmarPassword.errors.doesMatchPassword">No coinciden los Passwords</div>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <button [disabled]="loading" class="btn btn-primary">Cambiar Password</button>
+        <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+    </div>
+</form>

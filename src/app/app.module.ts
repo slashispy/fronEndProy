@@ -6,14 +6,14 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 // Componentes
 import { AppComponent } from './app.component';
-import { LoginComponent } from './components/login/login.component';
+import { LoginComponent } from './components/auth/login/login.component';
 import { AboutComponent } from './components/about/about.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { ProductoListarComponent } from './components/productos/producto-listar/producto-listar.component';
 import { ProductoEditarComponent } from './components/productos/producto-editar/producto-editar.component';
 import { ProductoCrearComponent } from './components/productos/producto-crear/producto-crear.component';
-import { RegistrarComponent } from './components/registrar/registrar.component';
+import { RegistrarComponent } from './components/auth/registrar/registrar.component';
 import { ProveedorListarComponent } from './components/proveedores/proveedor-listar/proveedor-listar.component';
 import { ProveedorCrearComponent } from './components/proveedores/proveedor-crear/proveedor-crear.component';
 import { ProveedorEditarComponent } from './components/proveedores/proveedor-editar/proveedor-editar.component';
@@ -33,7 +33,7 @@ import { ComprasComponent } from './components/compras/compra-lista/compras.comp
 import { CompraComponent } from './components/compras/compra-cabecera/compra.component';
 import { CompraItemsComponent } from './components/compras/compra-detalle/compra-items.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatAutocompleteModule, MatInputModule, MatDatepickerModule, MatNativeDateModule } from '@angular/material/';
+import { MatAutocompleteModule, MatInputModule, MatDatepickerModule, MatNativeDateModule, MatMenuModule } from '@angular/material/';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Rutas
@@ -47,6 +47,7 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
 // Modulos
 import { DataTablesModule } from 'angular-datatables';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { CambiarPassComponent } from './components/auth/cambiarPass/cambiarPass.component';
 
 
 
@@ -78,7 +79,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     ParametroEditarComponent,
     PerfilListarComponent,
     PerfilCrearComponent,
-    PerfilEditarComponent
+    PerfilEditarComponent,
+    CambiarPassComponent
   ],
   entryComponents: [CompraItemsComponent],
   imports: [
@@ -96,7 +98,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    AngularFontAwesomeModule
+    AngularFontAwesomeModule,
+    MatMenuModule
   ],
   providers: [
     LoginService,

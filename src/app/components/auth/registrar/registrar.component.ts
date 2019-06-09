@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import { LoginService } from 'src/app/servicios/login.service';
 import { first } from 'rxjs/operators';
-import { Usuario } from '../../clases/usuario';
-import { AppComponent } from '../../app.component';
+import { Usuario } from '../../../clases/usuario';
+import { AppComponent } from '../../../app.component';
 import { Perfil } from 'src/app/clases/perfil';
 
 @Component({

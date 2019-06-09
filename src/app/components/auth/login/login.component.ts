@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { LoginService } from '../../servicios/login.service';
-import { Credenciales } from '../../clases/credenciales';
-import { AppComponent } from '../../app.component';
+import { LoginService } from '../../../servicios/login.service';
+import { Credenciales } from '../../../clases/credenciales';
+import { AppComponent } from '../../../app.component';
 
 
 @Component({

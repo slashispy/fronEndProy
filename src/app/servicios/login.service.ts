@@ -13,6 +13,7 @@ export class LoginService {
   loginUrl = 'http://localhost:8091/backEndProy/auth/login';
   registrerUrl = 'http://localhost:8091/backEndProy/auth/registrer';
   rolesUrl = 'http://localhost:8091/backEndProy/auth/perfiles';
+  cambiarPassUrl = 'http://localhost:8091/backEndProy/auth/cambiarPass';
   credenciales: Credenciales;
   usuario: Usuario;
   roles: Perfil[];
@@ -54,6 +55,23 @@ export class LoginService {
         const cre: Credenciales = response;
         if (cre && cre.token) {
           cre.usuario = usuarioR.usuario;
+          localStorage.setItem('currentUser', JSON.stringify(cre));
+        }
+        return cre;
+      }),
+      catchError(this.handleError)
+    );
+
+  }
+
+  cambiarPassword(credencial: Credenciales) {
+    // console.log('Registrarse: ' + JSON.stringify(usuarioR));
+    return this.http.post(this.cambiarPassUrl, credencial, this.httpOptions)
+    .pipe(
+      map((response: Credenciales) => {
+        const cre: Credenciales = response;
+        if (cre && cre.token) {
+          cre.usuario = credencial.usuario;
           localStorage.setItem('currentUser', JSON.stringify(cre));
         }
         return cre;

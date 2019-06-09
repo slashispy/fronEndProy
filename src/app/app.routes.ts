@@ -1,12 +1,12 @@
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { AboutComponent } from './components/about/about.component';
-import { LoginComponent } from './components/login/login.component';
+import { LoginComponent } from './components/auth/login/login.component';
 import { ProductoListarComponent } from './components/productos/producto-listar/producto-listar.component';
 import { AuthGuard } from './guards/auth.guard';
 import { ProductoCrearComponent } from './components/productos/producto-crear/producto-crear.component';
 import { ProductoEditarComponent } from './components/productos/producto-editar/producto-editar.component';
-import { RegistrarComponent } from './components/registrar/registrar.component';
+import { RegistrarComponent } from './components/auth/registrar/registrar.component';
 import { ProveedorListarComponent } from './components/proveedores/proveedor-listar/proveedor-listar.component';
 import { ProveedorCrearComponent } from './components/proveedores/proveedor-crear/proveedor-crear.component';
 import { ProveedorEditarComponent } from './components/proveedores/proveedor-editar/proveedor-editar.component';
@@ -24,6 +24,7 @@ import { PerfilCrearComponent } from './components/perfiles/perfil-crear/perfil-
 import { PerfilEditarComponent } from './components/perfiles/perfil-editar/perfil-editar.component';
 import { ComprasComponent } from './components/compras/compra-lista/compras.component';
 import { CompraComponent } from './components/compras/compra-cabecera/compra.component';
+import { CambiarPassComponent } from './components/auth/cambiarPass/cambiarPass.component';
 
 const APP_ROUTES: Routes = [
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
@@ -52,6 +53,7 @@ const APP_ROUTES: Routes = [
     { path: 'perfil-editar', component: PerfilEditarComponent, canActivate: [AuthGuard]},
     { path: 'login', component: LoginComponent},
     { path: 'registrer', component: RegistrarComponent},
+    { path: 'cambiarPass', component: CambiarPassComponent},
     { path: '**', pathMatch: 'full', redirectTo: 'home'}
 
 ];
