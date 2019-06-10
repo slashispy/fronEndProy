@@ -3,11 +3,17 @@
         <form [formGroup]="productoForm" (ngSubmit)="editarProducto()" class="px-4 py-3">
           <div class="form-group">
             <label for="codigo">Código</label>
-            <input formControlName="codigo" type="text" class="form-control" id="codigo" placeholder="Código">
+            <input formControlName="codigo" type="text" class="form-control" id="codigo" placeholder="Código" [ngClass]="{ 'is-invalid': submitted && f.codigo.errors }">
+            <div *ngIf="submitted && f.codigo.errors" class="invalid-feedback">
+              <div *ngIf="f.codigo.errors.required">Codigo es requerido</div>
+            </div>
           </div>
           <div class="form-group">
             <label for="descripcion">Descripción</label>
-            <input formControlName="descripcion" type="text" class="form-control" id="descripcion" placeholder="Descripción">
+            <input formControlName="descripcion" type="text" class="form-control" id="descripcion" placeholder="Descripción" [ngClass]="{ 'is-invalid': submitted && f.descripcion.errors }">
+            <div *ngIf="submitted && f.descripcion.errors" class="invalid-feedback">
+              <div *ngIf="f.descripcion.errors.required">Descripción es requerido</div>
+            </div>
           </div>
           <div class="form-group">
             <label for="estado">Estado</label>
@@ -27,21 +33,28 @@
           <div class="form-group">
             <label for="controlarStock">Controlar Stock</label>
             <div class="form-check">
-              <input class="form-check-input" type="radio" formControlName="controlarStock" name="controlarStock" id="control1" value="S" checked>
+              <input class="form-check-input" type="radio" formControlName="controlarStock" name="controlarStock" id="control1" value="S" checked (ngModelChange)="activarValidator($event)">
               <label class="form-check-label" for="control1">
                 Si
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" formControlName="controlarStock" name="controlarStock" id="control2" value="N">
+              <input class="form-check-input" type="radio" formControlName="controlarStock" name="controlarStock" id="control2" value="N" (ngModelChange)="activarValidator($event)">
               <label class="form-check-label" for="control2">
                 No
               </label>
             </div>
           </div>
           <div class="form-group">
+            <label for="precioUnitario">Precio Unitario</label>
+            <input formControlName="precioUnitario" type="number" class="form-control" id="precioUnitario" placeholder="Campo Calculado">
+          </div>
+          <div class="form-group" *ngIf="validator">
             <label for="cantidadMinima">Cantidad Minima</label>
-            <input formControlName="cantidadMinima" type="number" class="form-control" id="cantidadMinima" placeholder="Cantidad Minima">
+            <input formControlName="cantidadMinima" type="number" class="form-control" id="cantidadMinima" placeholder="Cantidad Minima" [ngClass]="{ 'is-invalid': submitted && f.cantidadMinima.errors }">
+            <div *ngIf="submitted && f.cantidadMinima.errors" class="invalid-feedback">
+              <div *ngIf="f.cantidadMinima.errors.required">Cantidad minina es requerida</div>
+            </div>
           </div>
           <button type="submit" class="btn btn-primary">Editar</button>
           <a [routerLink]="['/productos']" class="btn btn-link">Cancelar</a>

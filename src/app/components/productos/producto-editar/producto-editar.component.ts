@@ -4,6 +4,7 @@ import { Credenciales } from '../../../clases/credenciales';
 import { Producto } from '../../../clases/producto';
 import { Router } from '@angular/router';
 import { ProductosService } from '../../../servicios/productos.service';
+import { AlertService } from '../../../servicios/alert.service';
 
 @Component({
   selector: 'app-producto-editar',
@@ -16,12 +17,16 @@ export class ProductoEditarComponent implements OnInit {
     descripcion: new FormControl('', Validators.required),
     estado: new FormControl('', Validators.required),
     controlarStock: new FormControl('', Validators.required),
+    precioUnitario: new FormControl(''),
     cantidadMinima: new FormControl('', Validators.required)
   });
   currentUser: Credenciales;
   producto: Producto;
+  submitted = false;
+  validator = true;
 
   constructor(private productosService: ProductosService,
+    private alertService: AlertService,
     private router: Router) {
       this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
      }
@@ -30,7 +35,6 @@ export class ProductoEditarComponent implements OnInit {
     if (this.currentUser != null) {
       const productoId = localStorage.getItem('productoId');
       if (!productoId) {
-        alert('Acción Inválida');
         this.router.navigate(['home']);
         return;
       }
@@ -43,12 +47,11 @@ export class ProductoEditarComponent implements OnInit {
           this.productoForm.controls['descripcion'].setValue(resp.descripcion);
           this.productoForm.controls['estado'].setValue(resp.estado);
           this.productoForm.controls['controlarStock'].setValue(resp.controlarStock);
-          this.productoForm.controls['codigo'].setValue(resp.codigo);
+          this.productoForm.controls['precioUnitario'].disable();
           this.productoForm.controls['cantidadMinima'].setValue(resp.cantidadMinima);
         },
         errorCode => {
-        console.log(errorCode);
-        // this.alert = true;
+        this.alertService.error(errorCode);
       } );
     } else {
       this.router.navigate(['home']);
@@ -56,7 +59,25 @@ export class ProductoEditarComponent implements OnInit {
     }
   }
 
+  get f() {return this.productoForm.controls; }
+
+  activarValidator(eve: any) {
+    if (this.productoForm.get('controlarStock').value === 'S') {
+      this.validator = true;
+    } else {
+      this.validator = false;
+    }
+    if (this.validator) {
+      this.productoForm.get('cantidadMinima').setValidators([Validators.required]);
+      this.productoForm.get('cantidadMinima').updateValueAndValidity();
+    } else {
+      this.productoForm.get('cantidadMinima').setValidators(null);
+      this.productoForm.get('cantidadMinima').updateValueAndValidity();
+    }
+  }
+
   editarProducto() {
+    this.submitted = true;
     if (this.productoForm.invalid) {
       return;
     }
@@ -69,8 +90,7 @@ export class ProductoEditarComponent implements OnInit {
           this.router.navigate(['/productos']);
         },
         errorCode => {
-        console.log(errorCode);
-        // this.alert = true;
+        this.alertService.error(errorCode);
       } );
     }
   }

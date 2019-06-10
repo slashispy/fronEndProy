@@ -5,6 +5,7 @@ import { Producto } from '../../../clases/producto';
 
 import { Router } from '@angular/router';
 import { ProductosService } from '../../../servicios/productos.service';
+import { AlertService } from '../../../servicios/alert.service';
 
 @Component({
   selector: 'app-producto-crear',
@@ -25,6 +26,7 @@ export class ProductoCrearComponent implements OnInit {
   validator = true;
 
   constructor(private productosService: ProductosService,
+    private alertService: AlertService,
     private router: Router) {
       this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     }
@@ -68,8 +70,7 @@ export class ProductoCrearComponent implements OnInit {
           this.router.navigate(['/productos']);
         },
         errorCode => {
-        console.log(errorCode);
-        // this.alert = true;
+          this.alertService.error(errorCode);
       } );
     }
   }

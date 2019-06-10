@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/servicios/login.service';
+import { AlertService } from '../../../servicios/alert.service';
 import { first } from 'rxjs/operators';
 import { Credenciales } from '../../../clases/credenciales';
-import { AppComponent } from '../../../app.component';
 
 @Component({
   selector: 'app-cambiarpass',
@@ -19,8 +19,8 @@ export class CambiarPassComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private loginService: LoginService,
-    private app: AppComponent
+    private alertService: AlertService,
+    private loginService: LoginService
   ) {}
 
   ngOnInit() {
@@ -42,19 +42,17 @@ export class CambiarPassComponent implements OnInit {
         return;
     }
     const credencial: Credenciales = this.cambioPassForm.value;
-    console.log(credencial);
     this.loading = true;
     this.loginService.cambiarPassword(credencial)
         .pipe(first())
         .subscribe(
             data => {
-              console.log(data);
               this.loading = false;
               this.actualizado = true;
-              // this.app.navBar = true;
-                // this.router.navigate(['/home']);
+              this.alertService.success('Contraseña fue cambiada exitosamente');
             },
             error => {
+                this.alertService.error(error);
                 this.loading = false;
             });
   }
