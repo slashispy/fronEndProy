@@ -32,14 +32,17 @@ import { PerfilEditarComponent } from './components/perfiles/perfil-editar/perfi
 import { ComprasComponent } from './components/compras/compra-lista/compras.component';
 import { CompraComponent } from './components/compras/compra-cabecera/compra.component';
 import { CompraItemsComponent } from './components/compras/compra-detalle/compra-items.component';
+import { AlertComponent } from './components/shared/alert/alert.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatAutocompleteModule, MatInputModule, MatDatepickerModule, MatNativeDateModule, MatMenuModule } from '@angular/material/';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CambiarPassComponent } from './components/auth/cambiarPass/cambiarPass.component';
 
 // Rutas
 import { APP_ROUTING } from './app.routes';
 // Servicios
 import { LoginService } from './servicios/login.service';
+import { AlertService } from './servicios/alert.service';
 // Guards
 import { AuthGuard } from './guards/auth.guard';
 // Interceptors
@@ -47,7 +50,6 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
 // Modulos
 import { DataTablesModule } from 'angular-datatables';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { CambiarPassComponent } from './components/auth/cambiarPass/cambiarPass.component';
 
 
 
@@ -80,7 +82,8 @@ import { CambiarPassComponent } from './components/auth/cambiarPass/cambiarPass.
     PerfilListarComponent,
     PerfilCrearComponent,
     PerfilEditarComponent,
-    CambiarPassComponent
+    CambiarPassComponent,
+    AlertComponent
   ],
   entryComponents: [CompraItemsComponent],
   imports: [
@@ -103,6 +106,7 @@ import { CambiarPassComponent } from './components/auth/cambiarPass/cambiarPass.
   ],
   providers: [
     LoginService,
+    AlertService,
     AuthGuard,
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],

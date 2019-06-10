@@ -5,6 +5,7 @@ import { Usuario } from '../../clases/usuario';
 import { Router } from '@angular/router';
 
 import { UsuariosService } from '../../servicios/usuarios.service';
+import { AlertService } from '../../servicios/alert.service';
 
 @Component({
   selector: 'app-home',
@@ -18,6 +19,7 @@ export class HomeComponent implements OnInit {
   saludo: string;
 
   constructor(private usuarioService: UsuariosService,
+              private alertService: AlertService,
               private router: Router) {
                 this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
               }
@@ -31,6 +33,7 @@ export class HomeComponent implements OnInit {
         },
         errorCode => {
           console.log(errorCode);
+          this.alertService.error(errorCode);
         }
       );
     } else {

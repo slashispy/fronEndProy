@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-
 import { LoginService } from '../../../servicios/login.service';
 import { Credenciales } from '../../../clases/credenciales';
 import { AppComponent } from '../../../app.component';
 import { first } from 'rxjs/operators';
+import { AlertService } from '../../../servicios/alert.service';
 
 
 @Component({
@@ -21,18 +21,19 @@ export class LoginComponent implements OnInit {
   loading = false;
   submitted = false;
   cre: Credenciales;
-  alert: boolean;
   returnUrl: string;
 
 
   constructor(private loginService: LoginService,
               private router: Router,
               private route: ActivatedRoute,
+              private alertService: AlertService,
               private app: AppComponent) {
                 app.navBar = false;
                }
 
   ngOnInit() {
+
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
@@ -44,8 +45,8 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
-    this.loading = true;
 
+    this.loading = true;
     const credenciales = this.loginForm.value;
     this.cre = credenciales;
     this.loginService.login(credenciales)
@@ -54,7 +55,8 @@ export class LoginComponent implements OnInit {
       this.router.navigate([this.returnUrl]);
       this.app.navBar = true;
     }, errorCode => {
-      this.alert = true;
+      console.log(errorCode);
+      this.alertService.error(errorCode);
       this.loading = false;
     } );
   }
