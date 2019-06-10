@@ -39,7 +39,7 @@ const APP_ROUTES: Routes = [
     { path: 'cliente-crear', component: ClienteCrearComponent, canActivate: [AuthGuard]},
     { path: 'cliente-editar', component: ClienteEditarComponent, canActivate: [AuthGuard]},
     { path: 'compras', component: ComprasComponent, canActivate: [AuthGuard]},
-    { path: 'compra', children: [
+    { path: 'compra-crear', children: [
         { path: '', component: CompraComponent},
         { path: 'edit/:id', component: CompraComponent}]},
     { path: 'permisos', component: PermisoListarComponent, canActivate: [AuthGuard]},

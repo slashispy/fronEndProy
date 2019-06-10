@@ -5,7 +5,7 @@
       <div class="form-group col-md-3">
         <label for="fecha">Fecha</label>
         <div class="input-group">
-          <input formControlName="fecha" type="text" class="form-control" id="fecha" placeholder="Fecha" [max]="maxDate" [matDatepicker]="dp3" disabled>
+          <input formControlName="fecha" type="text" class="form-control" id="fecha" placeholder="Fecha" [max]="maxDate" [matDatepicker]="dp3">
           <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
           <mat-datepicker #dp3 disabled="false"></mat-datepicker>
         </div>
@@ -28,11 +28,11 @@
     </div>
     <div class="form-group">
       <label for="importe">Importe</label>
-      <input formControlName="importe" type="number" class="form-control" id="importe" placeholder="Importe" readonly>
+      <input formControlName="importe" type="number" class="form-control" id="importe" placeholder="Importe">
     </div>
     <div class="form-group">
       <label for="descuento">Descuento</label>
-      <input formControlName="descuento" type="number" class="form-control" id="descuento" placeholder="Descuento" readonly>
+      <input formControlName="descuento" type="number" class="form-control" id="descuento" placeholder="Descuento">
     </div>
     <div class="form-group">
         <label for="tipoCompra">Tipo de Compra</label>

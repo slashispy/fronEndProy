@@ -27,11 +27,11 @@ import { map, startWith } from 'rxjs/operators';
 export class CompraComponent implements OnInit {
   isValid = true;
   compraForm = new FormGroup({
-    fecha: new FormControl('', Validators.required),
+    fecha: new FormControl({value: '', disabled: true}, Validators.required),
     nroFactura: new FormControl('', Validators.required),
     proveedor: new FormControl('', Validators.required),
-    importe: new FormControl('', Validators.required),
-    descuento: new FormControl('', Validators.required),
+    importe: new FormControl({value: '', disabled: true}, Validators.required),
+    descuento: new FormControl({value: '', disabled: true}, Validators.required),
     tipoCompra: new FormControl('', Validators.required),
     detalleCompras: new FormControl('', Validators.required)
   });
