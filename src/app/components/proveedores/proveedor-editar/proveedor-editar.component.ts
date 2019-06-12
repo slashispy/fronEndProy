@@ -4,6 +4,7 @@ import { Credenciales } from '../../../clases/credenciales';
 import { Proveedor } from '../../../clases/proveedor';
 import { Router } from '@angular/router';
 import { ProveedoresService } from '../../../servicios/proveedores.service';
+import { AlertService } from '../../../servicios/alert.service';
 
 @Component({
   selector: 'app-proveedor-editar',
@@ -21,9 +22,11 @@ export class ProveedorEditarComponent implements OnInit {
     telefono: new FormControl('', Validators.required)
   });
   currentUser: Credenciales;
+  submitted = false;
   proveedor: Proveedor;
 
   constructor(private proveedorService: ProveedoresService,
+    private alertService: AlertService,
     private router: Router) {
       this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     }
@@ -32,7 +35,6 @@ export class ProveedorEditarComponent implements OnInit {
     if (this.currentUser != null) {
       const proveedorId = localStorage.getItem('proveedorId');
       if (!proveedorId) {
-        alert('Acción Inválida');
         this.router.navigate(['home']);
         return;
       }
@@ -49,8 +51,7 @@ export class ProveedorEditarComponent implements OnInit {
           this.proveedorForm.controls['telefono'].setValue(resp.telefono);
         },
         errorCode => {
-        console.log(errorCode);
-        // this.alert = true;
+          this.alertService.error(errorCode);
       } );
     } else {
       this.router.navigate(['home']);
@@ -58,7 +59,10 @@ export class ProveedorEditarComponent implements OnInit {
     }
   }
 
+  get f() { return this.proveedorForm.controls; }
+
   editarProveedor() {
+    this.submitted = true;
     if (this.proveedorForm.invalid) {
       return;
     }
@@ -71,8 +75,7 @@ export class ProveedorEditarComponent implements OnInit {
           this.router.navigate(['/proveedores']);
         },
         errorCode => {
-        console.log(errorCode);
-        // this.alert = true;
+          this.alertService.error(errorCode);
       } );
     }
   }

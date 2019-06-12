@@ -4,6 +4,7 @@ import { Credenciales } from '../../../clases/credenciales';
 import { Proveedor } from '../../../clases/proveedor';
 import { ProveedoresService } from '../../../servicios/proveedores.service';
 import { Router } from '@angular/router';
+import { AlertService } from '../../../servicios/alert.service';
 
 @Component({
   selector: 'app-proveedor-crear',
@@ -21,9 +22,11 @@ export class ProveedorCrearComponent implements OnInit {
   });
 
   currentUser: Credenciales;
+  submitted = false;
   proveedor: Proveedor;
 
   constructor(private proveedorService: ProveedoresService,
+    private alertService: AlertService,
     private router: Router) {
       this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     }
@@ -36,7 +39,10 @@ export class ProveedorCrearComponent implements OnInit {
     }
   }
 
+  get f() {return this.proveedorForm.controls; }
+
   nuevoProveedor() {
+    this.submitted = true;
     if (this.proveedorForm.invalid) {
       return;
     }
@@ -49,8 +55,7 @@ export class ProveedorCrearComponent implements OnInit {
           this.router.navigate(['/proveedores']);
         },
         errorCode => {
-        console.log(errorCode);
-        // this.alert = true;
+          this.alertService.error(errorCode);
       } );
     }
   }
