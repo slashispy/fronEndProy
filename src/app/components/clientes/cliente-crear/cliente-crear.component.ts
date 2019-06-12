@@ -4,6 +4,7 @@ import { Credenciales } from '../../../clases/credenciales';
 import { Cliente } from '../../../clases/cliente';
 import { ClientesService } from '../../../servicios/clientes.service';
 import { Router } from '@angular/router';
+import { AlertService } from '../../../servicios/alert.service';
 
 @Component({
   selector: 'app-cliente-crear',
@@ -17,9 +18,11 @@ export class ClienteCrearComponent implements OnInit {
   });
 
   currentUser: Credenciales;
+  submitted = false;
   cliente: Cliente;
 
   constructor(private clientesService: ClientesService,
+    private alertService: AlertService,
     private router: Router) {
       this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     }
@@ -32,7 +35,10 @@ export class ClienteCrearComponent implements OnInit {
     }
   }
 
+  get f() {return this.clienteForm.controls; }
+
   nuevoCliente() {
+    this.submitted = true;
     if (this.clienteForm.invalid) {
       return;
     }
@@ -45,8 +51,7 @@ export class ClienteCrearComponent implements OnInit {
           this.router.navigate(['/clientes']);
         },
         errorCode => {
-        console.log(errorCode);
-        // this.alert = true;
+          this.alertService.error(errorCode);
       } );
     }
   }

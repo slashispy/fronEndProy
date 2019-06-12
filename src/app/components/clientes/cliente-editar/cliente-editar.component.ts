@@ -4,6 +4,7 @@ import { Credenciales } from '../../../clases/credenciales';
 import { Cliente } from '../../../clases/cliente';
 import { ClientesService } from '../../../servicios/clientes.service';
 import { Router } from '@angular/router';
+import { AlertService } from '../../../servicios/alert.service';
 
 @Component({
   selector: 'app-cliente-editar',
@@ -18,9 +19,11 @@ export class ClienteEditarComponent implements OnInit {
   });
 
   currentUser: Credenciales;
+  submitted = false;
   cliente: Cliente;
 
   constructor(private clienteService: ClientesService,
+    private alertService: AlertService,
     private router: Router) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
    }
@@ -42,8 +45,7 @@ export class ClienteEditarComponent implements OnInit {
           this.clienteForm.controls['razonSocial'].setValue(resp.razonSocial);
         },
         errorCode => {
-        console.log(errorCode);
-        // this.alert = true;
+          this.alertService.error(errorCode);
       } );
     } else {
       this.router.navigate(['home']);
@@ -51,7 +53,10 @@ export class ClienteEditarComponent implements OnInit {
     }
   }
 
+  get f() {return this.clienteForm.controls; }
+
   editarCliente() {
+    this.submitted = true;
     if (this.clienteForm.invalid) {
       return;
     }
@@ -64,8 +69,7 @@ export class ClienteEditarComponent implements OnInit {
           this.router.navigate(['/clientes']);
         },
         errorCode => {
-        console.log(errorCode);
-        // this.alert = true;
+          this.alertService.error(errorCode);
       } );
     }
   }
