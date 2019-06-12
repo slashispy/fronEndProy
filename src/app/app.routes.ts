@@ -51,9 +51,9 @@ const APP_ROUTES: Routes = [
     { path: 'perfiles', component: PerfilListarComponent, canActivate: [AuthGuard]},
     { path: 'perfil-crear', component: PerfilCrearComponent, canActivate: [AuthGuard]},
     { path: 'perfil-editar', component: PerfilEditarComponent, canActivate: [AuthGuard]},
+    { path: 'cambiarPass', component: CambiarPassComponent, canActivate: [AuthGuard]},
     { path: 'login', component: LoginComponent},
     { path: 'registrer', component: RegistrarComponent},
-    { path: 'cambiarPass', component: CambiarPassComponent, canActivate: [AuthGuard]},
     { path: '**', pathMatch: 'full', redirectTo: 'home'}
 
 ];

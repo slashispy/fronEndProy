@@ -74,9 +74,6 @@
         <a class="nav-link" [routerLink] = "['clientes']">Clientes</a>
       </li>
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink] = "['parametros']">Parametros</a>
-      </li>
-      <li class="nav-item" routerLinkActive="active">
         <a class="nav-link" [routerLink] = "['perfiles']">Roles</a>
       </li>
       <li class="nav-item" routerLinkActive="active">
@@ -97,6 +94,7 @@
 
   <mat-menu #usuario="matMenu">
     <button mat-menu-item [routerLink] = "['cambiarPass']">Cambiar Password</button>
+    <button mat-menu-item [routerLink] = "['parametros']">Parametros del Sistema</button>
     <button mat-menu-item (click)="logout()">Logout</button>
   </mat-menu>
   

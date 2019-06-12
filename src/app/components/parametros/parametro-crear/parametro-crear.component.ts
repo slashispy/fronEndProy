@@ -5,6 +5,7 @@ import { Parametro } from '../../../clases/parametro';
 
 import { Router } from '@angular/router';
 import { ParametrosService } from '../../../servicios/parametros.service';
+import { AlertService } from '../../../servicios/alert.service';
 
 @Component({
   selector: 'app-parametro-crear',
@@ -16,9 +17,11 @@ export class ParametroCrearComponent implements OnInit {
     valor: new FormControl('', Validators.required)
   });
   currentUser: Credenciales;
+  submitted = false;
   parametro: Parametro;
 
   constructor(private parametrosService: ParametrosService,
+    private alertService: AlertService,
     private router: Router) {
       this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
      }
@@ -31,7 +34,10 @@ export class ParametroCrearComponent implements OnInit {
     }
   }
 
+  get f() {return this.parametroForm.controls; }
+
   nuevoParametro() {
+    this.submitted = true;
     if (this.parametroForm.invalid) {
       return;
     }
@@ -44,8 +50,7 @@ export class ParametroCrearComponent implements OnInit {
           this.router.navigate(['/parametros']);
         },
         errorCode => {
-        console.log(errorCode);
-        // this.alert = true;
+        this.alertService.error(errorCode);
       } );
     }
   }
