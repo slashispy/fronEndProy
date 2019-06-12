@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
-import { LoginService } from 'src/app/servicios/login.service';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { LoginService } from '../../../servicios/login.service';
 import { first } from 'rxjs/operators';
 import { Usuario } from '../../../clases/usuario';
 import { AppComponent } from '../../../app.component';
-import { Perfil } from 'src/app/clases/perfil';
+import { Perfil } from '../../../clases/perfil';
+import { AlertService } from '../../../servicios/alert.service';
 
 @Component({
   selector: 'app-registrar',
@@ -23,6 +24,7 @@ export class RegistrarComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private loginService: LoginService,
+    private alertService: AlertService,
     private app: AppComponent
   ) {}
 
@@ -42,7 +44,7 @@ export class RegistrarComponent implements OnInit {
         this.permisos = resp;
       },
       errorCode => {
-        console.log(errorCode);
+        this.alertService.error(errorCode);
       }
     );
 
@@ -68,6 +70,7 @@ export class RegistrarComponent implements OnInit {
             },
             error => {
                 this.loading = false;
+                this.alertService.error(error);
             });
 }
 
