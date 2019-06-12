@@ -74,9 +74,6 @@
         <a class="nav-link" [routerLink] = "['clientes']"><i class="fa fa-address-card"></i>&nbsp;Clientes</a>
       </li>
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink] = "['perfiles']">Roles</a>
-      </li>
-      <li class="nav-item" routerLinkActive="active">
         <a class="nav-link" [matMenuTriggerFor]="compras"><i class="fa fa-shopping-cart"></i>&nbsp;Compras</a>
       </li>
       <li class="nav-item" routerLinkActive="active">
@@ -95,6 +92,7 @@
   <mat-menu #usuario="matMenu">
     <button mat-menu-item [routerLink] = "['cambiarPass']">Cambiar Password</button>
     <button mat-menu-item [routerLink] = "['parametros']">Parametros del Sistema</button>
+    <button mat-menu-item [routerLink] = "['perfiles']">Administrar Roles</button>
     <button mat-menu-item (click)="logout()">Logout</button>
   </mat-menu>
   

@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { PerfilesService } from '../../../servicios/perfiles.service';
 import { Permiso } from '../../../clases/permiso';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { AlertService } from 'src/app/servicios/alert.service';
 
 @Component({
   selector: 'app-perfil-editar',
@@ -21,12 +22,14 @@ export class PerfilEditarComponent implements OnInit {
   });
 
   currentUser: Credenciales;
+  submitted = false;
   perfil: Perfil;
   permisosDisponibles: Permiso[];
   permisosAsignados: Permiso[] = [];
   permisosNoAsignados: Permiso[] = [];
 
   constructor(private perfilesService: PerfilesService,
+    private alertService: AlertService,
     private router: Router) {
       this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     }
@@ -35,7 +38,6 @@ export class PerfilEditarComponent implements OnInit {
     if (this.currentUser != null) {
       const perfilId = localStorage.getItem('perfilId');
       if (!perfilId) {
-        alert('Acción Inválida');
         this.router.navigate(['home']);
         return;
       }
@@ -56,13 +58,12 @@ export class PerfilEditarComponent implements OnInit {
             this.filtrarPermisosNoAsignados();
           },
         errorCode => {
-          console.log(errorCode);
+          this.alertService.error(errorCode);
         }
       );
         },
         errorCode => {
-        console.log(errorCode);
-        // this.alert = true;
+          this.alertService.error(errorCode);
       } );
     } else {
       this.router.navigate(['home']);
@@ -97,8 +98,12 @@ export class PerfilEditarComponent implements OnInit {
     }
   }
 
+  get f() { return this.perfilForm.controls; }
+
   editarPerfil() {
+    this.submitted = true;
     if (this.perfilForm.invalid) {
+      this.alertService.error('Formulario invalido, favor verificar los campos');
       return;
     }
     const pro = this.perfilForm.value;
@@ -111,8 +116,7 @@ export class PerfilEditarComponent implements OnInit {
           this.router.navigate(['/perfiles']);
         },
         errorCode => {
-        console.log(errorCode);
-        // this.alert = true;
+          this.alertService.error(errorCode);
       } );
     }
   }

@@ -3,11 +3,17 @@
   <form [formGroup]="perfilForm" (ngSubmit)="nuevoPerfil()" class="px-4 py-3">
     <div class="form-group">
       <label for="codigo">Código</label>
-      <input formControlName="codigo" type="text" class="form-control" id="codigo" placeholder="Código">
+      <input formControlName="codigo" type="text" class="form-control" id="codigo" placeholder="Código" [ngClass]="{ 'is-invalid': submitted && f.codigo.errors }">
+      <div *ngIf="submitted && f.codigo.errors" class="invalid-feedback">
+        <div *ngIf="f.codigo.errors.required">Código es requerido</div>
+      </div>
     </div>
     <div class="form-group">
       <label for="descripcion">Descripción</label>
-      <input formControlName="descripcion" type="text" class="form-control" id="descripcion" placeholder="Descripción">
+      <input formControlName="descripcion" type="text" class="form-control" id="descripcion" placeholder="Descripción" [ngClass]="{ 'is-invalid': submitted && f.descripcion.errors }">
+      <div *ngIf="submitted && f.descripcion.errors" class="invalid-feedback">
+        <div *ngIf="f.descripcion.errors.required">Descripción es requerido</div>
+      </div>
     </div>
     <div class="form-group">
       <label for="estado">Estado</label>
@@ -28,33 +34,33 @@
     <div class="form-group">
       <label for="permisos">Permisos</label> <br>
       <div class="container">
-          <div class="example-container">
-              <label>Permisos disponibles</label>
-              <div
-                  cdkDropList
-                  #permisos="cdkDropList"
-                  [cdkDropListData]="permisosDisponibles"
-                  [cdkDropListConnectedTo]="[permisosAsig]"
-                  class="example-list"
-                  (cdkDropListDropped)="drop($event)">
-              <div class="example-box" *ngFor="let item of permisosDisponibles" cdkDrag>{{item.descripcion}}</div>
+        <div class="example-container">
+          <label>Permisos disponibles</label>
+          <div
+            cdkDropList
+            #permisos="cdkDropList"
+            [cdkDropListData]="permisosDisponibles"
+            [cdkDropListConnectedTo]="[permisosAsig]"
+            class="example-list"
+            (cdkDropListDropped)="drop($event)">
+            <div class="example-box" *ngFor="let item of permisosDisponibles" cdkDrag>{{item.descripcion}}</div>
           </div>
-          </div>
+        </div>
       
-          <div class="example-container">
-              <label>Permisos Asignados</label>
-              <div
-                  cdkDropList
-                  #permisosAsig="cdkDropList"
-                  [cdkDropListData]="permisosAsignados"
-                  [cdkDropListConnectedTo]="[permisos]"
-                  class="example-list"
-                  (cdkDropListDropped)="drop($event)">
-                  <div class="example-box" *ngFor="let item of permisosAsignados" cdkDrag>{{item.descripcion}}</div>
-              </div>
+        <div class="example-container">
+          <label>Permisos Asignados</label>
+          <div
+            cdkDropList
+            #permisosAsig="cdkDropList"
+            [cdkDropListData]="permisosAsignados"
+            [cdkDropListConnectedTo]="[permisos]"
+            class="example-list"
+            (cdkDropListDropped)="drop($event)">
+            <div class="example-box" *ngFor="let item of permisosAsignados" cdkDrag>{{item.descripcion}}</div>
           </div>
+        </div>
       </div>
-  </div>
+    </div>
 
     <button type="submit" class="btn btn-primary">Crear</button>
     <a [routerLink]="['/perfiles']" class="btn btn-link">Cancelar</a>

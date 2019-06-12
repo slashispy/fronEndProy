@@ -7,6 +7,7 @@ import { Permiso } from '../../../clases/permiso';
 import { Router } from '@angular/router';
 import { PerfilesService } from '../../../servicios/perfiles.service';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { AlertService } from '../../../servicios/alert.service';
 
 @Component({
   selector: 'app-perfil-crear',
@@ -20,11 +21,13 @@ export class PerfilCrearComponent implements OnInit {
     permisos: new FormControl([], Validators.required)
   });
   currentUser: Credenciales;
+  submitted = false;
   perfil: Perfil;
   permisosDisponibles: Permiso[];
   permisosAsignados: Permiso[] = [];
 
   constructor(private perfilesService: PerfilesService,
+    private alertService: AlertService,
     private router: Router) {
       this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     }
@@ -37,7 +40,7 @@ export class PerfilCrearComponent implements OnInit {
           this.permisosDisponibles = resp;
         },
         errorCode => {
-          console.log(errorCode);
+          this.alertService.error(errorCode);
         }
       );
     } else {
@@ -45,8 +48,12 @@ export class PerfilCrearComponent implements OnInit {
     }
   }
 
+  get f() { return this.perfilForm.controls; }
+
   nuevoPerfil() {
+    this.submitted = true;
     if (this.perfilForm.invalid) {
+      this.alertService.error('Formulario invalido, favor verificar los campos');
       return;
     }
     const prof = this.perfilForm.value;
@@ -58,8 +65,7 @@ export class PerfilCrearComponent implements OnInit {
           this.router.navigate(['/perfiles']);
         },
         errorCode => {
-        console.log(errorCode);
-        // this.alert = true;
+          this.alertService.error(errorCode);
       } );
     }
   }
@@ -68,7 +74,6 @@ export class PerfilCrearComponent implements OnInit {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
-      console.log(this.permisosAsignados);
       transferArrayItem(event.previousContainer.data,
                         event.container.data,
                         event.previousIndex,
