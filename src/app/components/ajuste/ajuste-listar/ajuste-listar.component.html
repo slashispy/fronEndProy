@@ -1,0 +1,39 @@
+<table class="table">
+  <tr>
+      <td>
+          <h3>Historico de Ajustes de Inventario</h3>
+      </td>
+      <td><button class="btn btn-primary" [routerLink] = "['/ajuste-crear']">Nuevo Ajuste de Inventario</button></td>
+  </tr>
+</table>
+<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Fecha</th>
+            <th>Importe</th>
+            <th>Descuento</th>
+            <th>Tipo de Ajuste</th>
+            <th>Estado</th>
+            <!-- <th>Acción</th> -->
+        </tr>
+    </thead>
+    <tbody *ngIf="ajustes?.length != 0">
+        <tr *ngFor="let ajuste of ajustes">
+            <td>{{ajuste.id}}</td>
+            <td>{{ajuste.fecha}}</td>
+            <td>{{ajuste.importe}}</td>
+            <td>{{ajuste.descuento}}</td>
+            <td>{{ajuste.tipoAjuste.descripcion}}</td>
+            <td>{{ajuste.estado}}</td>
+            <!-- <td>
+            <a class="btn btn-default" (click)="editProduct(compra.id)">Ver</a>
+            </td> -->
+        </tr>
+    </tbody>
+    <tbody *ngIf="ajustes?.length == 0">
+      <tr>
+        <td colspan="8" class="no-data-available">No Ajustes Registrados!</td>
+      </tr>
+    <tbody>
+</table>

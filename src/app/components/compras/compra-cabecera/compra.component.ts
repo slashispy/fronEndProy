@@ -148,7 +148,7 @@ export class CompraComponent implements OnInit {
     if (this.compraForm.invalid) {
       return;
     }
-    const comp = this.compraForm.value;
+    const comp = this.compraForm.getRawValue();
     this.compra = comp;
     if (this.currentUser != null) {
       this.comprasService.addCompra(comp, this.currentUser.token)

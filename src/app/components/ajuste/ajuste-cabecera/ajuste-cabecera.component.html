@@ -1,0 +1,68 @@
+<div class="container">
+  <h2>Nuevo Ajuste de Inventario</h2>
+  <form [formGroup]="ajusteForm" autocomplete="off" (ngSubmit)="nuevoAjusteInventario()" class="px-4 py-3">
+    <div class="form-row">
+      <div class="form-group col-md-3">
+        <label for="fecha">Fecha</label>
+        <div class="input-group">
+          <input formControlName="fecha" type="text" class="form-control" id="fecha" placeholder="Fecha" [max]="maxDate" [matDatepicker]="dp3">
+          <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+          <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+        </div>
+      </div>
+      <div class="form-group col-md-3">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="importe">Importe</label>
+      <input formControlName="importe" type="number" class="form-control" id="importe" placeholder="Importe">
+    </div>
+    <div class="form-group">
+      <label for="descuento">Descuento</label>
+      <input formControlName="descuento" type="number" class="form-control" id="descuento" placeholder="Descuento">
+    </div>
+    <div class="form-group">
+        <label for="tipoAjuste">Tipo de Ajuste</label>
+        <input formControlName="tipoAjuste" type="text" class="form-control" id="tipoAjuste" placeholder="Tipo de Ajuste" matInput [matAutocomplete]="auto2">
+        <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displayFnType">
+          <mat-option *ngFor="let option of filteredTypeOptions | async" [value]="option">
+            {{option.descripcion}}
+          </mat-option>
+        </mat-autocomplete>
+    </div>
+    <!-- order items table-->
+    <table class="table table-borderless">
+      <thead class="thead-light">
+        <th>Producto</th>
+        <th>Cantidad</th>
+        <th>Precio Unitario</th>
+        <th>Descuento</th>
+        <th>Importe</th>
+        <th>
+          <a class="btn btn-sm btn-success text-white" (click)="AddOrEditAjusteDetalle(null)"><i class="fa fa-plus"></i> Agregar Item</a>
+        </th>
+      </thead>
+      <tbody>
+        <tr *ngIf="ajusteService.ajusteItem.length==0" [class.text-danger]="!isValid && ajusteService.ajusteItem.length==0">
+          <td class="font-italic text-center" colspan="5">
+            No hay detalles en la lista.
+          </td>
+        </tr>
+  
+        <tr *ngFor="let item of ajusteService.ajusteItem;let i=index;">
+          <td>{{item.producto.descripcion}}</td>
+          <td>{{item.cantidad}}</td>
+          <td>{{item.precioUnitario}}</td>
+          <td>{{item.descuento}}</td>
+          <td>{{item.importe}}</td>
+          <td>
+            <a class="btn btn-sm btn-info text-white" (click)="AddOrEditAjusteDetalle(i)"><i class="fa fa-pencil"></i></a>
+            <a class="btn btn-sm btn-danger text-white ml-1" (click)="onDeleteOrderAjusteDetalle(i)"><i class="fa fa-trash"></i></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button type="submit" class="btn btn-primary">Registrar</button>
+    <a [routerLink]="['/ajustes']" class="btn btn-link">Cancelar</a>
+  </form>
+</div>

@@ -25,6 +25,8 @@ import { PerfilEditarComponent } from './components/perfiles/perfil-editar/perfi
 import { ComprasComponent } from './components/compras/compra-lista/compras.component';
 import { CompraComponent } from './components/compras/compra-cabecera/compra.component';
 import { CambiarPassComponent } from './components/auth/cambiarPass/cambiarPass.component';
+import { AjusteListarComponent } from './components/ajuste/ajuste-listar/ajuste-listar.component';
+import { AjusteCabeceraComponent } from './components/ajuste/ajuste-cabecera/ajuste-cabecera.component';
 
 const APP_ROUTES: Routes = [
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
@@ -41,7 +43,13 @@ const APP_ROUTES: Routes = [
     { path: 'compras', component: ComprasComponent, canActivate: [AuthGuard]},
     { path: 'compra-crear', children: [
         { path: '', component: CompraComponent},
-        { path: 'edit/:id', component: CompraComponent}]},
+        { path: 'edit/:id', component: CompraComponent}
+    ], canActivate: [AuthGuard]},
+    { path: 'ajustes', component: AjusteListarComponent, canActivate: [AuthGuard]},
+    { path: 'ajuste-crear', children: [
+        { path: '', component: AjusteCabeceraComponent},
+        { path: 'edit/:id', component: AjusteCabeceraComponent}
+    ], canActivate: [AuthGuard]},
     { path: 'permisos', component: PermisoListarComponent, canActivate: [AuthGuard]},
     { path: 'permiso-crear', component: PermisoCrearComponent, canActivate: [AuthGuard]},
     { path: 'permiso-editar', component: PermisoEditarComponent, canActivate: [AuthGuard]},
