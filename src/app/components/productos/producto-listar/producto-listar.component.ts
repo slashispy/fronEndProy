@@ -7,6 +7,9 @@ import { ProductosService } from '../../../servicios/productos.service';
 
 import { Subject } from 'rxjs';
 import { Datatables } from 'src/app/clases/utils/datatables';
+import * as jsPDF from 'jspdf';
+import 'jspdf-autotable';
+
 
 @Component({
   selector: 'app-producto-listar',
@@ -51,5 +54,33 @@ export class ProductoListarComponent extends Datatables implements OnDestroy, On
     localStorage.removeItem('productoId');
     localStorage.setItem('productoId', id);
     this.router.navigate(['producto-editar']);
+  }
+
+  informe() {
+    const doc = new jsPDF();
+    const cuerpo = new Array();
+    this.productos.forEach(element => {
+      cuerpo.push(new Array(element.codigo,
+        element.descripcion,
+        element.estado,
+        element.controlarStock,
+        element.cantidadMinima.toString()));
+    });
+    doc.text('Informe de Productos', 10, 10);
+    doc.autoTable({
+      head: [['Código', 'Descripción', 'Estado', 'Controlar Stock', 'Cantidad Mínima']],
+      body: cuerpo
+  });
+    doc.save(this.formatDate() + '_productos.pdf');
+  }
+
+  private formatDate() {
+    const d = new Date();
+    let month = '' + (d.getMonth() + 1);
+    let day = '' + d.getDate();
+    const year = d.getFullYear();
+    if (month.length < 2) { month = '0' + month; }
+    if (day.length < 2) { day = '0' + day; }
+    return [year, month, day].join('-');
   }
 }
