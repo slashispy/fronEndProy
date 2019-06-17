@@ -33,11 +33,9 @@ import { ComprasComponent } from './components/compras/compra-lista/compras.comp
 import { CompraComponent } from './components/compras/compra-cabecera/compra.component';
 import { CompraItemsComponent } from './components/compras/compra-detalle/compra-items.component';
 import { AlertComponent } from './components/shared/alert/alert.component';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatAutocompleteModule, MatInputModule, MatDatepickerModule, MatNativeDateModule, MatMenuModule } from '@angular/material/';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CambiarPassComponent } from './components/auth/cambiarPass/cambiarPass.component';
 import { InputMaskModule } from 'primeng/inputmask';
+import { AjusteListarComponent } from './components/ajuste/ajuste-listar/ajuste-listar.component';
 
 // Rutas
 import { APP_ROUTING } from './app.routes';
@@ -54,6 +52,11 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ComprasPendientesComponent } from './components/compras/compra-lista-pendientes/compras-pendientes.component';
 import { ComprasCanceladasComponent } from './components/compras/compra-lista-canceladas/compras-canceladas.component';
 import { CompraEditarComponent } from './components/compras/compra-editar/compra-editar.component';
+import { MatAutocompleteModule, MatInputModule, MatDatepickerModule, MatNativeDateModule, MatMenuModule } from '@angular/material/';
+import { MatDialogModule } from '@angular/material/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AjusteCabeceraComponent } from './components/ajuste/ajuste-cabecera/ajuste-cabecera.component';
+import { AjusteDetalleComponent } from './components/ajuste/ajuste-detalle/ajuste-detalle.component';
 
 
 
@@ -90,9 +93,15 @@ import { CompraEditarComponent } from './components/compras/compra-editar/compra
     PerfilCrearComponent,
     PerfilEditarComponent,
     CambiarPassComponent,
-    AlertComponent
+    AlertComponent,
+    AjusteListarComponent,
+    AjusteCabeceraComponent,
+    AjusteDetalleComponent
   ],
-  entryComponents: [CompraItemsComponent],
+  entryComponents: [
+    CompraItemsComponent,
+    AjusteDetalleComponent
+  ],
   imports: [
     BrowserModule,
     FormsModule,
