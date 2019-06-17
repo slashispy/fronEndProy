@@ -37,6 +37,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatAutocompleteModule, MatInputModule, MatDatepickerModule, MatNativeDateModule, MatMenuModule } from '@angular/material/';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CambiarPassComponent } from './components/auth/cambiarPass/cambiarPass.component';
+import { InputMaskModule } from 'primeng/inputmask';
 
 // Rutas
 import { APP_ROUTING } from './app.routes';
@@ -50,6 +51,9 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
 // Modulos
 import { DataTablesModule } from 'angular-datatables';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ComprasPendientesComponent } from './components/compras/compra-lista-pendientes/compras-pendientes.component';
+import { ComprasCanceladasComponent } from './components/compras/compra-lista-canceladas/compras-canceladas.component';
+import { CompraEditarComponent } from './components/compras/compra-editar/compra-editar.component';
 
 
 
@@ -71,6 +75,9 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     ClienteCrearComponent,
     ClienteEditarComponent,
     ComprasComponent,
+    ComprasPendientesComponent,
+    ComprasCanceladasComponent,
+    CompraEditarComponent,
     CompraComponent,
     CompraItemsComponent,
     PermisoListarComponent,
@@ -102,7 +109,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatDatepickerModule,
     MatNativeDateModule,
     AngularFontAwesomeModule,
-    MatMenuModule
+    MatMenuModule,
+    InputMaskModule
   ],
   providers: [
     LoginService,

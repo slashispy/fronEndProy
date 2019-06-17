@@ -13,8 +13,8 @@
       <div class="form-group col-md-3">
       </div>
       <div class="form-group col-md-6">
-          <label for="nroFactura">Nro. Factura</label>
-          <input formControlName="nroFactura" type="text" class="form-control" id="nroFactura" placeholder="Nro. Factura">
+        <label for="nroFactura">Nro. Factura</label>
+        <p-inputMask formControlName="nroFactura" mask="999-999-9999999"></p-inputMask>
       </div>
     </div>
     <div class="form-group">
@@ -25,6 +25,10 @@
             {{option.ruc}} {{option.razonSocial}}
           </mat-option>
         </mat-autocomplete>
+    </div>
+    <div class="form-group">
+      <label for="timbrado">Timbrado</label>
+      <input formControlName="timbrado" type="text" class="form-control" id="timbrado" placeholder="Timbrado">
     </div>
     <div class="form-group">
       <label for="importe">Importe</label>

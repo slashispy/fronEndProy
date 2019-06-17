@@ -25,6 +25,9 @@ import { PerfilEditarComponent } from './components/perfiles/perfil-editar/perfi
 import { ComprasComponent } from './components/compras/compra-lista/compras.component';
 import { CompraComponent } from './components/compras/compra-cabecera/compra.component';
 import { CambiarPassComponent } from './components/auth/cambiarPass/cambiarPass.component';
+import { ComprasPendientesComponent } from './components/compras/compra-lista-pendientes/compras-pendientes.component';
+import { ComprasCanceladasComponent } from './components/compras/compra-lista-canceladas/compras-canceladas.component';
+import { CompraEditarComponent } from './components/compras/compra-editar/compra-editar.component';
 
 const APP_ROUTES: Routes = [
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
@@ -39,6 +42,9 @@ const APP_ROUTES: Routes = [
     { path: 'cliente-crear', component: ClienteCrearComponent, canActivate: [AuthGuard]},
     { path: 'cliente-editar', component: ClienteEditarComponent, canActivate: [AuthGuard]},
     { path: 'compras', component: ComprasComponent, canActivate: [AuthGuard]},
+    { path: 'compras-pendientes', component: ComprasPendientesComponent, canActivate: [AuthGuard]},
+    { path: 'compras-canceladas', component: ComprasCanceladasComponent, canActivate: [AuthGuard]},
+    { path: 'compra-editar', component: CompraEditarComponent, canActivate: [AuthGuard]},
     { path: 'compra-crear', children: [
         { path: '', component: CompraComponent},
         { path: 'edit/:id', component: CompraComponent}]},

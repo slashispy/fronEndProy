@@ -1,0 +1,61 @@
+<div class="container">
+        <h2>Compra Pendiente</h2>
+        <form [formGroup]="compraForm" class="px-4 py-3">
+          <div class="form-row">
+            <div class="form-group col-md-3">
+              <label for="fecha">Fecha</label>
+              <div class="input-group">
+                <input formControlName="fecha" type="date" class="form-control" id="fecha" placeholder="Fecha">
+              </div>
+            </div>
+            <div class="form-group col-md-3">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="nroFactura">Nro. Factura</label>
+              <input formControlName="nroFactura" type="text" class="form-control" id="nroFactura" readonly>
+            </div>
+          </div>
+          <div class="form-group">
+              <label for="proveedor">Proveedor</label>
+              <input formControlName="proveedor" type="text" class="form-control" id="proveedor" readonly>
+          </div>
+          <div class="form-group">
+            <label for="timbrado">Timbrado</label>
+            <input formControlName="timbrado" type="text" class="form-control" id="timbrado" placeholder="Timbrado" readonly>
+          </div>
+          <div class="form-group">
+            <label for="importe">Importe</label>
+            <input formControlName="importe" type="number" class="form-control" id="importe" placeholder="Importe">
+          </div>
+          <div class="form-group">
+            <label for="descuento">Descuento</label>
+            <input formControlName="descuento" type="number" class="form-control" id="descuento" placeholder="Descuento">
+          </div>
+          <div class="form-group">
+              <label for="tipoCompra">Tipo de Compra</label>
+              <input formControlName="tipoCompra" type="text" class="form-control" id="tipoCompra">
+          </div>
+          <!-- order items table-->
+          <table class="table table-borderless">
+            <thead class="thead-light">
+              <th>Producto</th>
+              <th>Cantidad</th>
+              <th>Precio Unitario</th>
+              <th>Descuento</th>
+              <th>Importe</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of compraForm.controls['detalleCompras'].value;let i=index;">
+                <td>{{item.producto.descripcion}}</td>
+                <td>{{item.cantidad}}</td>
+                <td>{{item.precioUnitario}}</td>
+                <td>{{item.descuento}}</td>
+                <td>{{item.importe}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <button type="submit" class="btn btn-primary" (click)="aprobarCompra()">Aprobar</button>
+          <button type="submit" class="btn btn-danger" (click)="cancelarCompra()" style="margin-left:10px">Cancelar</button>
+        </form>
+      </div>
+      

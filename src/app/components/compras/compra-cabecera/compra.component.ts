@@ -29,6 +29,7 @@ export class CompraComponent implements OnInit {
   compraForm = new FormGroup({
     fecha: new FormControl({value: '', disabled: true}, Validators.required),
     nroFactura: new FormControl('', Validators.required),
+    timbrado: new FormControl('', Validators.required),
     proveedor: new FormControl('', Validators.required),
     importe: new FormControl({value: '', disabled: true}, Validators.required),
     descuento: new FormControl({value: '', disabled: true}, Validators.required),
@@ -144,17 +145,17 @@ export class CompraComponent implements OnInit {
 
   nuevaCompra() {
     this.compraForm.controls.detalleCompras.setValue(this.comprasService.compraItems);
-    console.log(this.compraForm.value);
+    console.log(this.compraForm.getRawValue());
     if (this.compraForm.invalid) {
       return;
     }
-    const comp = this.compraForm.value;
+    const comp = this.compraForm.getRawValue();
     this.compra = comp;
     if (this.currentUser != null) {
       this.comprasService.addCompra(comp, this.currentUser.token)
       .subscribe(
         resp => {
-          this.router.navigate(['/compras']);
+          this.router.navigate(['/compras-pendientes']);
         },
         errorCode => {
         console.log(errorCode);

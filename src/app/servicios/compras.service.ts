@@ -12,10 +12,14 @@ export class ComprasService {
   compras: Compra[];
   compraItems: Item[] = new Array();
   tiposCompra: TipoCompra[] = new Array();
+  compra: Compra;
   constructor(private http: HttpClient) { }
 
   compraUrl = 'http://localhost:8091/backEndProy/compra/';
+  comprasUrl = 'http://localhost:8091/backEndProy/compra/?estado=A';
   tipoCompraUrl = 'http://localhost:8091/backEndProy/tipoTransaccion/?uso=C';
+  comprasUrlPendiente = 'http://localhost:8091/backEndProy/compra/?estado=P';
+  comprasUrlCancelada = 'http://localhost:8091/backEndProy/compra/?estado=C';
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json',
@@ -25,7 +29,33 @@ export class ComprasService {
 
   getAllCompras(token: string) {
     this.httpOptions.headers = this.httpOptions.headers.set('Authorization', token);
-    return this.http.get( this.compraUrl, this.httpOptions)
+    return this.http.get( this.comprasUrl, this.httpOptions)
+    .pipe(
+      map( (resp: Compra[]) => {
+        this.compras = resp;
+        return this.compras;
+      }
+      ),
+      catchError(this.handleError)
+      );
+  }
+
+  getAllComprasPendientes(token: string) {
+    this.httpOptions.headers = this.httpOptions.headers.set('Authorization', token);
+    return this.http.get( this.comprasUrlPendiente, this.httpOptions)
+    .pipe(
+      map( (resp: Compra[]) => {
+        this.compras = resp;
+        return this.compras;
+      }
+      ),
+      catchError(this.handleError)
+      );
+  }
+
+  getAllComprasCanceladas(token: string) {
+    this.httpOptions.headers = this.httpOptions.headers.set('Authorization', token);
+    return this.http.get( this.comprasUrlCancelada, this.httpOptions)
     .pipe(
       map( (resp: Compra[]) => {
         this.compras = resp;
@@ -72,5 +102,25 @@ export class ComprasService {
     // return an observable with a user-facing error message
     return throwError(
       error);
+  }
+
+  getCompra(token: string, id: string) {
+    this.httpOptions.headers = this.httpOptions.headers.set('Authorization', token);
+    return this.http.get(this.compraUrl + id, this.httpOptions)
+      .pipe(
+        map((resp: Compra) => {
+          this.compra = resp;
+          return this.compra;
+        }),
+        catchError(this.handleError)
+      );
+  }
+
+  editCompra(compra: Compra, token: string) {
+    this.httpOptions.headers = this.httpOptions.headers.set('Authorization', token);
+    return this.http.put(this.compraUrl + compra.id, compra, this.httpOptions)
+    .pipe(
+      catchError(this.handleError)
+    );
   }
 }

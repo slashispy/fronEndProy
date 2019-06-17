@@ -10,9 +10,9 @@ import { ComprasService } from 'src/app/servicios/compras.service';
 
 @Component({
   selector: 'app-compras',
-  templateUrl: './compras.component.html'
+  templateUrl: './compras-canceladas.component.html'
 })
-export class ComprasComponent extends Datatables implements OnDestroy, OnInit {
+export class ComprasCanceladasComponent extends Datatables implements OnDestroy, OnInit {
   @Output() idProducto = new EventEmitter<string>();
   compras: Compra[];
   dtTrigger: Subject<any> = new Subject();
@@ -27,7 +27,7 @@ export class ComprasComponent extends Datatables implements OnDestroy, OnInit {
   ngOnInit() {
     super.ngOnInit();
     if (this.currentUser != null) {
-      this.comprasService.getAllCompras(this.currentUser.token)
+      this.comprasService.getAllComprasCanceladas(this.currentUser.token)
       .subscribe(
         resp => {
           this.compras = resp;
@@ -46,6 +46,12 @@ export class ComprasComponent extends Datatables implements OnDestroy, OnInit {
     // Do not forget to unsubscribe the event
     this.dtTrigger.unsubscribe();
   }
+
+ /*  editProduct(id: string): void {
+    localStorage.removeItem('productoId');
+    localStorage.setItem('productoId', id);
+    this.router.navigate(['producto-editar']);
+  } */
 
   refreshList() {
     // this.service.getOrderList().then(res => this.orderList = res);

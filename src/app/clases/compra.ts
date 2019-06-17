@@ -12,13 +12,16 @@ export class Prod {
     cantidadMinima: number;
 }
 export class Compra {
+    id: number;
     fecha: string;
     nroFactura: string;
+    timbrado: string;
     proveedor: Proveedor;
     importe: number;
     descuento: number;
     tipoCompra: TipoCompra;
     detalleCompras: Item[];
+    estado: string;
 }
 export class Id {
     id: number;
