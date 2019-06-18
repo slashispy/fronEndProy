@@ -1,9 +1,8 @@
 <table class="table">
   <tr>
       <td>
-          <h3>Historico de Ajustes de Inventario</h3>
+          <h3>Ajustes de Inventario Cancelados</h3>
       </td>
-      <td><button class="btn btn-primary" [routerLink] = "['/ajuste-crear']">Nuevo Ajuste de Inventario</button></td>
   </tr>
 </table>
 <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
@@ -34,7 +33,7 @@
     </tbody>
     <tbody *ngIf="ajustes?.length == 0">
       <tr>
-        <td colspan="8" class="no-data-available">No Ajustes Registrados!</td>
+        <td colspan="8" class="no-data-available">No hay Ajustes Cancelados</td>
       </tr>
     <tbody>
 </table>

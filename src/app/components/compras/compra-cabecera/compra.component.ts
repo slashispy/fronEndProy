@@ -51,6 +51,7 @@ export class CompraComponent implements OnInit {
     private comprasService: ComprasService,
     private proveedoresService: ProveedoresService) {
       this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      this.comprasService.compraItems = [];
     }
 
   ngOnInit() {

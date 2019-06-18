@@ -30,6 +30,7 @@ export class AjusteEditarComponent implements OnInit {
   tipoAjuste: TipoAjuste;
   submitted = false;
   ajuste: Ajuste;
+  estado = 'C';
 
   constructor(private ajusteService: AjustesService,
     private alertService: AlertService,
@@ -47,6 +48,7 @@ export class AjusteEditarComponent implements OnInit {
       this.ajusteService.getAjuste(this.currentUser.token, ajusteId)
       .subscribe(
         resp => {
+          this.estado = resp.estado;
           this.ajusteForm.controls['id'].setValue(resp.id);
           this.ajusteForm.controls['fecha'].setValue(resp.fecha);
           this.ajusteForm.controls['importe'].setValue(resp.importe);
@@ -79,7 +81,7 @@ export class AjusteEditarComponent implements OnInit {
       this.ajusteService.editAjuste(this.ajuste, this.currentUser.token)
       .subscribe(
         resp => {
-          this.router.navigate(['/ajuste']);
+          this.router.navigate(['/ajustes']);
         },
         errorCode => {
           this.alertService.error(errorCode);

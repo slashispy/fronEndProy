@@ -43,6 +43,7 @@ export class AjusteCabeceraComponent implements OnInit {
     private ajusteService: AjustesService,
     private alertService: AlertService) {
       this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      this.ajusteService.ajusteItem = [];
     }
 
   ngOnInit() {

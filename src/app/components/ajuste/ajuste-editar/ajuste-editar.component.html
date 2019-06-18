@@ -42,7 +42,7 @@
         </tr>
       </tbody>
     </table>
-    <button type="submit" class="btn btn-danger" (click)="cancelarAjuste()" style="margin-left:10px">Cancelar</button>
+    <button *ngIf="estado !== 'C'" type="submit" class="btn btn-danger" (click)="cancelarAjuste()" style="margin-left:10px">Cancelar</button>
     <a [routerLink]="['/ajustes']" class="btn btn-link">Volver</a>
   </form>
 </div>

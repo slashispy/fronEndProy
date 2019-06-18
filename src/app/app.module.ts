@@ -36,6 +36,13 @@ import { AlertComponent } from './components/shared/alert/alert.component';
 import { CambiarPassComponent } from './components/auth/cambiarPass/cambiarPass.component';
 import { InputMaskModule } from 'primeng/inputmask';
 import { AjusteListarComponent } from './components/ajuste/ajuste-listar/ajuste-listar.component';
+import { AjusteCabeceraComponent } from './components/ajuste/ajuste-cabecera/ajuste-cabecera.component';
+import { AjusteDetalleComponent } from './components/ajuste/ajuste-detalle/ajuste-detalle.component';
+import { AjusteEditarComponent } from './components/ajuste/ajuste-editar/ajuste-editar.component';
+import { ComprasPendientesComponent } from './components/compras/compra-lista-pendientes/compras-pendientes.component';
+import { ComprasCanceladasComponent } from './components/compras/compra-lista-canceladas/compras-canceladas.component';
+import { CompraEditarComponent } from './components/compras/compra-editar/compra-editar.component';
+import { AjusteListarCanceladasComponent } from './components/ajuste/ajuste-listar-canceladas/ajuste-listar-canceladas.component';
 
 // Rutas
 import { APP_ROUTING } from './app.routes';
@@ -49,15 +56,10 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
 // Modulos
 import { DataTablesModule } from 'angular-datatables';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { ComprasPendientesComponent } from './components/compras/compra-lista-pendientes/compras-pendientes.component';
-import { ComprasCanceladasComponent } from './components/compras/compra-lista-canceladas/compras-canceladas.component';
-import { CompraEditarComponent } from './components/compras/compra-editar/compra-editar.component';
 import { MatAutocompleteModule, MatInputModule, MatDatepickerModule, MatNativeDateModule, MatMenuModule } from '@angular/material/';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AjusteCabeceraComponent } from './components/ajuste/ajuste-cabecera/ajuste-cabecera.component';
-import { AjusteDetalleComponent } from './components/ajuste/ajuste-detalle/ajuste-detalle.component';
-import { AjusteEditarComponent } from './components/ajuste/ajuste-editar/ajuste-editar.component';
+
 
 
 
@@ -98,7 +100,8 @@ import { AjusteEditarComponent } from './components/ajuste/ajuste-editar/ajuste-
     AjusteListarComponent,
     AjusteCabeceraComponent,
     AjusteDetalleComponent,
-    AjusteEditarComponent
+    AjusteEditarComponent,
+    AjusteListarCanceladasComponent
   ],
   entryComponents: [
     CompraItemsComponent,

@@ -5,13 +5,13 @@ import { Credenciales } from '../../../clases/credenciales';
 import { Subject } from 'rxjs';
 import { AjustesService } from '../../../servicios/ajustes.service';
 import { Router } from '@angular/router';
-import { AlertService } from '../../../servicios/alert.service';
+import { AlertService } from 'src/app/servicios/alert.service';
 
 @Component({
-  selector: 'app-ajuste-listar',
-  templateUrl: './ajuste-listar.component.html'
+  selector: 'app-ajuste-listar-canceladas',
+  templateUrl: './ajuste-listar-canceladas.component.html'
 })
-export class AjusteListarComponent extends Datatables implements OnDestroy, OnInit {
+export class AjusteListarCanceladasComponent extends Datatables implements OnInit, OnDestroy {
 
   ajustes: Ajuste[];
   dtTrigger: Subject<any> = new Subject();
@@ -20,14 +20,14 @@ export class AjusteListarComponent extends Datatables implements OnDestroy, OnIn
   constructor(private ajusteService: AjustesService,
     private router: Router,
     private alertService: AlertService) {
-      super();
-      this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-     }
+    super();
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+   }
 
   ngOnInit() {
     super.ngOnInit();
     if (this.currentUser != null) {
-      this.ajusteService.getAjusteByEstado(this.currentUser.token, 'A')
+      this.ajusteService.getAjusteByEstado(this.currentUser.token, 'C')
       .subscribe(
         resp => {
           this.ajustes = resp;
