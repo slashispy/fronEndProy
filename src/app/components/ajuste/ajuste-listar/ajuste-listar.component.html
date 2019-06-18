@@ -15,7 +15,7 @@
             <th>Descuento</th>
             <th>Tipo de Ajuste</th>
             <th>Estado</th>
-            <!-- <th>Acción</th> -->
+            <th>Acción</th>
         </tr>
     </thead>
     <tbody *ngIf="ajustes?.length != 0">
@@ -26,9 +26,9 @@
             <td>{{ajuste.descuento}}</td>
             <td>{{ajuste.tipoAjuste.descripcion}}</td>
             <td>{{ajuste.estado}}</td>
-            <!-- <td>
-            <a class="btn btn-default" (click)="editProduct(compra.id)">Ver</a>
-            </td> -->
+            <td>
+                <a class="btn btn-default" (click)="editAjuste(ajuste.id)">Ver</a>
+            </td>
         </tr>
     </tbody>
     <tbody *ngIf="ajustes?.length == 0">

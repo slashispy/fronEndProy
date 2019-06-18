@@ -1,0 +1,48 @@
+<div class="container">
+  <h2>Ajuste de Inventario</h2>
+  <form [formGroup]="ajusteForm" autocomplete="off" class="px-4 py-3">
+    <div class="form-row">
+      <div class="form-group col-md-3">
+        <label for="fecha">Fecha</label>
+        <div class="input-group">
+          <input formControlName="fecha" type="date" class="form-control" id="fecha" placeholder="Fecha">
+        </div>
+      </div>
+      <div class="form-group col-md-3">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="importe">Importe</label>
+      <input formControlName="importe" type="number" class="form-control" id="importe" placeholder="Importe">
+    </div>
+    <div class="form-group">
+      <label for="descuento">Descuento</label>
+      <input formControlName="descuento" type="number" class="form-control" id="descuento" placeholder="Descuento">
+    </div>
+    <div class="form-group">
+        <label for="tipoAjuste">Tipo de Ajuste</label>
+        <input formControlName="tipoAjuste" type="text" class="form-control" id="tipoAjuste" placeholder="Tipo de Ajuste">
+    </div>
+    <!-- order items table-->
+    <table class="table table-borderless">
+      <thead class="thead-light">
+        <th>Producto</th>
+        <th>Cantidad</th>
+        <th>Precio Unitario</th>
+        <th>Descuento</th>
+        <th>Importe</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of ajusteForm.controls['detallesAjuste'].value;let i=index;">
+          <td>{{item.producto.descripcion}}</td>
+          <td>{{item.cantidad}}</td>
+          <td>{{item.precioUnitario}}</td>
+          <td>{{item.descuento}}</td>
+          <td>{{item.importe}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <button type="submit" class="btn btn-danger" (click)="cancelarAjuste()" style="margin-left:10px">Cancelar</button>
+    <a [routerLink]="['/ajustes']" class="btn btn-link">Volver</a>
+  </form>
+</div>

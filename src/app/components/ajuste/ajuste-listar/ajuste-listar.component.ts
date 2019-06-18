@@ -25,7 +25,7 @@ export class AjusteListarComponent extends Datatables implements OnDestroy, OnIn
   ngOnInit() {
     super.ngOnInit();
     if (this.currentUser != null) {
-      this.ajusteService.getAllAjustes(this.currentUser.token)
+      this.ajusteService.getAjusteByEstado(this.currentUser.token, 'A')
       .subscribe(
         resp => {
           this.ajustes = resp;
@@ -38,6 +38,12 @@ export class AjusteListarComponent extends Datatables implements OnDestroy, OnIn
     } else {
       this.router.navigate(['/login']);
     }
+  }
+
+  editAjuste(id: string): void {
+    localStorage.removeItem('ajusteId');
+    localStorage.setItem('ajusteId', id);
+    this.router.navigate(['ajuste-editar']);
   }
 
   ngOnDestroy(): void {

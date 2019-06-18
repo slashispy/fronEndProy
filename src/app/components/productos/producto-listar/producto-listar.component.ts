@@ -64,13 +64,13 @@ export class ProductoListarComponent extends Datatables implements OnDestroy, On
         element.descripcion,
         element.estado,
         element.controlarStock,
-        element.cantidadMinima.toString()));
+        element.cantidadMinima == null ? '0' : element.cantidadMinima.toString()));
     });
     doc.text('Informe de Productos', 10, 10);
     doc.autoTable({
       head: [['Código', 'Descripción', 'Estado', 'Controlar Stock', 'Cantidad Mínima']],
       body: cuerpo
-  });
+    });
     doc.save(this.formatDate() + '_productos.pdf');
   }
 

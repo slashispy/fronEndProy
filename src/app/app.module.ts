@@ -57,6 +57,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AjusteCabeceraComponent } from './components/ajuste/ajuste-cabecera/ajuste-cabecera.component';
 import { AjusteDetalleComponent } from './components/ajuste/ajuste-detalle/ajuste-detalle.component';
+import { AjusteEditarComponent } from './components/ajuste/ajuste-editar/ajuste-editar.component';
 
 
 
@@ -96,7 +97,8 @@ import { AjusteDetalleComponent } from './components/ajuste/ajuste-detalle/ajust
     AlertComponent,
     AjusteListarComponent,
     AjusteCabeceraComponent,
-    AjusteDetalleComponent
+    AjusteDetalleComponent,
+    AjusteEditarComponent
   ],
   entryComponents: [
     CompraItemsComponent,

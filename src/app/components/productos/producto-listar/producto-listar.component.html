@@ -26,7 +26,7 @@
             <td *ngIf="producto.estado === 'I'">Inactivo</td>
             <td *ngIf="producto.controlarStock === 'S'">Si</td>
             <td *ngIf="producto.controlarStock === 'N'">No</td>
-            <td>{{producto.cantidadMinima}}</td>
+            <td>{{producto.cantidadMinima == null ? 0 : producto.cantidadMinima}}</td>
             <td>
             <a class="btn btn-default" (click)="editProduct(producto.id)">Ver</a>
             </td>
