@@ -7,7 +7,7 @@ export class Ajuste {
     importe: number;
     descuento: number;
     tipoAjuste: TipoAjuste;
-    detallesAjuste: DetalleAjuste;
+    detallesAjuste: DetalleAjuste[];
 }
 
 export class TipoAjuste {
