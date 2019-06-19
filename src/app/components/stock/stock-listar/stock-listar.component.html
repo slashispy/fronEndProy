@@ -1,3 +1,41 @@
-<p>
-  stock-listar works!
-</p>
+<table class="table">
+    <tr>
+        <td>
+            <h3>Stock</h3>
+        </td>
+        <td><button class="btn btn-primary" (click)="informe()"><i class="fa fa-file-pdf-o"></i>&nbsp;Informe</button></td>
+    </tr>
+  </table>
+  <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+      <thead>
+          <tr>
+              <th>Producto</th>
+              <th>Controla Stock?</th>
+              <th>Bajas</th>
+              <th>Altas</th>
+              <th>Existencias</th>
+              <th>Importe en Ventas</th>
+              <th>Importe en Compras</th>
+              <th>Precio Venta</th>
+          </tr>
+      </thead>
+      <tbody *ngIf="stock?.length != 0">
+          <tr *ngFor="let producto of stock">
+              <td>{{producto.descProducto}}</td>
+              <td>{{producto.controlarStock}}</td>
+              <td>{{producto.cantidadBaja}}</td>
+              <td>{{producto.cantidadEntrada}}</td>
+              <td>{{producto.existencias}}</td>
+              <td>{{producto.importeEntrada}}</td>
+              <td>{{producto.importeGastado}}</td>
+              <td>{{producto.precioVenta}}</td>
+          </tr>
+      </tbody>
+      <tbody *ngIf="stock?.length == 0">
+        <tr>
+          <td colspan="8" class="no-data-available">No data!</td>
+        </tr>
+      <tbody>
+  </table>
+  
+  <!--<a ui-sref="tipoExpedDtos-new" class="btn-primary btn-lg">Agregar Nuevo Expedientes de un Departamento</a>-->

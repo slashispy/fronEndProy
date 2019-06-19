@@ -36,6 +36,7 @@ import { VentaListarComponent } from './components/venta/venta-listar/venta-list
 import { VentaCabeceraComponent } from './components/venta/venta-cabecera/venta-cabecera.component';
 import { VentaEditarComponent } from './components/venta/venta-editar/venta-editar.component';
 import { VentaListarCanceladasComponent } from './components/venta/venta-listar-canceladas/venta-listar-canceladas.component';
+import { StockListarComponent } from './components/stock/stock-listar/stock-listar.component';
 
 const APP_ROUTES: Routes = [
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
@@ -62,6 +63,7 @@ const APP_ROUTES: Routes = [
     { path: 'venta-crear', component: VentaCabeceraComponent, canActivate: [AuthGuard]},
     { path: 'venta-editar', component: VentaEditarComponent, canActivate: [AuthGuard]},
     { path: 'ventas-canceladas', component: VentaListarCanceladasComponent, canActivate: [AuthGuard]},
+    { path: 'stock', component: StockListarComponent, canActivate: [AuthGuard]},
     { path: 'permisos', component: PermisoListarComponent, canActivate: [AuthGuard]},
     { path: 'permiso-crear', component: PermisoCrearComponent, canActivate: [AuthGuard]},
     { path: 'permiso-editar', component: PermisoEditarComponent, canActivate: [AuthGuard]},
