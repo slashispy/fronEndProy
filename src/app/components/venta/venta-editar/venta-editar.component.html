@@ -65,7 +65,7 @@
           </tbody>
         </table>
       <button *ngIf="estado !== 'C'" type="submit" class="btn btn-danger" (click)="cancelarVenta()" style="margin-left:10px">Cancelar</button>
-      <a [routerLink]="['/ventas']" class="btn btn-link">Volver</a>
+      <a (click)="volver()" class="btn btn-link">Volver</a>
     </form>
   </div>
   

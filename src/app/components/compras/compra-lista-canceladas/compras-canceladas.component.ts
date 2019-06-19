@@ -47,11 +47,11 @@ export class ComprasCanceladasComponent extends Datatables implements OnDestroy,
     this.dtTrigger.unsubscribe();
   }
 
- /*  editProduct(id: string): void {
-    localStorage.removeItem('productoId');
-    localStorage.setItem('productoId', id);
-    this.router.navigate(['producto-editar']);
-  } */
+  editCompra(id: string): void {
+    localStorage.removeItem('compraId');
+    localStorage.setItem('compraId', id);
+    this.router.navigate(['compra-editar']);
+  }
 
   refreshList() {
     // this.service.getOrderList().then(res => this.orderList = res);

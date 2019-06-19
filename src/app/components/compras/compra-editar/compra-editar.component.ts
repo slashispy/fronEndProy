@@ -41,6 +41,7 @@ export class CompraEditarComponent implements OnInit {
   submitted = false;
   validator = true;
   tipoCompra: TipoCompra;
+  estado = 'P';
 
   constructor(private comprasService: ComprasService,
     private alertService: AlertService,
@@ -69,6 +70,7 @@ export class CompraEditarComponent implements OnInit {
           this.compraForm.controls['tipoCompra'].setValue(resp.tipoCompra.descripcion);
           this.tipoCompra = resp.tipoCompra;
           this.compraForm.controls['detalleCompras'].setValue(resp.detalleCompras);
+          this.estado = resp.estado;
         },
         errorCode => {
         this.alertService.error(errorCode);
@@ -76,6 +78,16 @@ export class CompraEditarComponent implements OnInit {
     } else {
       this.router.navigate(['home']);
       return;
+    }
+  }
+
+  volver() {
+    if (this.estado === 'P') {
+      this.router.navigate(['/compras-pendientes']);
+    } else if ( this.estado === 'A') {
+      this.router.navigate(['/compras']);
+    } else {
+      this.router.navigate(['/compras-canceladas']);
     }
   }
 

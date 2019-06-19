@@ -42,6 +42,12 @@ export class ComprasComponent extends Datatables implements OnDestroy, OnInit {
     }
   }
 
+  editCompra(id: string): void {
+    localStorage.removeItem('compraId');
+    localStorage.setItem('compraId', id);
+    this.router.navigate(['compra-editar']);
+  }
+
   ngOnDestroy(): void {
     // Do not forget to unsubscribe the event
     this.dtTrigger.unsubscribe();

@@ -78,6 +78,16 @@ export class VentaEditarComponent implements OnInit {
 
   get f() {return this.ventaForm.controls; }
 
+  volver() {
+    if (this.estado === 'P') {
+      this.router.navigate(['/ventas-pendientes']);
+    } else if ( this.estado === 'A') {
+      this.router.navigate(['/ventas']);
+    } else {
+      this.router.navigate(['/ventas-canceladas']);
+    }
+  }
+
   cancelarVenta() {
     this.editarVenta('C');
   }

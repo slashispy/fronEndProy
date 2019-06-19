@@ -69,6 +69,16 @@ export class AjusteEditarComponent implements OnInit {
 
   get f() {return this.ajusteForm.controls; }
 
+  volver() {
+    if (this.estado === 'P') {
+      this.router.navigate(['/ajustes-pendientes']);
+    } else if ( this.estado === 'A') {
+      this.router.navigate(['/ajustes']);
+    } else {
+      this.router.navigate(['/ajustes-canceladas']);
+    }
+  }
+
   cancelarAjuste() {
     this.editarAjuste('C');
   }
