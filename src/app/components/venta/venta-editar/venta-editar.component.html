@@ -1,0 +1,71 @@
+<div class="container">
+    <h2>Venta</h2>
+    <form [formGroup]="ventaForm" autocomplete="off" class="px-4 py-3">
+      <div class="form-row">
+        <div class="form-group col-md-3">
+          <label for="fecha">Fecha</label>
+          <div class="input-group">
+            <input formControlName="fecha" type="date" class="form-control" id="fecha" placeholder="Fecha">
+          </div>
+        </div>
+        <div class="form-group col-md-3">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="nroFactura">Nro. Factura</label>
+          <input formControlName="nroFactura" type="text" class="form-control" id="nroFactura">
+        </div>
+      </div>
+      <div class="form-group">
+          <label for="cliente">Cliente</label>
+          <input formControlName="cliente" type="text" class="form-control" id="cliente">
+      </div>
+      <div class="form-group">
+        <label for="importe">Importe</label>
+        <input formControlName="importe" type="number" class="form-control" id="importe" placeholder="Importe">
+      </div>
+      <div class="form-group">
+        <label for="descuento">Descuento</label>
+        <input formControlName="descuento" type="number" class="form-control" id="descuento" placeholder="Descuento">
+      </div>
+      <div class="form-group">
+          <label for="tipoAjuste">Tipo de Venta</label>
+          <input formControlName="tipoVenta" type="text" class="form-control" id="tipoVenta" placeholder="Tipo de Venta">
+      </div>
+      <!-- order items table-->
+      <table class="table table-borderless">
+        <thead class="thead-light">
+          <th>Producto</th>
+          <th>Cantidad</th>
+          <th>Precio Unitario</th>
+          <th>Descuento</th>
+          <th>Importe</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of ventaForm.controls['detalleVenta'].value;let i=index;">
+            <td>{{item.producto.descripcion}}</td>
+            <td>{{item.cantidad}}</td>
+            <td>{{item.precioUnitario}}</td>
+            <td>{{item.descuento}}</td>
+            <td>{{item.importe}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="table table-borderless">
+          <thead class="thead-light">
+            <th>Medio de Pago</th>
+            <th>Monto</th>
+            <th>Vuelto</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of ventaForm.controls['mediosPago'].value;let i=index;">
+              <td>{{item.medioPago.descripcion}}</td>
+              <td>{{item.monto}}</td>
+              <td>{{item.vuelto}}</td>
+            </tr>
+          </tbody>
+        </table>
+      <button *ngIf="estado !== 'C'" type="submit" class="btn btn-danger" (click)="cancelarVenta()" style="margin-left:10px">Cancelar</button>
+      <a [routerLink]="['/ventas']" class="btn btn-link">Volver</a>
+    </form>
+  </div>
+  

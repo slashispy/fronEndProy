@@ -53,6 +53,9 @@ import { VentaCabeceraComponent } from './components/venta/venta-cabecera/venta-
 import { VentaDetalleComponent } from './components/venta/venta-detalle/venta-detalle.component';
 import { VentaDetalleMedioPagoComponent } from './components/venta/venta-detalle-medio-pago/venta-detalle-medio-pago.component';
 import { ClienteCrearDialogComponent } from './components/clientes/cliente-crear-dialog/cliente-crear-dialog.component';
+import { VentaEditarComponent } from './components/venta/venta-editar/venta-editar.component';
+import { VentaListarCanceladasComponent } from './components/venta/venta-listar-canceladas/venta-listar-canceladas.component';
+import { StockListarComponent } from './components/stock/stock-listar/stock-listar.component';
 // Rutas
 import { APP_ROUTING } from './app.routes';
 // Servicios
@@ -106,7 +109,10 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
     VentaCabeceraComponent,
     VentaDetalleComponent,
     VentaDetalleMedioPagoComponent,
-    ClienteCrearDialogComponent
+    ClienteCrearDialogComponent,
+    VentaEditarComponent,
+    VentaListarCanceladasComponent,
+    StockListarComponent
   ],
   entryComponents: [
     CompraItemsComponent,

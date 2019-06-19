@@ -98,7 +98,7 @@ export class CompraEditarComponent implements OnInit {
       this.comprasService.editCompra(this.compra, this.currentUser.token)
       .subscribe(
         resp => {
-          this.router.navigate(['/compras']);
+          this.router.navigate(['/compras-pendientes']);
         },
         errorCode => {
         this.alertService.error(errorCode);

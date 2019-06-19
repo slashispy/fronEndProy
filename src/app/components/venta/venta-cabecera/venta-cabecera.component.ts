@@ -196,7 +196,6 @@ export class VentaCabeceraComponent implements OnInit {
     }
     const ventaValue = this.ventaForm.getRawValue();
     this.venta = ventaValue;
-    console.log(ventaValue);
     if (this.currentUser != null) {
       this.ventasService.addVenta(ventaValue, this.currentUser.token)
       .subscribe(
