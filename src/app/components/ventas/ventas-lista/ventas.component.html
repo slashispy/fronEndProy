@@ -1,0 +1,42 @@
+<table class="table">
+  <tr>
+      <td>
+          <h3>Lista de Ventas</h3>
+      </td>
+  </tr>
+</table>
+<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Fecha</th>
+            <th>Nº Factura</th>
+            <th>Cliente</th>
+            <th>Importe</th>
+            <th>Descuento</th>
+            <th>Tipo de Venta</th>
+            <!-- <th>Acción</th> -->
+        </tr>
+    </thead>
+    <tbody *ngIf="ventas?.length != 0">
+        <tr *ngFor="let venta of ventas">
+            <td>{{venta.id}}</td>
+            <td>{{venta.fecha}}</td>
+            <td>{{venta.nroFactura}}</td>
+            <td>{{venta.proveedor.razonSocial}}</td>
+            <td>{{venta.importe}}</td>
+            <td>{{venta.descuento}}</td>
+            <td>{{venta.tipoVenta.descripcion}}</td>
+            <!-- <td>
+            <a class="btn btn-default" (click)="editProduct(venta.id)">Ver</a>
+            </td> -->
+        </tr>
+    </tbody>
+    <tbody *ngIf="ventas?.length == 0">
+      <tr>
+        <td colspan="8" class="no-data-available">No data!</td>
+      </tr>
+    <tbody>
+</table>
+
+<!--<a ui-sref="tipoExpedDtos-new" class="btn-primary btn-lg">Agregar Nuevo Expedientes de un Departamento</a>-->

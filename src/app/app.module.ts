@@ -59,6 +59,9 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatAutocompleteModule, MatInputModule, MatDatepickerModule, MatNativeDateModule, MatMenuModule } from '@angular/material/';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { VentasComponent } from './components/ventas/ventas-lista/ventas.component';
+import { VentaComponent } from './components/ventas/venta-cabecera/venta.component';
+import { VentaItemsComponent } from './components/ventas/venta-detalle/venta-items.component';
 
 
 
@@ -101,10 +104,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AjusteCabeceraComponent,
     AjusteDetalleComponent,
     AjusteEditarComponent,
-    AjusteListarCanceladasComponent
+    AjusteListarCanceladasComponent,
+    VentasComponent,
+    VentaComponent,
+    VentaItemsComponent
   ],
   entryComponents: [
     CompraItemsComponent,
+    VentaItemsComponent,
     AjusteDetalleComponent
   ],
   imports: [
