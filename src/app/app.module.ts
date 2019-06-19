@@ -4,6 +4,12 @@ import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { DataTablesModule } from 'angular-datatables';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatAutocompleteModule, MatInputModule, MatDatepickerModule, MatNativeDateModule, MatMenuModule } from '@angular/material/';
+import { MatDialogModule } from '@angular/material/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { InputMaskModule } from 'primeng/inputmask';
 // Componentes
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/auth/login/login.component';
@@ -34,7 +40,6 @@ import { CompraComponent } from './components/compras/compra-cabecera/compra.com
 import { CompraItemsComponent } from './components/compras/compra-detalle/compra-items.component';
 import { AlertComponent } from './components/shared/alert/alert.component';
 import { CambiarPassComponent } from './components/auth/cambiarPass/cambiarPass.component';
-import { InputMaskModule } from 'primeng/inputmask';
 import { AjusteListarComponent } from './components/ajuste/ajuste-listar/ajuste-listar.component';
 import { AjusteCabeceraComponent } from './components/ajuste/ajuste-cabecera/ajuste-cabecera.component';
 import { AjusteDetalleComponent } from './components/ajuste/ajuste-detalle/ajuste-detalle.component';
@@ -43,7 +48,11 @@ import { ComprasPendientesComponent } from './components/compras/compra-lista-pe
 import { ComprasCanceladasComponent } from './components/compras/compra-lista-canceladas/compras-canceladas.component';
 import { CompraEditarComponent } from './components/compras/compra-editar/compra-editar.component';
 import { AjusteListarCanceladasComponent } from './components/ajuste/ajuste-listar-canceladas/ajuste-listar-canceladas.component';
-
+import { VentaListarComponent } from './components/venta/venta-listar/venta-listar.component';
+import { VentaCabeceraComponent } from './components/venta/venta-cabecera/venta-cabecera.component';
+import { VentaDetalleComponent } from './components/venta/venta-detalle/venta-detalle.component';
+import { VentaDetalleMedioPagoComponent } from './components/venta/venta-detalle-medio-pago/venta-detalle-medio-pago.component';
+import { ClienteCrearDialogComponent } from './components/clientes/cliente-crear-dialog/cliente-crear-dialog.component';
 // Rutas
 import { APP_ROUTING } from './app.routes';
 // Servicios
@@ -53,15 +62,6 @@ import { AlertService } from './servicios/alert.service';
 import { AuthGuard } from './guards/auth.guard';
 // Interceptors
 import { ErrorInterceptor } from './interceptors/error.interceptor';
-// Modulos
-import { DataTablesModule } from 'angular-datatables';
-import { DragDropModule } from '@angular/cdk/drag-drop';
-import { MatAutocompleteModule, MatInputModule, MatDatepickerModule, MatNativeDateModule, MatMenuModule } from '@angular/material/';
-import { MatDialogModule } from '@angular/material/dialog';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-
-
 
 @NgModule({
   declarations: [
@@ -101,11 +101,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AjusteCabeceraComponent,
     AjusteDetalleComponent,
     AjusteEditarComponent,
-    AjusteListarCanceladasComponent
+    AjusteListarCanceladasComponent,
+    VentaListarComponent,
+    VentaCabeceraComponent,
+    VentaDetalleComponent,
+    VentaDetalleMedioPagoComponent,
+    ClienteCrearDialogComponent
   ],
   entryComponents: [
     CompraItemsComponent,
-    AjusteDetalleComponent
+    AjusteDetalleComponent,
+    VentaDetalleComponent,
+    VentaDetalleMedioPagoComponent,
+    ClienteCrearDialogComponent
   ],
   imports: [
     BrowserModule,

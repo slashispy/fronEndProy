@@ -22,6 +22,9 @@
       <li class="nav-item" routerLinkActive="active">
           <a class="nav-link" [matMenuTriggerFor]="ajustes"><i class="fa fa-calendar-check-o"></i>&nbsp;Ajustes</a>
       </li>
+      <li class="nav-item" routerLinkActive="Active">
+        <a class="nav-link" [matMenuTriggerFor]="ventas"><i class="fa fa-money"></i>&nbsp;Ventas</a>
+      </li>
       <li class="nav-item" routerLinkActive="active">
           <a class="nav-link"[routerLink] = "['about']">About</a>
         </li>
@@ -53,6 +56,11 @@
     <button mat-menu-item [routerLink] = "['ajustes']">Historico de Ajustes de Inventario</button>
     <button mat-menu-item [routerLink] = "['ajuste-crear']">Registrar un Ajuste de Inventario</button>
     <button mat-menu-item [routerLink] = "['ajustes-canceladas']">Ajustes de Invenario Canceladas</button>
+  </mat-menu>
+
+  <mat-menu #ventas="matMenu">
+    <button mat-menu-item [routerLink] = "['ventas']">Historial de Ventas</button>
+    <button mat-menu-item [routerLink] = "['venta-crear']">Registrar Venta</button>
   </mat-menu>
 
 

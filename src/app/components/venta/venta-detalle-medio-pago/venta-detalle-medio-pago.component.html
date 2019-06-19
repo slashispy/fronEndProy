@@ -1,0 +1,35 @@
+<h4 class="dispaly-4">Detalle de los Medios Pagos</h4>
+<hr>
+<form [formGroup]="DetalleVentaMedioPagoForm" autocomplete="off" (submit)="onSubmit(form)">
+  <div class="form-group">
+      <label for="medioPago">Medio de Pago</label>
+      <input formControlName="medioPago" type="text" class="form-control" id="medioPago" placeholder="Medio de Pago" matInput [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{option.descripcion}}
+        </mat-option>
+      </mat-autocomplete>
+  </div>
+  <div class="form-group">
+    <label for="monto">Monto</label>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <div class="input-group-text">&#x20B2;</div>
+      </div>
+      <input formControlName="monto" type="number" class="form-control" id="monto" placeholder="Monto" value="0" (keyup)="updateTotal()">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="importe">Vuelto</label>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <div class="input-group-text">&#x20B2;</div>
+      </div>
+      <input formControlName="vuelto" type="number" class="form-control" id="vuelto" placeholder="Vuelto" readonly>
+    </div>
+  </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Guardar</button>
+    <button type="button" class="btn btn-outline-dark ml-1" [mat-dialog-close]><i class="fa fa-close"></i> Cerrar</button>
+  </div>
+</form>

@@ -32,6 +32,8 @@ import { AjusteListarComponent } from './components/ajuste/ajuste-listar/ajuste-
 import { AjusteCabeceraComponent } from './components/ajuste/ajuste-cabecera/ajuste-cabecera.component';
 import { AjusteEditarComponent } from './components/ajuste/ajuste-editar/ajuste-editar.component';
 import { AjusteListarCanceladasComponent } from './components/ajuste/ajuste-listar-canceladas/ajuste-listar-canceladas.component';
+import { VentaListarComponent } from './components/venta/venta-listar/venta-listar.component';
+import { VentaCabeceraComponent } from './components/venta/venta-cabecera/venta-cabecera.component';
 
 const APP_ROUTES: Routes = [
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
@@ -54,6 +56,8 @@ const APP_ROUTES: Routes = [
     { path: 'ajuste-crear', component: AjusteCabeceraComponent, canActivate: [AuthGuard]},
     { path: 'ajuste-editar', component: AjusteEditarComponent, canActivate: [AuthGuard]},
     { path: 'ajustes-canceladas', component: AjusteListarCanceladasComponent, canActivate: [AuthGuard]},
+    { path: 'ventas', component: VentaListarComponent, canActivate: [AuthGuard]},
+    { path: 'venta-crear', component: VentaCabeceraComponent, canActivate: [AuthGuard]},
     { path: 'permisos', component: PermisoListarComponent, canActivate: [AuthGuard]},
     { path: 'permiso-crear', component: PermisoCrearComponent, canActivate: [AuthGuard]},
     { path: 'permiso-editar', component: PermisoEditarComponent, canActivate: [AuthGuard]},

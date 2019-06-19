@@ -1,0 +1,50 @@
+<h4 class="dispaly-4">Detalle de la Venta</h4>
+<hr>
+<form [formGroup]="DetallaVentaForm" autocomplete="off" (submit)="onSubmit(form)">
+  <div class="form-group">
+      <label for="producto">Producto</label>
+      <input formControlName="producto" type="text" class="form-control" id="producto" placeholder="Producto" matInput [matAutocomplete]="auto" (ngModelChange)="AsignarCantidadPrecioUnitario()">
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{option.codigo}} {{option.descripcion}}
+        </mat-option>
+      </mat-autocomplete>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label>Precio Unitario</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text">&#x20B2;</div>
+        </div>
+        <input formControlName="precioUnitario" type="number" class="form-control" id="price" placeholder="Precio Unitario">
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label>Cantidad</label>
+      <input formControlName="cantidad" type="number" class="form-control" id="cantidad" placeholder="Cantidad" [max]="MaxCant" (keyup)="updateTotal()">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="descuento">Descuento</label>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <div class="input-group-text">&#x20B2;</div>
+      </div>
+      <input formControlName="descuento" type="number" class="form-control" id="descuento" placeholder="Descuento" value="0" (keyup)="updateTotal()">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="importe">Importe</label>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <div class="input-group-text">&#x20B2;</div>
+      </div>
+      <input formControlName="importe" type="number" class="form-control" id="importe" placeholder="Importe" readonly>
+    </div>
+  </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Guardar</button>
+    <button type="button" class="btn btn-outline-dark ml-1" [mat-dialog-close]><i class="fa fa-close"></i> Cerrar</button>
+  </div>
+</form>
