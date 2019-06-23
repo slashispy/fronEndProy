@@ -4,7 +4,8 @@
           <h3>Lista de Productos</h3>
       </td>
       <td><button class="btn btn-primary" [routerLink] = "['/producto-crear']">Nuevo Producto</button></td>
-      <td><button class="btn btn-primary" (click)="informe()"><i class="fa fa-file-pdf-o"></i>&nbsp;Informe</button></td>
+      <td><button class="btn btn-primary" (click)="informe()"><i class="fa fa-file-pdf-o"></i>&nbsp;Informe PDF</button></td>
+      <td><button class="btn btn-primary" (click)="exportAsXLSX()"><i class="fa fa-file-excel-o"></i>&nbsp;Informe XLSX</button></td>
   </tr>
 </table>
 <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">

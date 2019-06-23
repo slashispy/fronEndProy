@@ -9,6 +9,7 @@ import { Subject } from 'rxjs';
 import { Datatables } from 'src/app/clases/utils/datatables';
 import * as jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import { ExcelService } from '../../../servicios/excel.service';
 
 
 @Component({
@@ -22,6 +23,7 @@ export class ProductoListarComponent extends Datatables implements OnDestroy, On
   currentUser: Credenciales;
 
   constructor(private productosService: ProductosService,
+    private excelService: ExcelService,
     private router: Router) {
       super();
       this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -83,4 +85,16 @@ export class ProductoListarComponent extends Datatables implements OnDestroy, On
     if (day.length < 2) { day = '0' + day; }
     return [year, month, day].join('-');
   }
+
+  exportAsXLSX(): void {
+    const data = new Array();
+    this.productos.forEach(element => {
+      data.push({Codigo : element.codigo,
+        Descripcion : element.descripcion,
+        Estado : element.estado,
+        Controlar_stock : element.controlarStock,
+        Cantidad_minima : element.cantidadMinima == null ? '0' : element.cantidadMinima.toString()});
+    });
+    this.excelService.exportAsExcelFile(data, 'productos');
+ }
 }

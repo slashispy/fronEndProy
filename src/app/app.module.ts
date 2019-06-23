@@ -65,6 +65,8 @@ import { AlertService } from './servicios/alert.service';
 import { AuthGuard } from './guards/auth.guard';
 // Interceptors
 import { ErrorInterceptor } from './interceptors/error.interceptor';
+// Interceptors
+import { ExcelService } from './servicios/excel.service';
 
 @NgModule({
   declarations: [
@@ -143,6 +145,7 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
   providers: [
     LoginService,
     AlertService,
+    ExcelService,
     AuthGuard,
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
