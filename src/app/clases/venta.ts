@@ -44,3 +44,9 @@ export class DetalleVenta {
     descuento: number;
     importe: number;
 }
+
+export class UltimaFactura {
+    id: number;
+    usuario: string;
+    nroFactura: string;
+}

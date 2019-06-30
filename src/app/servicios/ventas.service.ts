@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Venta, DetalleVenta, VentaDetalleMedioPago, TipoVenta, MedioPago } from '../clases/venta';
+import { Venta, DetalleVenta, VentaDetalleMedioPago, TipoVenta, MedioPago, UltimaFactura } from '../clases/venta';
 import { catchError, map } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
@@ -14,12 +14,17 @@ export class VentasService {
   ventasMediosPago: VentaDetalleMedioPago[] = new Array();
   tiposVenta: TipoVenta[] = new Array();
   mediosPagos: MedioPago[] = new Array();
+  factura: string;
+  comprobante: Venta;
 
   constructor(private http: HttpClient) { }
 
   ventaUrl = 'http://localhost:8091/backEndProy/venta/';
   tipoVentaUrl = 'http://localhost:8091/backEndProy/tipoTransaccion/?uso=V';
   medioPagoUrl = 'http://localhost:8091/backEndProy/medio-pago/';
+  ultimaFacturaUrl = 'http://localhost:8091/backEndProy/ultima-factura/';
+  comprobanteUrl = 'http://localhost:8091/backEndProy/venta/nroFactura?nroFactura=';
+  sucursal = '001';
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -104,6 +109,31 @@ export class VentasService {
     this.httpOptions.headers = this.httpOptions.headers.set('Authorization', token);
     return this.http.put(this.ventaUrl + venta.id, venta, this.httpOptions)
       .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  getNroFactura(idUsuario: number, token: string) {
+    this.httpOptions.headers = this.httpOptions.headers.set('Authorization', token);
+    return this.http.get(this.ultimaFacturaUrl + idUsuario, this.httpOptions)
+      .pipe(
+        map((resp: UltimaFactura) => {
+          return this.factura = this.sucursal + '-' + ('000' + idUsuario).slice(-3) + '-'
+           + ('0000000' + (parseInt(resp.nroFactura.split('-')[2], 10) + 1)).slice(-7);
+        }
+        ),
+        catchError(this.handleError)
+      );
+  }
+
+  getComprobante(token: string, nroFactura: string) {
+    this.httpOptions.headers = this.httpOptions.headers.set('Authorization', token);
+    return this.http.get(this.comprobanteUrl + nroFactura, this.httpOptions)
+      .pipe(
+        map((resp: Venta) => {
+          this.comprobante = resp;
+          return this.comprobante;
+        }),
         catchError(this.handleError)
       );
   }

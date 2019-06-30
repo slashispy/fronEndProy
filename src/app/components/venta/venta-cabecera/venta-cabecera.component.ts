@@ -15,6 +15,8 @@ import { map, startWith } from 'rxjs/operators';
 import { VentaDetalleComponent } from '../venta-detalle/venta-detalle.component';
 import { VentaDetalleMedioPagoComponent } from '../venta-detalle-medio-pago/venta-detalle-medio-pago.component';
 import { ClienteCrearDialogComponent } from '../../clientes/cliente-crear-dialog/cliente-crear-dialog.component';
+import { UsuariosService } from 'src/app/servicios/usuarios.service';
+import * as jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-venta-cabecera',
@@ -29,7 +31,7 @@ export class VentaCabeceraComponent implements OnInit {
   isValid = true;
   ventaForm = new FormGroup({
     fecha: new FormControl({value: '', disabled: true}, Validators.required),
-    nroFactura: new FormControl('', Validators.required),
+    nroFactura: new FormControl({value: '', disabled: true}, Validators.required),
     cliente: new FormControl('', Validators.required),
     importe: new FormControl({value: '', disabled: true}, Validators.required),
     descuento: new FormControl({value: '', disabled: true}, Validators.required),
@@ -47,12 +49,15 @@ export class VentaCabeceraComponent implements OnInit {
   typeOptions: TipoVenta[];
   filteredOptions: Observable<Cliente[]>;
   filteredTypeOptions: Observable<TipoVenta[]>;
+  comprobante: Venta;
+  nroFactura: string;
 
   constructor(private dialog: MatDialog,
     private router: Router,
     private ventasService: VentasService,
     private alertService: AlertService,
-    private clientesService: ClientesService) {
+    private clientesService: ClientesService,
+    private usuarioService: UsuariosService) {
       this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
       this.ventasService.ventasItem = [];
       this.ventasService.mediosPagos = [];
@@ -82,6 +87,24 @@ export class VentaCabeceraComponent implements OnInit {
                   );
                 this.ventaForm.controls['importe'].setValue(0);
                 this.ventaForm.controls['descuento'].setValue(0);
+                this.ventaForm.controls['fecha'].setValue(this.formatDate(this.maxDate));
+                this.usuarioService.getUserByUsuario(this.currentUser.usuario, this.currentUser.token)
+                .subscribe(
+                  resp3 => {
+                    this.ventasService.getNroFactura(resp3.id, this.currentUser.token)
+                    .subscribe(
+                      resp4 => {
+                        this.nroFactura = resp4;
+                        this.ventaForm.controls['nroFactura'].setValue(resp4);
+                    },
+                    errorCode => {
+                      this.alertService.error(errorCode);
+                    });
+                  },
+                  errorCode => {
+                    this.alertService.error(errorCode);
+                  }
+                );
               },
               errorCode => {
                 this.alertService.error(errorCode);
@@ -200,6 +223,7 @@ export class VentaCabeceraComponent implements OnInit {
       this.ventasService.addVenta(ventaValue, this.currentUser.token)
       .subscribe(
         resp => {
+          this.imprimirFactura(this.nroFactura);
           this.router.navigate(['/ventas']);
         },
         errorCode => {
@@ -208,4 +232,83 @@ export class VentaCabeceraComponent implements OnInit {
     }
   }
 
+  imprimirFactura(nroFactura: string) {
+    if (this.currentUser != null) {
+      this.ventasService.getComprobante(this.currentUser.token, nroFactura)
+      .subscribe(
+        resp => {
+          this.comprobante = resp;
+          this.comprobantePdf(resp);
+        },
+        errorCode => {
+          this.alertService.error(errorCode);
+        }
+      );
+    } else {
+      this.router.navigate(['/login']);
+    }
+  }
+
+  private comprobantePdf(comprobante: Venta) {
+    const doc = new jsPDF('P', 'mm', [74, 100 + 2 * 5]);
+    doc.setFontSize(3);
+    doc.setFont('times');
+    doc.text('Cobisol S.A.', 13, 2, null, null, 'center');
+    doc.text('Kiosko', 13, 3, null, null, 'center');
+    doc.setLineWidth(0.05);
+    doc.line(1, 3.2, 25, 3.2); // horizontal line
+    doc.text('CASA CENTRAL', 13, 4.1, null, null, 'center');
+    doc.text('Dirección del Local', 1, 5.5);
+    doc.text('R.U.C. ' + comprobante.ruc, 1, 8);
+    // doc.text('Tel.:000-000', 25, 8, null, null, 'right');
+    doc.text('Timbrado: ' + comprobante.timbrado, 1, 9);
+    doc.text('Factura: ' + comprobante.nroFactura, 25, 9, null, null, 'right');
+    doc.text('IVA INCLUIDO', 13, 11, null, null, 'center');
+    doc.text('Fecha: ' + comprobante.fecha, 1, 13);
+    // doc.text('Hora: 12:12:12', 25, 13, null, null, 'right');
+    doc.text('CI/RUC: ' + comprobante.cliente.ruc, 1, 14);
+    doc.text('Cliente: ' + comprobante.cliente.razonSocial, 1, 15);
+    doc.line(1, 15.2, 25, 15.2);
+    doc.text('DESCRIPCION', 1, 16.3);
+    doc.text('CANTIDAD', 1, 17.3);
+    doc.text('PRECIO', 10, 17.3);
+    doc.text('TOTAL', 25, 17.3, null, null, 'right');
+    doc.line(1, 17.5, 25, 17.5);
+    let linea = 17.5;
+    comprobante.detalleVenta.forEach(element => {
+      linea++;
+      doc.text(element.producto.descripcion, 1, linea);
+      linea++;
+      doc.text(element.cantidad.toString(), 1, linea);
+      doc.text(element.precioUnitario.toString(), 10, linea);
+      doc.text(element.importe.toString(), 25, linea, null, null, 'right');
+    });
+    linea += 0.2;
+    doc.line(1, linea, 25, linea);
+    linea ++;
+    doc.text('TOTAL IVA (10%):', 1, linea);
+    doc.text((comprobante.importe / 11).toString(), 25, linea, null, null, 'right');
+    linea ++;
+    doc.text('TOTAL A PAGAR:', 1, linea);
+    doc.text(comprobante.importe.toString(), 25, linea, null, null, 'right');
+    linea += 4.3;
+    doc.text('ORIGINAL: CLIENTE', 1, linea);
+    linea += 2;
+    doc.text('DUPLICADO: ARCHIVO TRIBUTARIO', 1, linea);
+    linea += 4;
+    doc.text('GRACIAS POR SU PREFERENCIA!', 13, linea, null, null, 'center');
+    doc.save('a_factura.pdf');
+  }
+
+  private formatDate(date: Date) {
+    const d = new Date(date),
+    year = d.getFullYear();
+    let month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate();
+
+    if (month.length < 2) { month = '0' + month; }
+    if (day.length < 2) { day = '0' + day; }
+
+    return [year, month, day].join('-');
+  }
 }

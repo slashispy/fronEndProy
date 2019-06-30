@@ -5,16 +5,14 @@
       <div class="form-group col-md-3">
         <label for="fecha">Fecha</label>
         <div class="input-group">
-          <input formControlName="fecha" type="text" class="form-control" id="fecha" placeholder="Fecha" [max]="maxDate" [matDatepicker]="dp3">
-          <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
-          <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+          <input formControlName="fecha" type="text" class="form-control" id="fecha" placeholder="Fecha">
         </div>
       </div>
       <div class="form-group col-md-3">
       </div>
       <div class="form-group col-md-6">
         <label for="nroFactura">Nro. Factura</label>
-        <p-inputMask formControlName="nroFactura" mask="999-999-9999999"></p-inputMask>
+        <input formControlName="nroFactura" type="text" class="form-control" id="nroFactura">
       </div>
     </div>
     <div class="form-group">

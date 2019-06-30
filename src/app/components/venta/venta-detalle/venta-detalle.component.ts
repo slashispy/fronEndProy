@@ -92,7 +92,7 @@ export class VentaDetalleComponent implements OnInit {
 
   AsignarCantidadPrecioUnitario() {
     this.productoSeleccionado = this.DetallaVentaForm.controls['producto'].value;
-    if (this.productoSeleccionado.codigo !== '' ) {
+    if (typeof this.productoSeleccionado.codigo !== 'undefined') {
       this.stockService.getStock(this.currentUser.token, this.productoSeleccionado.id.toString())
       .subscribe(
         resp => {
