@@ -29,6 +29,7 @@ import * as jsPDF from 'jspdf';
 })
 export class VentaCabeceraComponent implements OnInit {
   isValid = true;
+  cajaAbierta = true;
   ventaForm = new FormGroup({
     fecha: new FormControl({value: '', disabled: true}, Validators.required),
     nroFactura: new FormControl({value: '', disabled: true}, Validators.required),

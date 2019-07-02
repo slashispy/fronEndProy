@@ -1,0 +1,38 @@
+<table class="table">
+  <tr>
+      <td>
+          <h3>Cajas Abiertas</h3>
+      </td>
+      <td><button class="btn btn-primary" [routerLink] = "['/caja-crear']">Registar Caja</button></td>
+  </tr>
+</table>
+<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+    <thead>
+        <tr>
+            <th>Fecha Apertura</th>
+            <th>Monto Inicial</th>
+            <th>Uso</th>
+            <th>Usuario</th>
+            <th>Acción</th>
+        </tr>
+    </thead>
+    <tbody *ngIf="cajas?.length != 0">
+        <tr *ngFor="let caja of cajas">
+            <td>{{caja.fechaApertura}}</td>
+            <td>{{caja.montoApertura}}</td>
+            <td *ngIf="caja.uso === 'V'">Ventas</td>
+            <td *ngIf="caja.uso === 'C'">Compras</td>
+            <td>{{caja.usuario.nombre}} {{caja.usuario.apellido}}</td>
+            <td>
+            <a class="btn btn-default" (click)="cerrarCaja(caja.id)">Cerrar Caja</a>
+            </td>
+        </tr>
+    </tbody>
+    <tbody *ngIf="cajas?.length == 0">
+      <tr>
+        <td colspan="8" class="no-data-available">No data!</td>
+      </tr>
+    <tbody>
+</table>
+
+<!--<a ui-sref="tipoExpedDtos-new" class="btn-primary btn-lg">Agregar Nuevo Expedientes de un Departamento</a>-->

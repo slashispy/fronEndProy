@@ -22,9 +22,9 @@ export class CajaService {
 
   constructor(private http: HttpClient) { }
 
-  getAllCajas(token: string) {
+  getAllCajas(token: string, usuario: string ) {
     this.httpOptions.headers = this.httpOptions.headers.set('Authorization', token);
-    return this.http.get( this.cajaUrl, this.httpOptions)
+    return this.http.get( this.cajaUrl + '?usuario=' + usuario, this.httpOptions)
     .pipe(
       map( (resp: Caja[]) => {
         this.cajas = resp;
