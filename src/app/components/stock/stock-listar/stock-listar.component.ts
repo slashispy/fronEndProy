@@ -60,9 +60,6 @@ export class StockListarComponent extends Datatables implements OnInit, OnDestro
     const cuerpo = new Array();
     this.stock.forEach(element => {
       cuerpo.push(new Array(element.descProducto,
-        element.controlarStock,
-        element.cantidadBaja.toString(),
-        element.cantidadEntrada.toString(),
         element.existencias.toString(),
         element.importeEntrada.toString(),
         element.importeGastado.toString(),
@@ -71,7 +68,7 @@ export class StockListarComponent extends Datatables implements OnInit, OnDestro
     doc.text('Informe de Stock', 10, 10);
     doc.autoTable({
       // tslint:disable-next-line:max-line-length
-      head: [['Producto', 'Se Controla Stock?', 'Bajas', 'Altas', 'Existencias', 'Importe en Ventas', 'Importe en Compras', 'Precio Venta']],
+      head: [['Producto', 'Existencias', 'Importe en Ventas', 'Importe en Compras', 'Precio Venta']],
       body: cuerpo
     });
     doc.save(this.formatDate() + '_stock.pdf');

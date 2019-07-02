@@ -1,0 +1,55 @@
+<div class="container">
+  <h2>Regitrar Cierre de Caja</h2>
+  <form [formGroup]="cajaForm" (ngSubmit)="cerrarCaja()" class="px-4 py-3">
+    <div class="form-row">
+      <div class="form-group col-md-3">
+        <label for="fecha">Fecha Apertura</label>
+        <div class="input-group">
+          <input formControlName="fechaApertura" type="text" class="form-control" id="fechaApertura" placeholder="Fecha de Aperutra">
+        </div>
+      </div>
+      <div class="form-group col-md-3">
+          <label for="fecha">Fecha Cierre</label>
+          <div class="input-group">
+            <input formControlName="fechaCierre" type="text" class="form-control" id="fechaCierre" placeholder="fecha de Cierre">
+          </div>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="usuario">Usuario</label>
+        <!--<input formControlName="usuario" type="text" class="form-control" id="usuario" placeholder="Usuario">-->
+        <p class="form-control" id="usuario">{{usuario.usuario}}</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="montoApertura">Monto Apertura</label>
+      <input formControlName="montoApertura" type="number" class="form-control" id="montoApertura" placeholder="Monto de Apertura" [ngClass]="{ 'is-invalid': submitted && f.montoApertura.errors }">
+      <div *ngIf="submitted && f.montoApertura.errors" class="invalid-feedback">
+        <div *ngIf="f.montoApertura.errors.required">Monto de Apertura es requerido</div>
+      </div>
+    </div>
+    <div class="form-group">
+        <label for="montoApertura">Monto Cierre</label>
+        <input formControlName="montoCierre" type="number" class="form-control" id="montoCierre" placeholder="Monto de Cierre" [ngClass]="{ 'is-invalid': submitted && f.montoCierre.errors }">
+        <div *ngIf="submitted && f.montoCierre.errors" class="invalid-feedback">
+          <div *ngIf="f.montoCierre.errors.required">Monto de Cierre es requerido</div>
+        </div>
+      </div>
+    <div class="form-group">
+      <label for="uso">Uso de la caja</label>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" formControlName="uso" name="uso" id="uso1" value="V" checked>
+        <label class="form-check-label" for="uso1">
+          Venta
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" formControlName="uso" name="uso" id="uso2" value="C">
+        <label class="form-check-label" for="uso2">
+          Compra
+        </label>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Cerrar</button>
+    <a [routerLink]="['/cajas']" class="btn btn-link">Cancelar</a>
+  </form>
+</div>

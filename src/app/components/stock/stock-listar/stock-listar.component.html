@@ -10,9 +10,6 @@
       <thead>
           <tr>
               <th>Producto</th>
-              <th>Controla Stock?</th>
-              <th>Bajas</th>
-              <th>Altas</th>
               <th>Existencias</th>
               <th>Importe en Ventas</th>
               <th>Importe en Compras</th>
@@ -22,9 +19,6 @@
       <tbody *ngIf="stock?.length != 0">
           <tr *ngFor="let producto of stock">
               <td>{{producto.descProducto}}</td>
-              <td>{{producto.controlarStock}}</td>
-              <td>{{producto.cantidadBaja}}</td>
-              <td>{{producto.cantidadEntrada}}</td>
               <td>{{producto.existencias}}</td>
               <td>{{producto.importeEntrada}}</td>
               <td>{{producto.importeGastado}}</td>

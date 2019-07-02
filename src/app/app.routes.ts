@@ -38,6 +38,9 @@ import { VentaCabeceraComponent } from './components/venta/venta-cabecera/venta-
 import { VentaEditarComponent } from './components/venta/venta-editar/venta-editar.component';
 import { VentaListarCanceladasComponent } from './components/venta/venta-listar-canceladas/venta-listar-canceladas.component';
 import { StockListarComponent } from './components/stock/stock-listar/stock-listar.component';
+import { CajaCrearComponent } from './components/caja/caja-crear/caja-crear.component';
+import { CajaListarComponent } from './components/caja/caja-listar/caja-listar.component';
+import { CajaEditarComponent } from './components/caja/caja-editar/caja-editar.component';
 
 const APP_ROUTES: Routes = [
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
@@ -61,6 +64,9 @@ const APP_ROUTES: Routes = [
     { path: 'ajuste-crear', component: AjusteCabeceraComponent, canActivate: [AuthGuard]},
     { path: 'ajuste-editar', component: AjusteEditarComponent, canActivate: [AuthGuard]},
     { path: 'ajustes-canceladas', component: AjusteListarCanceladasComponent, canActivate: [AuthGuard]},
+    { path: 'cajas', component: CajaListarComponent, canActivate: [AuthGuard]},
+    { path: 'caja-crear', component: CajaCrearComponent, canActivate: [AuthGuard]},
+    { path: 'caja-cerrar', component: CajaEditarComponent, canActivate: [AuthGuard]},
     { path: 'ventas', component: VentaListarComponent, canActivate: [AuthGuard]},
     { path: 'venta-crear', component: VentaCabeceraComponent, canActivate: [AuthGuard]},
     { path: 'venta-editar', component: VentaEditarComponent, canActivate: [AuthGuard]},

@@ -57,17 +57,19 @@ import { ClienteCrearDialogComponent } from './components/clientes/cliente-crear
 import { VentaEditarComponent } from './components/venta/venta-editar/venta-editar.component';
 import { VentaListarCanceladasComponent } from './components/venta/venta-listar-canceladas/venta-listar-canceladas.component';
 import { StockListarComponent } from './components/stock/stock-listar/stock-listar.component';
+import { CajaCrearComponent } from './components/caja/caja-crear/caja-crear.component';
+import { CajaEditarComponent } from './components/caja/caja-editar/caja-editar.component';
+import { CajaListarComponent } from './components/caja/caja-listar/caja-listar.component';
 // Rutas
 import { APP_ROUTING } from './app.routes';
 // Servicios
 import { LoginService } from './servicios/login.service';
 import { AlertService } from './servicios/alert.service';
+import { ExcelService } from './servicios/excel.service';
 // Guards
 import { AuthGuard } from './guards/auth.guard';
 // Interceptors
 import { ErrorInterceptor } from './interceptors/error.interceptor';
-// Interceptors
-import { ExcelService } from './servicios/excel.service';
 
 @NgModule({
   declarations: [
@@ -116,7 +118,10 @@ import { ExcelService } from './servicios/excel.service';
     ClienteCrearDialogComponent,
     VentaEditarComponent,
     VentaListarCanceladasComponent,
-    StockListarComponent
+    StockListarComponent,
+    CajaCrearComponent,
+    CajaEditarComponent,
+    CajaListarComponent
   ],
   entryComponents: [
     CompraItemsComponent,
