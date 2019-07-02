@@ -27,6 +27,7 @@ import { CompraComponent } from './components/compras/compra-cabecera/compra.com
 import { CambiarPassComponent } from './components/auth/cambiarPass/cambiarPass.component';
 import { ComprasPendientesComponent } from './components/compras/compra-lista-pendientes/compras-pendientes.component';
 import { ComprasCanceladasComponent } from './components/compras/compra-lista-canceladas/compras-canceladas.component';
+import { ComprasInformeComponent } from './components/compras/compras-informe/compras-informe.component';
 import { CompraEditarComponent } from './components/compras/compra-editar/compra-editar.component';
 import { AjusteListarComponent } from './components/ajuste/ajuste-listar/ajuste-listar.component';
 import { AjusteCabeceraComponent } from './components/ajuste/ajuste-cabecera/ajuste-cabecera.component';
@@ -55,6 +56,7 @@ const APP_ROUTES: Routes = [
     { path: 'compras-canceladas', component: ComprasCanceladasComponent, canActivate: [AuthGuard]},
     { path: 'compra-editar', component: CompraEditarComponent, canActivate: [AuthGuard]},
     { path: 'compra-crear', component: CompraComponent, canActivate: [AuthGuard]},
+    { path: 'compras-informe', component: ComprasInformeComponent, canActivate: [AuthGuard]},
     { path: 'ajustes', component: AjusteListarComponent, canActivate: [AuthGuard]},
     { path: 'ajuste-crear', component: AjusteCabeceraComponent, canActivate: [AuthGuard]},
     { path: 'ajuste-editar', component: AjusteEditarComponent, canActivate: [AuthGuard]},

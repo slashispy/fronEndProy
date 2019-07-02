@@ -46,6 +46,7 @@ import { AjusteDetalleComponent } from './components/ajuste/ajuste-detalle/ajust
 import { AjusteEditarComponent } from './components/ajuste/ajuste-editar/ajuste-editar.component';
 import { ComprasPendientesComponent } from './components/compras/compra-lista-pendientes/compras-pendientes.component';
 import { ComprasCanceladasComponent } from './components/compras/compra-lista-canceladas/compras-canceladas.component';
+import { ComprasInformeComponent } from './components/compras/compras-informe/compras-informe.component';
 import { CompraEditarComponent } from './components/compras/compra-editar/compra-editar.component';
 import { AjusteListarCanceladasComponent } from './components/ajuste/ajuste-listar-canceladas/ajuste-listar-canceladas.component';
 import { VentaListarComponent } from './components/venta/venta-listar/venta-listar.component';
@@ -90,6 +91,7 @@ import { ExcelService } from './servicios/excel.service';
     ComprasCanceladasComponent,
     CompraEditarComponent,
     CompraComponent,
+    ComprasInformeComponent,
     CompraItemsComponent,
     PermisoListarComponent,
     PermisoCrearComponent,

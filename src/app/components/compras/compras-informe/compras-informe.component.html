@@ -1,0 +1,80 @@
+<table class="table">
+  <tr>
+      <td>
+          <h3>Informe de Compras</h3>
+      </td>
+      <td><button class="btn btn-primary"><i class="fa fa-file-pdf-o"></i>&nbsp;Informe PDF</button></td>
+      <td><button class="btn btn-primary"><i class="fa fa-file-excel-o"></i>&nbsp;Informe XLSX</button></td>
+  </tr>
+</table>
+<form [formGroup]="informeForm" (ngSubmit)="buscar()" class="px-4 py-3">
+    <div class="form-row">
+      <div class="form-group col-md-3">
+        <label for="desde">Desde: </label>
+        <div class="input-group">
+          <input formControlName="desde" type="text" class="form-control" id="desde" placeholder="Desde" [max]="maxDate" [matDatepicker]="dp3">
+          <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+          <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+        </div>
+        <label for="hasta">Hasta: </label>
+        <div class="input-group">
+          <input formControlName="hasta" type="text" class="form-control" id="hasta" placeholder="Hasta" [max]="maxDate" [matDatepicker]="dp4">
+          <mat-datepicker-toggle matSuffix [for]="dp4"></mat-datepicker-toggle>
+          <mat-datepicker #dp4 disabled="false"></mat-datepicker>
+        </div>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="estado">Estado: </label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" formControlName="estado" name="estado" id="estado1" value="P" checked>
+          <label class="form-check-label" for="estado1">
+            Pendiente
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" formControlName="estado" name="estado" id="estado2" value="A">
+          <label class="form-check-label" for="estado2">
+            Aprobada
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" formControlName="estado" name="estado" id="estado3" value="C">
+          <label class="form-check-label" for="estado3">
+            Cancelada
+          </label>
+        </div>
+        <button class="btn btn-primary"><i class="fa fa-search"></i>&nbsp;Buscar</button>
+    </div>
+    </div>
+</form>
+<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Fecha</th>
+            <th>Nº Factura</th>
+            <th>Proveedor</th>
+            <th>Tipo de Compra</th>
+            <th>Importe</th>
+            <th>Descuento</th>
+        </tr>
+    </thead>
+    <tbody *ngIf="compras?.length != 0">
+        <tr *ngFor="let compra of compras">
+            <td>{{compra.id}}</td>
+            <td>{{compra.fecha}}</td>
+            <td>{{compra.nroFactura}}</td>
+            <td>{{compra.proveedor.razonSocial}}</td>
+            <td>{{compra.tipoCompra.descripcion}}</td>
+            <td>{{compra.importe}}</td>
+            <td>{{compra.descuento}}</td>
+        </tr>
+    </tbody>
+    <tbody *ngIf="compras?.length == 0">
+      <tr>
+        <td colspan="8" class="no-data-available">No data!</td>
+      </tr>
+    <tbody>
+</table>
+
+<!--<a ui-sref="tipoExpedDtos-new" class="btn-primary btn-lg">Agregar Nuevo Expedientes de un Departamento</a>-->

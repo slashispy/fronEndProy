@@ -287,7 +287,7 @@ export class VentaCabeceraComponent implements OnInit {
     doc.line(1, linea, 25, linea);
     linea ++;
     doc.text('TOTAL IVA (10%):', 1, linea);
-    doc.text((comprobante.importe / 11).toString(), 25, linea, null, null, 'right');
+    doc.text((Math.round(comprobante.importe / 11)).toString(), 25, linea, null, null, 'right');
     linea ++;
     doc.text('TOTAL A PAGAR:', 1, linea);
     doc.text(comprobante.importe.toString(), 25, linea, null, null, 'right');

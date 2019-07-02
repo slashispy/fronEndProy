@@ -122,4 +122,18 @@ export class ComprasService {
       catchError(this.handleError)
     );
   }
+
+  informeCompras(token: string, desde: string, hasta: string, estado: string) {
+    console.log(desde, hasta, estado);
+    this.httpOptions.headers = this.httpOptions.headers.set('Authorization', token);
+    return this.http.get( this.comprasUrl, this.httpOptions)
+    .pipe(
+      map( (resp: Compra[]) => {
+        this.compras = resp;
+        return this.compras;
+      }
+      ),
+      catchError(this.handleError)
+      );
+  }
 }
