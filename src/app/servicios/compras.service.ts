@@ -124,9 +124,8 @@ export class ComprasService {
   }
 
   informeCompras(token: string, desde: string, hasta: string, estado: string) {
-    console.log(desde, hasta, estado);
     this.httpOptions.headers = this.httpOptions.headers.set('Authorization', token);
-    return this.http.get( this.comprasUrl, this.httpOptions)
+    return this.http.get( this.compraUrl + 'informe/?estado=' + estado + '&desde=' + desde + '&hasta=' + hasta, this.httpOptions)
     .pipe(
       map( (resp: Compra[]) => {
         this.compras = resp;

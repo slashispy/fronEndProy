@@ -11,6 +11,7 @@ import { Datatables } from 'src/app/clases/utils/datatables';
 import { ComprasService } from 'src/app/servicios/compras.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { DataTableDirective } from 'angular-datatables';
+import { AlertService } from 'src/app/servicios/alert.service';
 
 @Component({
   selector: 'app-compras-informe',
@@ -36,7 +37,8 @@ export class ComprasInformeComponent extends Datatables implements OnDestroy, On
   currentUser: Credenciales;
 
   constructor(private comprasService: ComprasService,
-    private router: Router) {
+    private router: Router,
+    private alerService: AlertService) {
       super();
       this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
      }
@@ -58,7 +60,7 @@ export class ComprasInformeComponent extends Datatables implements OnDestroy, On
           this.dtTrigger.next();
         },
         errorCode => {
-          console.log(errorCode);
+          this.alerService.error(errorCode);
         }
       );
     } else {
@@ -81,7 +83,7 @@ export class ComprasInformeComponent extends Datatables implements OnDestroy, On
           });
         },
         errorCode => {
-          console.log(errorCode);
+          this.alerService.error(errorCode);
         }
       );
     } else {
