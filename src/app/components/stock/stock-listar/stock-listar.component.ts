@@ -9,6 +9,7 @@ import { Datatables } from 'src/app/clases/utils/datatables';
 import * as jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import { AlertService } from '../../../servicios/alert.service';
+import { ExcelService } from '../../../servicios/excel.service';
 
 @Component({
   selector: 'app-stock-listar',
@@ -20,6 +21,7 @@ export class StockListarComponent extends Datatables implements OnInit, OnDestro
   currentUser: Credenciales;
 
   constructor(private stockService: StockService,
+    private excelService: ExcelService,
     private router: Router,
     private alertService: AlertService) {
       super();
@@ -67,12 +69,23 @@ export class StockListarComponent extends Datatables implements OnInit, OnDestro
     });
     doc.text('Informe de Stock', 10, 10);
     doc.autoTable({
-      // tslint:disable-next-line:max-line-length
       head: [['Producto', 'Existencias', 'Importe en Ventas', 'Importe en Compras', 'Precio Venta']],
       body: cuerpo
     });
     doc.save(this.formatDate() + '_stock.pdf');
   }
+
+  exportAsXLSX(): void {
+    const data = new Array();
+    this.stock.forEach(element => {
+      data.push({Producto : element.descProducto,
+        Existencias : element.existencias,
+        Importe_en_Ventas : element.importeEntrada,
+        Importe_en_Compras : element.importeGastado,
+        Precio_Venta : element.precioVenta });
+    });
+    this.excelService.exportAsExcelFile(data, 'productos');
+ }
 
   private formatDate() {
     const d = new Date();
