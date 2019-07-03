@@ -138,6 +138,19 @@ export class VentasService {
       );
   }
 
+  informeVentas(token: string, desde: string, hasta: string, estado: string) {
+    this.httpOptions.headers = this.httpOptions.headers.set('Authorization', token);
+    return this.http.get( this.ventaUrl + 'informe/?estado=' + estado + '&desde=' + desde + '&hasta=' + hasta, this.httpOptions)
+    .pipe(
+      map( (resp: Venta[]) => {
+        this.ventas = resp;
+        return this.ventas;
+      }
+      ),
+      catchError(this.handleError)
+      );
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.

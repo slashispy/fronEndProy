@@ -1,7 +1,7 @@
 <table class="table">
   <tr>
       <td>
-          <h3>Informe de Compras</h3>
+          <h3>Informe de Ventas</h3>
       </td>
       <td><button class="btn btn-primary" (click)="informe()"><i class="fa fa-file-pdf-o"></i>&nbsp;Informe PDF</button></td>
       <td><button class="btn btn-primary" (click)="exportAsXLSX()"><i class="fa fa-file-excel-o"></i>&nbsp;Informe XLSX</button></td>
@@ -26,12 +26,6 @@
       <div class="form-group col-md-3">
         <label for="estado">Estado: </label>
         <div class="form-check">
-          <input class="form-check-input" type="radio" formControlName="estado" name="estado" id="estado1" value="P" checked>
-          <label class="form-check-label" for="estado1">
-            Pendiente
-          </label>
-        </div>
-        <div class="form-check">
           <input class="form-check-input" type="radio" formControlName="estado" name="estado" id="estado2" value="A">
           <label class="form-check-label" for="estado2">
             Aprobada
@@ -50,29 +44,27 @@
 <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
     <thead>
         <tr>
-            <th>Id</th>
             <th>Fecha</th>
             <th>Nº Factura</th>
-            <th>Proveedor</th>
-            <th>Tipo de Compra</th>
+            <th>Cliente</th>
             <th>Importe</th>
             <th>Descuento</th>
+            <th>Tipo de Venta</th>
         </tr>
     </thead>
-    <tbody *ngIf="compras?.length != 0">
-        <tr *ngFor="let compra of compras">
-            <td>{{compra.id}}</td>
-            <td>{{compra.fecha}}</td>
-            <td>{{compra.nroFactura}}</td>
-            <td>{{compra.proveedor.razonSocial}}</td>
-            <td>{{compra.tipoCompra.descripcion}}</td>
-            <td>{{compra.importe}}</td>
-            <td>{{compra.descuento}}</td>
+    <tbody *ngIf="ventas?.length != 0">
+        <tr *ngFor="let venta of ventas">
+            <td>{{venta.fecha}}</td>
+            <td>{{venta.nroFactura}}</td>
+            <td>{{venta.cliente.razonSocial}}</td>
+            <td>{{venta.importe}}</td>
+            <td>{{venta.descuento}}</td>
+            <td>{{venta.tipoVenta.descripcion}}</td>
         </tr>
     </tbody>
-    <tbody *ngIf="compras?.length == 0">
+    <tbody *ngIf="ventas?.length == 0">
       <tr>
-        <td colspan="8" class="no-data-available">No data!</td>
+        <td colspan="6" class="no-data-available">No data!</td>
       </tr>
     <tbody>
 </table>

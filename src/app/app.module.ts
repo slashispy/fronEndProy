@@ -53,6 +53,7 @@ import { VentaListarComponent } from './components/venta/venta-listar/venta-list
 import { VentaCabeceraComponent } from './components/venta/venta-cabecera/venta-cabecera.component';
 import { VentaDetalleComponent } from './components/venta/venta-detalle/venta-detalle.component';
 import { VentaDetalleMedioPagoComponent } from './components/venta/venta-detalle-medio-pago/venta-detalle-medio-pago.component';
+import { VentasInformeComponent } from './components/venta/ventas-informe/ventas-informe.component';
 import { ClienteCrearDialogComponent } from './components/clientes/cliente-crear-dialog/cliente-crear-dialog.component';
 import { VentaEditarComponent } from './components/venta/venta-editar/venta-editar.component';
 import { VentaListarCanceladasComponent } from './components/venta/venta-listar-canceladas/venta-listar-canceladas.component';
@@ -115,6 +116,7 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
     VentaCabeceraComponent,
     VentaDetalleComponent,
     VentaDetalleMedioPagoComponent,
+    VentasInformeComponent,
     ClienteCrearDialogComponent,
     VentaEditarComponent,
     VentaListarCanceladasComponent,
