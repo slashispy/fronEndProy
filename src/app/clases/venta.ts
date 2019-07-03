@@ -1,5 +1,6 @@
 import { Producto } from './producto';
 import { Cliente } from './cliente';
+import { Caja } from './caja';
 
 export class Venta {
     id: number;
@@ -13,6 +14,7 @@ export class Venta {
     estado: string;
     timbrado: string;
     ruc: string;
+    caja: Caja;
     detalleVenta: DetalleVenta[];
 }
 

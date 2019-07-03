@@ -75,7 +75,7 @@ export class CajaCrearComponent implements OnInit {
           this.cajaService.registarCaja(this.currentUser.token, this.caja)
           .subscribe(
           resp => {
-            this.router.navigate(['/ventas']);
+            this.router.navigate(['/cajas']);
           },
           errorCode2 => {
             this.alertService.error(errorCode2);

@@ -5,7 +5,6 @@ import { Compra, Item, TipoCompra } from '../../../clases/compra';
 import { Router } from '@angular/router';
 import { ProductosService } from '../../../servicios/productos.service';
 import { ComprasService } from '../../../servicios/compras.service';
-
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CompraItemsComponent } from '../compra-detalle/compra-items.component';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
@@ -14,6 +13,9 @@ import { Proveedor } from 'src/app/clases/proveedor';
 import { Observable } from 'rxjs';
 import { ProveedoresService } from 'src/app/servicios/proveedores.service';
 import { map, startWith } from 'rxjs/operators';
+import { CajaService } from '../../../servicios/caja.service';
+import { Caja } from '../../../clases/caja';
+import { AlertService } from '../../../servicios/alert.service';
 
 @Component({
   selector: 'app-compra',
@@ -34,6 +36,7 @@ export class CompraComponent implements OnInit {
     importe: new FormControl({value: '', disabled: true}, Validators.required),
     descuento: new FormControl({value: '', disabled: true}, Validators.required),
     tipoCompra: new FormControl('', Validators.required),
+    caja: new FormControl('', Validators.required),
     detalleCompras: new FormControl('', Validators.required)
   });
   currentUser: Credenciales;
@@ -44,15 +47,40 @@ export class CompraComponent implements OnInit {
   typeOptions: TipoCompra[];
   filteredOptions: Observable<Proveedor[]>;
   filteredTypeOptions: Observable<TipoCompra[]>;
+  formValid = false;
+  caja: Caja;
 
   constructor(private productosService: ProductosService,
+    private cajaService: CajaService,
     private dialog: MatDialog,
     private router: Router,
     private comprasService: ComprasService,
+    private alertService: AlertService,
     private proveedoresService: ProveedoresService) {
       this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
       this.comprasService.compraItems = [];
-    }
+      this.validarCaja('C');
+  }
+
+  validarCaja( uso: string) {
+    this.cajaService.getCajaAbierta(this.currentUser.token, uso, this.currentUser.usuario)
+    .subscribe(
+      resp => {
+        this.caja = resp;
+        if (this.formatDate(new Date()) === this.caja.fechaApertura ) {
+          this.formValid = true;
+          this.compraForm.controls['caja'].setValue(this.caja);
+        } else {
+          this.formValid = false;
+          this.alertService.error('Tiene una caja abierta en fecha: ' + this.caja.fechaApertura + '. La fecha debe ser de hoy');
+        }
+      },
+      errorCode => {
+        this.formValid = false;
+        this.alertService.error(errorCode);
+      }
+    );
+  }
 
   ngOnInit() {
     if (this.currentUser != null) {
@@ -60,7 +88,6 @@ export class CompraComponent implements OnInit {
       .subscribe(
         resp => {
           this.options = resp;
-          // console.log(this.options);
           this.filteredOptions = this.compraForm.controls.proveedor.valueChanges
             .pipe(
               startWith<string | Proveedor>(''),
@@ -94,6 +121,18 @@ export class CompraComponent implements OnInit {
     } else {
       this.router.navigate(['/login']);
     }
+  }
+
+  private formatDate(date: Date) {
+    const d = new Date(date),
+    year = d.getFullYear();
+    let month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate();
+
+    if (month.length < 2) { month = '0' + month; }
+    if (day.length < 2) { day = '0' + day; }
+
+    return [year, month, day].join('-');
   }
 
   AddOrEditOrderItem(orderItemIndex) {
@@ -146,7 +185,6 @@ export class CompraComponent implements OnInit {
 
   nuevaCompra() {
     this.compraForm.controls.detalleCompras.setValue(this.comprasService.compraItems);
-    console.log(this.compraForm.getRawValue());
     if (this.compraForm.invalid) {
       return;
     }

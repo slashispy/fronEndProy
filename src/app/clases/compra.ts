@@ -1,5 +1,6 @@
 import { Producto } from './producto';
 import { Proveedor } from './proveedor';
+import { Caja } from './caja';
 
 export class Prod {
     id: number;
@@ -20,6 +21,7 @@ export class Compra {
     importe: number;
     descuento: number;
     tipoCompra: TipoCompra;
+    caja: Caja;
     detalleCompras: Item[];
     estado: string;
 }

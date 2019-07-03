@@ -1,6 +1,6 @@
 <div class="container">
   <h2>Nueva Venta</h2>
-  <form *ngIf="cajaAbierta" [formGroup]="ventaForm" (ngSubmit)="nuevaVenta()" class="px-4 py-3">
+  <form *ngIf="formValid" [formGroup]="ventaForm" (ngSubmit)="nuevaVenta()" class="px-4 py-3">
     <div class="form-row">
       <div class="form-group col-md-3">
         <label for="fecha">Fecha</label>

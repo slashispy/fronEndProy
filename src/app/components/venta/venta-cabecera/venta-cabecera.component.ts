@@ -7,10 +7,12 @@ import { Venta, DetalleVenta, TipoVenta, VentaDetalleMedioPago } from '../../../
 import { Credenciales } from '../../../clases/credenciales';
 import { Observable } from 'rxjs';
 import { Cliente } from '../../../clases/cliente';
+import { Caja } from '../../../clases/caja';
 import { Router } from '@angular/router';
 import { VentasService } from '../../../servicios/ventas.service';
 import { AlertService } from 'src/app/servicios/alert.service';
 import { ClientesService } from 'src/app/servicios/clientes.service';
+import { CajaService } from '../../../servicios/caja.service';
 import { map, startWith } from 'rxjs/operators';
 import { VentaDetalleComponent } from '../venta-detalle/venta-detalle.component';
 import { VentaDetalleMedioPagoComponent } from '../venta-detalle-medio-pago/venta-detalle-medio-pago.component';
@@ -29,7 +31,7 @@ import * as jsPDF from 'jspdf';
 })
 export class VentaCabeceraComponent implements OnInit {
   isValid = true;
-  cajaAbierta = true;
+  formValid = false;
   ventaForm = new FormGroup({
     fecha: new FormControl({value: '', disabled: true}, Validators.required),
     nroFactura: new FormControl({value: '', disabled: true}, Validators.required),
@@ -37,6 +39,7 @@ export class VentaCabeceraComponent implements OnInit {
     importe: new FormControl({value: '', disabled: true}, Validators.required),
     descuento: new FormControl({value: '', disabled: true}, Validators.required),
     tipoVenta: new FormControl('', Validators.required),
+    caja: new FormControl('', Validators.required),
     mediosPago: new FormControl('', Validators.required),
     detalleVenta: new FormControl('', Validators.required)
   });
@@ -52,16 +55,39 @@ export class VentaCabeceraComponent implements OnInit {
   filteredTypeOptions: Observable<TipoVenta[]>;
   comprobante: Venta;
   nroFactura: string;
+  caja: Caja;
 
   constructor(private dialog: MatDialog,
     private router: Router,
     private ventasService: VentasService,
     private alertService: AlertService,
+    private cajaService: CajaService,
     private clientesService: ClientesService,
     private usuarioService: UsuariosService) {
       this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
       this.ventasService.ventasItem = [];
       this.ventasService.mediosPagos = [];
+      this.validarCaja('V');
+    }
+
+    validarCaja( uso: string) {
+      this.cajaService.getCajaAbierta(this.currentUser.token, uso, this.currentUser.usuario)
+      .subscribe(
+        resp => {
+          this.caja = resp;
+          if (this.formatDate(new Date()) === this.caja.fechaApertura ) {
+            this.formValid = true;
+            this.ventaForm.controls['caja'].setValue(this.caja);
+          } else {
+            this.formValid = false;
+            this.alertService.error('Tiene una caja abierta en fecha: ' + this.caja.fechaApertura + '. La fecha debe ser de hoy');
+          }
+        },
+        errorCode => {
+          this.formValid = false;
+          this.alertService.error(errorCode);
+        }
+      );
     }
 
   ngOnInit() {

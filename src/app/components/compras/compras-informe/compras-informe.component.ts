@@ -115,52 +115,56 @@ export class ComprasInformeComponent extends Datatables implements OnDestroy, On
   informe() {
     const doc = new jsPDF();
     const cuerpo = new Array();
-    this.compras.forEach(element => {
-      cuerpo.push(new Array(element.id.toString(),
-        element.fecha,
-        element.nroFactura,
-        element.proveedor.razonSocial,
-        element.tipoCompra.descripcion,
-        element.importe.toString(),
-        element.descuento.toString()));
-    });
-    doc.text('Informe de Compras', 10, 10);
-    doc.setFontSize(8);
-    doc.text('Desde: ' + this.formatDate(this.informeForm.controls.desde.value), 10, 15);
-    doc.text('Hasta: ' + this.formatDate(this.informeForm.controls.hasta.value), 10, 19);
-    switch (this.informeForm.controls.estado.value) {
-      case 'A':
-        doc.text('Estado: Aprobada', 10, 23);
-        break;
-      case 'P':
-      doc.text('Estado: Pendiente', 10, 23);
-        break;
-      case 'C':
-      doc.text('Estado: Cancelada', 10, 23);
-        break;
+    if (typeof this.compras !== 'undefined' && this.compras.length > 0) {
+      this.compras.forEach(element => {
+        cuerpo.push(new Array(element.id.toString(),
+          element.fecha,
+          element.nroFactura,
+          element.proveedor.razonSocial,
+          element.tipoCompra.descripcion,
+          element.importe.toString(),
+          element.descuento.toString()));
+      });
+      doc.text('Informe de Compras', 10, 10);
+      doc.setFontSize(8);
+      doc.text('Desde: ' + this.formatDate(this.informeForm.controls.desde.value), 10, 15);
+      doc.text('Hasta: ' + this.formatDate(this.informeForm.controls.hasta.value), 10, 19);
+      switch (this.informeForm.controls.estado.value) {
+        case 'A':
+          doc.text('Estado: Aprobada', 10, 23);
+          break;
+        case 'P':
+          doc.text('Estado: Pendiente', 10, 23);
+          break;
+        case 'C':
+          doc.text('Estado: Cancelada', 10, 23);
+          break;
+      }
+      doc.autoTable({
+        margin: {top: 26},
+        head: [['Id', 'Fecha', 'Nro de Factura', 'Proveedor', 'Tipo de Compra', 'Importe', 'Descuento']],
+        body: cuerpo
+      });
+      doc.save('informe_compras.pdf');
     }
-    doc.autoTable({
-      margin: {top: 26},
-      head: [['Id', 'Fecha', 'Nro de Factura', 'Proveedor', 'Tipo de Compra', 'Importe', 'Descuento']],
-      body: cuerpo
-    });
-    doc.save('informe_compras.pdf');
   }
 
   exportAsXLSX(): void {
     const data = new Array();
-    this.compras.forEach(element => {
-      data.push({Id : element.id.toString(),
-        Fecha : element.fecha,
-        Nro_factura : element.nroFactura,
-        Proveedor : element.proveedor.razonSocial,
-        Tipo_de_compra : element.tipoCompra.descripcion,
-        Importe : element.importe.toString(),
-        Descuento : element.descuento.toString()});
-    });
-    this.excelService.exportAsExcelFile(data, 'compras_desde_' +
-    this.formatDate(this.informeForm.controls.desde.value) + '_hasta_' +
-    this.formatDate(this.informeForm.controls.hasta.value) + '_estado_' +
-    this.informeForm.controls.estado.value);
- }
+    if (typeof this.compras !== 'undefined' && this.compras.length > 0) {
+      this.compras.forEach(element => {
+        data.push({Id : element.id.toString(),
+          Fecha : element.fecha,
+          Nro_factura : element.nroFactura,
+          Proveedor : element.proveedor.razonSocial,
+          Tipo_de_compra : element.tipoCompra.descripcion,
+          Importe : element.importe.toString(),
+          Descuento : element.descuento.toString()});
+      });
+      this.excelService.exportAsExcelFile(data, 'compras_desde_' +
+      this.formatDate(this.informeForm.controls.desde.value) + '_hasta_' +
+      this.formatDate(this.informeForm.controls.hasta.value) + '_estado_' +
+      this.informeForm.controls.estado.value);
+    }
+  }
 }

@@ -115,47 +115,51 @@ export class VentasInformeComponent extends Datatables implements OnDestroy, OnI
   informe() {
     const doc = new jsPDF();
     const cuerpo = new Array();
-    this.ventas.forEach(element => {
-      cuerpo.push(new Array(element.fecha,
-        element.nroFactura,
-        element.cliente.razonSocial,
-        element.importe.toString(),
-        element.descuento.toString(),
-        element.tipoVenta.descripcion));
-    });
-    doc.text('Informe de Ventas', 10, 10);
-    doc.setFontSize(8);
-    doc.text('Desde: ' + this.formatDate(this.informeForm.controls.desde.value), 10, 15);
-    doc.text('Hasta: ' + this.formatDate(this.informeForm.controls.hasta.value), 10, 19);
-    switch (this.informeForm.controls.estado.value) {
-      case 'A':
-        doc.text('Estado: Aprobada', 10, 23);
-        break;
-      case 'C':
-      doc.text('Estado: Cancelada', 10, 23);
-        break;
+    if (typeof this.ventas !== 'undefined' && this.ventas.length > 0) {
+      this.ventas.forEach(element => {
+        cuerpo.push(new Array(element.fecha,
+          element.nroFactura,
+          element.cliente.razonSocial,
+          element.importe.toString(),
+          element.descuento.toString(),
+          element.tipoVenta.descripcion));
+      });
+      doc.text('Informe de Ventas', 10, 10);
+      doc.setFontSize(8);
+      doc.text('Desde: ' + this.formatDate(this.informeForm.controls.desde.value), 10, 15);
+      doc.text('Hasta: ' + this.formatDate(this.informeForm.controls.hasta.value), 10, 19);
+      switch (this.informeForm.controls.estado.value) {
+        case 'A':
+          doc.text('Estado: Aprobada', 10, 23);
+          break;
+        case 'C':
+        doc.text('Estado: Cancelada', 10, 23);
+          break;
+      }
+      doc.autoTable({
+        margin: {top: 26},
+        head: [['Fecha', 'Nro de Factura', 'Cliente', 'Importe', 'Descuento', 'Tipo de Venta']],
+        body: cuerpo
+      });
+      doc.save('informe_ventas.pdf');
     }
-    doc.autoTable({
-      margin: {top: 26},
-      head: [['Fecha', 'Nro de Factura', 'Cliente', 'Importe', 'Descuento', 'Tipo de Venta']],
-      body: cuerpo
-    });
-    doc.save('informe_ventas.pdf');
   }
 
   exportAsXLSX(): void {
     const data = new Array();
-    this.ventas.forEach(element => {
-      data.push({Fecha : element.fecha,
-        Nro_factura : element.nroFactura,
-        Cliente : element.cliente.razonSocial,
-        Importe : element.importe.toString(),
-        Descuento : element.descuento.toString(),
-        Tipo_de_venta : element.tipoVenta.descripcion});
-    });
-    this.excelService.exportAsExcelFile(data, 'ventas_desde_' +
-    this.formatDate(this.informeForm.controls.desde.value) + '_hasta_' +
-    this.formatDate(this.informeForm.controls.hasta.value) + '_estado_' +
-    this.informeForm.controls.estado.value);
- }
+    if (typeof this.ventas !== 'undefined' && this.ventas.length > 0) {
+      this.ventas.forEach(element => {
+        data.push({Fecha : element.fecha,
+          Nro_factura : element.nroFactura,
+          Cliente : element.cliente.razonSocial,
+          Importe : element.importe.toString(),
+          Descuento : element.descuento.toString(),
+          Tipo_de_venta : element.tipoVenta.descripcion});
+      });
+      this.excelService.exportAsExcelFile(data, 'ventas_desde_' +
+      this.formatDate(this.informeForm.controls.desde.value) + '_hasta_' +
+      this.formatDate(this.informeForm.controls.hasta.value) + '_estado_' +
+      this.informeForm.controls.estado.value);
+    }
+  }
 }
